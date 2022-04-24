@@ -1,19 +1,40 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Client } from '@notionhq/client'
-import { INotionQueryResponse } from '../types/databasesQuery'
+import { INotionResult } from '../types/databasesQuery'
+import Link from 'next/link'
 
 //BEM 방식 ( block , element , model )
 
 interface IProps {
-  data: Readonly<INotionQueryResponse>
+  data: Readonly<INotionResult[]>
 }
 
 const Home = ({ data }: IProps) => {
   useEffect(() => {
     console.log(data)
   }, [])
-  return <div></div>
+
+  const getDatabaseDisplay = () => {
+    const jsx: JSX.Element[] = []
+    data.forEach((element) => {
+      jsx.push(
+        <div key={element.id}>
+          <p>{element.properties.Name.title[0].plain_text}</p>
+          <span>
+            {element.properties.Tags.multi_select.map((value) => {
+              return value.name
+            })}
+          </span>
+          <p>{element.id}</p>
+          <Link href={`/article/${element.id}`}>HELLO</Link>
+        </div>
+      )
+    })
+    return jsx
+  }
+
+  return <div>{getDatabaseDisplay()}</div>
 }
 
 export default Home
@@ -27,7 +48,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      data: respose, // will be passed to the page component as props
+      data: respose.results, // will be passed to the page component as props
     },
   }
 }
