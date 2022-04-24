@@ -1,6 +1,6 @@
 module.exports = {
   // basic site info (required)
-  name: 'boilerplate',
+  name: 'NotionDB Test',
   domain: '',
   author: 'Byeong Ju Choi',
 

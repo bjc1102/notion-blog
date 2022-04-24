@@ -1,21 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { name } from '../site.config'
+import { Client } from '@notionhq/client'
+import { INotionQueryResponse } from '../types/databasesQuery'
 
 //BEM 방식 ( block , element , model )
 
-const index = () => {
-  return <Wrapper>{name}</Wrapper>
+interface IProps {
+  data: Readonly<INotionQueryResponse>
 }
 
-const Wrapper = styled.div`
-  width: 200px;
-  height: 200px;
-  background-color: black;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
+const Home = ({ data }: IProps) => {
+  useEffect(() => {
+    console.log(data)
+  }, [])
+  return <div></div>
+}
 
-export default index
+export default Home
+
+export async function getStaticProps() {
+  const notion = new Client({ auth: process.env.NOTION_API_KEY })
+  const databaseID = '5a74d44910624069aa52d4ac84db5f0e'
+  const respose = await notion.databases.query({
+    database_id: databaseID,
+  })
+
+  return {
+    props: {
+      data: respose, // will be passed to the page component as props
+    },
+  }
+}
