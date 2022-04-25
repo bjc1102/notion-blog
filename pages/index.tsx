@@ -11,10 +11,6 @@ interface IProps {
 }
 
 const Home = ({ data }: IProps) => {
-  useEffect(() => {
-    console.log(data)
-  }, [])
-
   const getDatabaseDisplay = () => {
     const jsx: JSX.Element[] = []
     data.forEach((element) => {
@@ -27,7 +23,9 @@ const Home = ({ data }: IProps) => {
             })}
           </span>
           <p>{element.id}</p>
-          <Link href={`/article/${element.id}`}>HELLO</Link>
+          <Link href={`/article/${element.id}`}>
+            <a>HELLO</a>
+          </Link>
         </div>
       )
     })
@@ -41,7 +39,7 @@ export default Home
 
 export async function getStaticProps() {
   const notion = new Client({ auth: process.env.NOTION_API_KEY })
-  const databaseID = '5a74d44910624069aa52d4ac84db5f0e'
+  const databaseID = process.env.NOTION_DB_ID ? process.env.NOTION_DB_ID : ''
   const respose = await notion.databases.query({
     database_id: databaseID,
   })

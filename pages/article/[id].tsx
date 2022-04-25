@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Client } from '@notionhq/client'
+import { NotionAPI } from 'notion-client'
 import { NextPage, GetStaticPropsContext } from 'next'
+import { NotionRenderer } from 'react-notion-x'
 
 const Article: NextPage = ({ post }: any) => {
-  console.log(post)
-  return <div></div>
+  return <NotionRenderer recordMap={post} darkMode={false} />
 }
 
 export default Article
@@ -18,7 +19,6 @@ export const getStaticPaths = async () => {
     database_id: databaseID,
   })
   // pre-render할 Path를 얻음 (posts를 통해서)
-
   const paths = respose.results.map((result) => ({
     params: {
       id: result.id,
@@ -31,14 +31,16 @@ export const getStaticPaths = async () => {
 }
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
-  const notion = new Client({ auth: process.env.NOTION_API_KEY })
+  // const notion = new Client({ auth: process.env.NOTION_API_KEY })
   const blockID = params?.id?.toString() || ''
-  const response = await notion.blocks.children.list({
-    block_id: blockID,
-  })
+  const notion = new NotionAPI()
+  const recordMap = await notion.getPage(blockID)
+  // const response = await notion.blocks.children.list({
+  //   block_id: blockID,
+  // })
   return {
     props: {
-      post: response.results,
+      post: recordMap,
     },
   }
 }
