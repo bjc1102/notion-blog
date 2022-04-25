@@ -34,7 +34,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   // const notion = new Client({ auth: process.env.NOTION_API_KEY })
   const blockID = params?.id?.toString() || ''
   const notion = new NotionAPI()
-  const recordMap = await notion.getPage(blockID)
+  const recordMap = await notion.getPage('e84ea938c57945a38829633b1f2bb833')
   // const response = await notion.blocks.children.list({
   //   block_id: blockID,
   // })
