@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
-import { ThemeProvider } from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import { Theme } from '../styles/theme'
 import { GlobalStyle } from '../styles/global-style'
 import { name } from '../site.config'
@@ -20,8 +20,15 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
       </Head>
       <GlobalStyle />
       <ThemeProvider theme={Theme}>
+        <Navbar />
         <Component {...pageProps} />
       </ThemeProvider>
     </>
   )
 }
+
+const Navbar = styled.div`
+  width: 200px;
+  height: 200px;
+  background-color: black;
+`

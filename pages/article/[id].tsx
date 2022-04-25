@@ -3,9 +3,19 @@ import { Client } from '@notionhq/client'
 import { NotionAPI } from 'notion-client'
 import { NextPage, GetStaticPropsContext } from 'next'
 import { NotionRenderer } from 'react-notion-x'
+import { Code } from 'react-notion-x/build/third-party/code'
+import { Collection } from 'react-notion-x/build/third-party/collection'
+import Image from 'next/image'
+import Link from 'next/link'
 
-const Article: NextPage = ({ post }: any) => {
-  return <NotionRenderer recordMap={post} darkMode={false} />
+const Article: NextPage = ({ recordMap }: any) => {
+  return (
+    <NotionRenderer
+      recordMap={recordMap}
+      darkMode={false}
+      components={{ Code, Collection, nextImage: Image, nextLink: Link }}
+    />
+  )
 }
 
 export default Article
@@ -31,16 +41,14 @@ export const getStaticPaths = async () => {
 }
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
-  // const notion = new Client({ auth: process.env.NOTION_API_KEY })
-  const blockID = params?.id?.toString() || ''
+  const blockID = 'e84ea938c57945a38829633b1f2bb833'
+  // params?.id?.toString() || ''
+  // e84ea938c57945a38829633b1f2bb833
   const notion = new NotionAPI()
-  const recordMap = await notion.getPage('e84ea938c57945a38829633b1f2bb833')
-  // const response = await notion.blocks.children.list({
-  //   block_id: blockID,
-  // })
+  const recordMap = await notion.getPage(blockID)
   return {
     props: {
-      post: recordMap,
+      recordMap,
     },
   }
 }

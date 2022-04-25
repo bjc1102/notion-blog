@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Client } from '@notionhq/client'
 import { INotionResult } from '../types/databasesQuery'
@@ -24,7 +24,7 @@ const Home = ({ data }: IProps) => {
           </span>
           <p>{element.id}</p>
           <Link href={`/article/${element.id}`}>
-            <a>HELLO</a>
+            <a>{element.id}</a>
           </Link>
         </div>
       )
