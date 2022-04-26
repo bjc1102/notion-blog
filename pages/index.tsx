@@ -11,10 +11,6 @@ interface IProps {
 }
 
 const Home = ({ data }: IProps) => {
-  useEffect(() => {
-    console.log(data[0])
-  }, [])
-
   const getDatabaseDisplay = () => {
     const jsx: JSX.Element[] = []
     data.forEach((element) => {
@@ -27,7 +23,9 @@ const Home = ({ data }: IProps) => {
             })}
           </span>
           <p>{element.id}</p>
-          <Link href={`/article/${element.id}`}>
+          <Link
+            href={`/article/${element.properties.Name.title[0].mention.page.id}`}
+          >
             <a>{element.properties.Name.title[0].mention.page.id}</a>
           </Link>
         </div>
