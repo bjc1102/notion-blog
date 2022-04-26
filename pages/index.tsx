@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Client } from '@notionhq/client'
 import { INotionResult } from '../types/databasesQuery'
@@ -11,12 +11,16 @@ interface IProps {
 }
 
 const Home = ({ data }: IProps) => {
+  useEffect(() => {
+    console.log(data[0])
+  }, [])
+
   const getDatabaseDisplay = () => {
     const jsx: JSX.Element[] = []
     data.forEach((element) => {
       jsx.push(
         <div key={element.id}>
-          <p>{element.properties.Name.title[0].plain_text}</p>
+          <p>{element.properties.Title.rich_text[0].plain_text}</p>
           <span>
             {element.properties.Tags.multi_select.map((value) => {
               return value.name
@@ -24,7 +28,7 @@ const Home = ({ data }: IProps) => {
           </span>
           <p>{element.id}</p>
           <Link href={`/article/${element.id}`}>
-            <a>{element.id}</a>
+            <a>{element.properties.Name.title[0].mention.page.id}</a>
           </Link>
         </div>
       )

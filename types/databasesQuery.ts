@@ -35,7 +35,26 @@ export interface INotionResult {
         {
           type: string
           plain_text: string
-          href: null
+          href: string
+          mention: {
+            type: string
+            page: {
+              id: string
+            }
+          }
+        }
+      ]
+    }
+    Title: {
+      id: string
+      type: string
+      rich_text: [
+        {
+          type: string
+          text: {
+            content: string
+          }
+          plain_text: string
         }
       ]
     }
