@@ -10,12 +10,13 @@ import { Modal } from 'react-notion-x/build/third-party/modal'
 import Image from 'next/image'
 import Link from 'next/link'
 import * as notion from 'notion-types'
+import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
 
 interface IProps {
   recordMap: notion.ExtendedRecordMap
 }
 
-const Article: NextPage = ({ recordMap }: IProps) => {
+const Article = ({ recordMap }: IProps) => {
   return (
     <NotionRenderer
       recordMap={recordMap}
@@ -50,12 +51,13 @@ export const getStaticPaths = async () => {
   // 우리는 오로지 이 path들만 빌드타임에 프리렌더 함
   // { fallback: false } 는 다른 routes들은 404임을 의미
   // true이면 만들어지지 않은 것도 추후 요청이 들어오면 만들어 줄 거라는 뜻
+  console.log(response.results[0].properties.Name.title[0])
+
   return { paths, fallback: false }
 }
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
   const pageId = params?.id?.toString() || ''
-  // e84ea938c57945a38829633b1f2bb833
   const notion = new NotionAPI()
   const recordMap = await notion.getPage(pageId)
   return {
