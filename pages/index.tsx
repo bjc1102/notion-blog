@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import NotionService from '../services/notion-service';
 import { name } from '../site.config';
-import { flexCenter } from '../styles/theme';
 import { BlogPost } from '../@types/schema';
 import BlogCard from '../components/BlogCard';
 
@@ -35,7 +34,7 @@ const Home: NextPage = ({
           content={description}
         />
       </Head>
-      <MainContentWrapper>
+      <div>
         <div className="main-article">
           <div className="main-article__title">
             <h1 className="main-ariticle__text">{name}</h1>
@@ -44,25 +43,9 @@ const Home: NextPage = ({
             <BlogCard key={post.id} post={post} />
           ))}
         </div>
-      </MainContentWrapper>
+      </div>
     </>
   );
 };
 
 export default Home;
-
-const MainContentWrapper = styled.main`
-  min-height: 100vh;
-  .main-article {
-    max-width: 64rem;
-    margin: 0 auto;
-    .main-article__title {
-      ${flexCenter}
-      .main-ariticle__text {
-        font-size: 1.125rem; /* 18px */
-        line-height: 1.75rem; /* 28px */
-        text-align: center;
-      }
-    }
-  }
-`;

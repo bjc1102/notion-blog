@@ -19,9 +19,7 @@ const Post = ({
         />
         <meta name="og:image" title="og:title" content={post.cover} />
       </Head>
-      <article className="prose">
-        <ReactMarkdown>{markdown}</ReactMarkdown>
-      </article>
+      <ReactMarkdown>{markdown}</ReactMarkdown>
     </>
   );
 };
