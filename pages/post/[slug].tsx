@@ -19,7 +19,9 @@ const Post = ({
         />
         <meta name="og:image" title="og:title" content={post.cover} />
       </Head>
-      <ReactMarkdown>{markdown}</ReactMarkdown>
+      <article className="prose">
+        <ReactMarkdown>{markdown}</ReactMarkdown>
+      </article>
     </>
   );
 };
@@ -51,6 +53,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   if (!p) {
     throw 'Error';
   }
+  console.log(p);
 
   return {
     props: {
