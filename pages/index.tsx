@@ -11,7 +11,6 @@ import BlogCard from '../components/BlogCard';
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
-
   const posts = await notionService.getPublishedBlogPosts();
 
   return {
