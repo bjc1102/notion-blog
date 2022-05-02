@@ -1,7 +1,6 @@
 import React from 'react';
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
 import Head from 'next/head';
-import styled from 'styled-components';
 
 import NotionService from '../services/notion-service';
 import { name } from '../site.config';
