@@ -1,7 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import Head from 'next/head';
-import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import Head from 'next/head';
 import NotionService from '../../services/notion-service';
 
 const Post = ({
@@ -13,28 +12,57 @@ const Post = ({
       <Head>
         <title>{post.title}</title>
         <meta
-          name="og:description"
-          title="og:description"
+          name={'description'}
+          title={'description'}
           content={post.description}
         />
-        <meta name="og:image" title="og:title" content={post.cover} />
+        <meta name={'og:title'} title={'og:title'} content={post.title} />
+        <meta
+          name={'og:description'}
+          title={'og:description'}
+          content={post.description}
+        />
+        <meta name={'og:image'} title={'og:image'} content={post.cover} />
       </Head>
-      <article className="prose">
-        <ReactMarkdown>{markdown}</ReactMarkdown>
-      </article>
+
+      <div className="min-h-screen">
+        <main className="max-w-5xl mx-auto relative">
+          <div className="flex items-center justify-center">
+            <article className="prose">
+              <ReactMarkdown>{markdown}</ReactMarkdown>
+            </article>
+          </div>
+        </main>
+      </div>
     </>
   );
 };
 
-export default Post;
+export const getStaticProps: GetStaticProps = async (context) => {
+  const notionService = new NotionService();
+
+  // @ts-ignore
+  const p = await notionService.getSingleBlogPost(context.params?.slug);
+
+  if (!p) {
+    throw '';
+  }
+
+  return {
+    props: {
+      markdown: p.markdown,
+      post: p.post,
+    },
+  };
+};
 
 export async function getStaticPaths() {
-  const notionSerivce = new NotionService();
-  const posts = await notionSerivce.getPublishedBlogPosts();
+  const notionService = new NotionService();
 
-  //because we are generating static paths, you will have to redepoly
-  //your site when you make a change in Notion.
+  const posts = await notionService.getPublishedBlogPosts();
 
+  // Because we are generating static paths, you will have to redeploy your site whenever
+  // you make a change in Notion.
   const paths = posts.map((post) => {
     return `/post/${post.slug}`;
   });
@@ -45,20 +73,4 @@ export async function getStaticPaths() {
   };
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const notionService = new NotionService();
-  // @ts-ignore
-  const p = await notionService.getSingleBlogPost(context.params?.slug);
-
-  if (!p) {
-    throw 'Error';
-  }
-  console.log(p);
-
-  return {
-    props: {
-      markdow: p.markdown,
-      post: p.post,
-    },
-  };
-};
+export default Post;

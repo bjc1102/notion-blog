@@ -1,14 +1,12 @@
-import React from 'react';
-import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
-
-import NotionService from '../services/notion-service';
-import { name } from '../site.config';
 import { BlogPost } from '../@types/schema';
 import BlogCard from '../components/BlogCard';
+import NotionService from '../services/notion-service';
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
+
   const posts = await notionService.getPublishedBlogPosts();
 
   return {
@@ -18,11 +16,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-const Home: NextPage = ({
-  posts,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const title = 'Test Blog';
-  const description = 'Welcome to my Notion blog';
+  const description = 'Welcome to my Notion Blog.';
+
   return (
     <>
       <Head>
@@ -32,16 +29,29 @@ const Home: NextPage = ({
           title={'description'}
           content={description}
         />
+        <meta name={'og:title'} title={'og:title'} content={title} />
+        <meta
+          name={'og:description'}
+          title={'og:description'}
+          content={title}
+        />
       </Head>
-      <div>
-        <div className="main-article">
-          <div className="main-article__title">
-            <h1 className="main-ariticle__text">{name}</h1>
+
+      <div className="min-h-screen">
+        <main className="max-w-5xl mx-auto relative">
+          <div className="h-full pt-4 pb-16 mx-auto">
+            <div className="flex items-center justify-center">
+              <h1 className="font-extrabold text-4xl text-black">
+                Notion + NextJS Sample Blog
+              </h1>
+            </div>
+            <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-2 lg:max-w-none">
+              {posts.map((post: BlogPost) => (
+                <BlogCard key={post.id} post={post} />
+              ))}
+            </div>
           </div>
-          {posts.map((post: BlogPost) => (
-            <BlogCard key={post.id} post={post} />
-          ))}
-        </div>
+        </main>
       </div>
     </>
   );
