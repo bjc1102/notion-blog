@@ -10,9 +10,8 @@ import { Code } from 'react-notion-x/build/third-party/code';
 import { Collection } from 'react-notion-x/build/third-party/collection';
 import { Equation } from 'react-notion-x/build/third-party/equation';
 import { Pdf } from 'react-notion-x/build/third-party/pdf';
-import { getPageTitle, getPageProperty } from 'notion-utils';
+import { getPageTitle } from 'notion-utils';
 import { useRouter } from 'next/router';
-import { BlogPost } from '../../@types/schema';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
@@ -22,31 +21,23 @@ const Modal = dynamic(
 );
 
 const Post = ({
+  title,
   recordMap,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
   const { post } = router.query;
 
-  // const handlePostData = (post: string | string[] | undefined): string => {
-  //   if (!post) return '';
-  //   return Array.isArray(post) ? post[0] : post;
-  // };
-
-  // const nowPost: BlogPost = JSON.parse(handlePostData(post));
-  // console.log(nowPost);
-
   return (
     <>
-      {/* <Head>
-        <title>"title"</title>
-        <meta name={'og:title'} title={'og:title'} content={nowPost.title} />
+      <Head>
+        <title>{title}</title>
+        <meta name={'og:title'} title={'og:title'} content={title} />
         <meta
           name={'og:description'}
           title={'og:description'}
-          content={nowPost.description}
+          content="노션을 CMS로 이용하는 블로그입니다"
         />
-        <meta name={'og:image'} title={'og:image'} content={nowPost.cover} />
-      </Head> */}
+      </Head>
       <h3>title</h3>
       <div className="bg-gray-900">
         <NotionRenderer

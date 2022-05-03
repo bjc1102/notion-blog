@@ -15,7 +15,6 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
     <Link
       href={{
         pathname: `/post/${post.slug}`,
-        query: { post: JSON.stringify(post) },
       }}
     >
       <div className="card-contents">

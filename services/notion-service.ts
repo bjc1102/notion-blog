@@ -67,7 +67,6 @@ export default class NotionService {
 
     // grab page from notion
     const recordMap = await this.notion.getPage(response.results[0].id);
-
     return recordMap;
   }
 
