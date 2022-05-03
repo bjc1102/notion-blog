@@ -24,6 +24,7 @@ const Post = ({
         />
         <meta name={'og:image'} title={'og:image'} content={post.cover} />
       </Head>
+<<<<<<< HEAD
 
       <div className="min-h-screen">
         <main className="max-w-5xl mx-auto relative">
@@ -34,6 +35,9 @@ const Post = ({
           </div>
         </main>
       </div>
+=======
+      <ReactMarkdown>{markdown}</ReactMarkdown>
+>>>>>>> parent of 88ae560 (chore: post 불러오기 테스트)
     </>
   );
 };

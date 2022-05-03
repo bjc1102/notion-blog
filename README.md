@@ -1,1 +1,1 @@
-Typescript + Eslint + Tailwind + commitlint , husky
+Typescript + Eslint + styled-compontents + commitlint , husky
