@@ -19,6 +19,7 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
           <img src={post.cover} alt={'cover-image'} />
         </div>
         {/* Text */}
+        <h1>{post.title}</h1>
         <div className="card-content__text">
           <h4>{dayjs(post.date).format('LL')}</h4>
         </div>

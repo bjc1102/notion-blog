@@ -2,15 +2,20 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import ReactMarkdown from 'react-markdown';
 import Head from 'next/head';
 import NotionService from '../../services/notion-service';
+import { NotionRenderer } from 'react-notion-x';
+import { Code } from 'react-notion-x/build/third-party/code';
+import { Collection } from 'react-notion-x/build/third-party/collection';
+import { Equation } from 'react-notion-x/build/third-party/equation';
+import { Modal } from 'react-notion-x/build/third-party/modal';
+import { Pdf } from 'react-notion-x/build/third-party/pdf';
 
 const Post = ({
-  markdown,
-  post,
+  recordMap,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
-        <title>{post.title}</title>
+        {/* <title>{post.title}</title>
         <meta
           name={'description'}
           title={'description'}
@@ -22,9 +27,18 @@ const Post = ({
           title={'og:description'}
           content={post.description}
         />
-        <meta name={'og:image'} title={'og:image'} content={post.cover} />
+        <meta name={'og:image'} title={'og:image'} content={post.cover} /> */}
       </Head>
-      <ReactMarkdown>{markdown}</ReactMarkdown>
+      <NotionRenderer
+        recordMap={recordMap}
+        components={{
+          Code,
+          Collection,
+          Equation,
+          Modal,
+          Pdf,
+        }}
+      />
     </>
   );
 };
@@ -33,16 +47,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
 
   // @ts-ignore
-  const p = await notionService.getSingleBlogPost(context.params?.slug);
+  const recordMap = await notionService.getSingleBlogPost(context.params?.slug);
 
-  if (!p) {
+  if (!recordMap) {
     throw '';
   }
 
   return {
     props: {
-      markdown: p.markdown,
-      post: p.post,
+      recordMap,
     },
   };
 };

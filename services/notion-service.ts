@@ -1,14 +1,18 @@
 import { Client } from '@notionhq/client';
 import { BlogPost, PostPage } from '../@types/schema';
 import { NotionToMarkdown } from 'notion-to-md';
+import { NotionAPI } from 'notion-client';
+import { ExtendedRecordMap } from '../node_modules/notion-types/build/maps';
 
 export default class NotionService {
   client: Client;
   n2m: NotionToMarkdown;
+  notion: NotionAPI;
 
   constructor() {
     this.client = new Client({ auth: process.env.NOTION_ACCESS_TOKEN });
     this.n2m = new NotionToMarkdown({ notionClient: this.client });
+    this.notion = new NotionAPI();
   }
 
   async getPublishedBlogPosts(): Promise<BlogPost[]> {
@@ -35,9 +39,7 @@ export default class NotionService {
     });
   }
 
-  async getSingleBlogPost(slug: string): Promise<PostPage> {
-    let post, markdown;
-
+  async getSingleBlogPost(slug: string): Promise<ExtendedRecordMap> {
     const database = process.env.NOTION_DB_ID ?? '';
     // list of blog posts
     const response = await this.client.databases.query({
@@ -64,16 +66,9 @@ export default class NotionService {
     }
 
     // grab page from notion
-    const page = response.results[0];
+    const recordMap = await this.notion.getPage(response.results[0].id);
 
-    const mdBlocks = await this.n2m.pageToMarkdown(page.id);
-    markdown = this.n2m.toMarkdownString(mdBlocks);
-    post = NotionService.pageToPostTransformer(page);
-
-    return {
-      post,
-      markdown,
-    };
+    return recordMap;
   }
 
   private static pageToPostTransformer(page: any): BlogPost {
