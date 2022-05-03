@@ -1,44 +1,68 @@
+import * as React from 'react';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import ReactMarkdown from 'react-markdown';
 import Head from 'next/head';
 import NotionService from '../../services/notion-service';
+import Link from 'next/link';
+import Image from 'next/image';
 import { NotionRenderer } from 'react-notion-x';
+import dynamic from 'next/dynamic';
 import { Code } from 'react-notion-x/build/third-party/code';
 import { Collection } from 'react-notion-x/build/third-party/collection';
 import { Equation } from 'react-notion-x/build/third-party/equation';
-import { Modal } from 'react-notion-x/build/third-party/modal';
 import { Pdf } from 'react-notion-x/build/third-party/pdf';
+import { getPageTitle, getPageProperty } from 'notion-utils';
+import { useRouter } from 'next/router';
+import { BlogPost } from '../../@types/schema';
+
+const Modal = dynamic(
+  () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
+  {
+    ssr: false,
+  }
+);
 
 const Post = ({
   recordMap,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const router = useRouter();
+  const { post } = router.query;
+
+  // const handlePostData = (post: string | string[] | undefined): string => {
+  //   if (!post) return '';
+  //   return Array.isArray(post) ? post[0] : post;
+  // };
+
+  // const nowPost: BlogPost = JSON.parse(handlePostData(post));
+  // console.log(nowPost);
+
   return (
     <>
-      <Head>
-        {/* <title>{post.title}</title>
-        <meta
-          name={'description'}
-          title={'description'}
-          content={post.description}
-        />
-        <meta name={'og:title'} title={'og:title'} content={post.title} />
+      {/* <Head>
+        <title>"title"</title>
+        <meta name={'og:title'} title={'og:title'} content={nowPost.title} />
         <meta
           name={'og:description'}
           title={'og:description'}
-          content={post.description}
+          content={nowPost.description}
         />
-        <meta name={'og:image'} title={'og:image'} content={post.cover} /> */}
-      </Head>
-      <NotionRenderer
-        recordMap={recordMap}
-        components={{
-          Code,
-          Collection,
-          Equation,
-          Modal,
-          Pdf,
-        }}
-      />
+        <meta name={'og:image'} title={'og:image'} content={nowPost.cover} />
+      </Head> */}
+      <h3>title</h3>
+      <div className="bg-gray-900">
+        <NotionRenderer
+          recordMap={recordMap}
+          darkMode={true}
+          components={{
+            nextImage: Image,
+            nextLink: Link,
+            Code,
+            Collection,
+            Equation,
+            Modal,
+            Pdf,
+          }}
+        />
+      </div>
     </>
   );
 };
@@ -48,6 +72,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   // @ts-ignore
   const recordMap = await notionService.getSingleBlogPost(context.params?.slug);
+  const title = getPageTitle(recordMap);
 
   if (!recordMap) {
     throw '';
@@ -56,6 +81,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       recordMap,
+      title,
     },
   };
 };

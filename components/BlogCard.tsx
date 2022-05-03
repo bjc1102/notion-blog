@@ -12,7 +12,12 @@ type BlogCardProps = {
 
 const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
   return (
-    <Link href={`/post/${post.slug}`}>
+    <Link
+      href={{
+        pathname: `/post/${post.slug}`,
+        query: { post: JSON.stringify(post) },
+      }}
+    >
       <div className="card-contents">
         {/* Image */}
         <div className="card-content__image">
