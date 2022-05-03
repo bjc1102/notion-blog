@@ -1,6 +1,6 @@
 import { Client } from '@notionhq/client';
-import { NotionToMarkdown } from 'notion-to-md';
 import { BlogPost, PostPage } from '../@types/schema';
+import { NotionToMarkdown } from 'notion-to-md';
 
 export default class NotionService {
   client: Client;
@@ -13,8 +13,7 @@ export default class NotionService {
 
   async getPublishedBlogPosts(): Promise<BlogPost[]> {
     const database = process.env.NOTION_DB_ID ?? '';
-
-    //list blog posts
+    // list blog posts
     const response = await this.client.databases.query({
       database_id: database,
       filter: {
@@ -25,7 +24,7 @@ export default class NotionService {
       },
       sorts: [
         {
-          property: 'Created',
+          property: 'Updated',
           direction: 'descending',
         },
       ],
@@ -38,24 +37,33 @@ export default class NotionService {
 
   async getSingleBlogPost(slug: string): Promise<PostPage> {
     let post, markdown;
-    const database = process.env.NOTION_DB_ID ?? '';
 
-    //list of blog posts
+    const database = process.env.NOTION_DB_ID ?? '';
+    // list of blog posts
     const response = await this.client.databases.query({
       database_id: database,
       filter: {
         property: 'Slug',
         formula: {
           text: {
-            equals: slug,
+            equals: slug, // slug
           },
         },
+        // add option for tags in the future
       },
+      sorts: [
+        {
+          property: 'Updated',
+          direction: 'descending',
+        },
+      ],
     });
 
     if (!response.results[0]) {
       throw 'No results available';
     }
+
+    // grab page from notion
     const page = response.results[0];
 
     const mdBlocks = await this.n2m.pageToMarkdown(page.id);
@@ -70,7 +78,6 @@ export default class NotionService {
 
   private static pageToPostTransformer(page: any): BlogPost {
     let cover = page.cover;
-
     switch (cover.type) {
       case 'file':
         cover = page.cover.file;
@@ -79,9 +86,10 @@ export default class NotionService {
         cover = page.cover.external.url;
         break;
       default:
-        //add default cover image if you want
+        // Add default cover image if you want...
         cover = '';
     }
+
     return {
       id: page.id,
       cover: cover,
