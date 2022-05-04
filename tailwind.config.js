@@ -9,7 +9,9 @@ module.exports = {
         sans: ['Noto Sans KR'],
       },
       colors: {
-        primary: '#243c5a',
+        primary: '#1E2126',
+        accent: '#ADBF26',
+        textColor: '#ffffff',
       },
     },
   },

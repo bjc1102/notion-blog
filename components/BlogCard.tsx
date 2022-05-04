@@ -33,7 +33,7 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
         </div>
         <div className="flex gap-2">
           {post.tags.map((tag) => (
-            <span className="bg-primary text-base" key={tag.id}>
+            <span className="bg-accent text-base" key={tag.id}>
               #{tag.name}
             </span>
           ))}
