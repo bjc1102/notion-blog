@@ -34,9 +34,9 @@ const Home: NextPage = ({
         />
       </Head>
       <div>
-        <div className="main-article">
+        <div className="">
           <div className="main-article__title">
-            <h1 className="main-ariticle__text">{name}</h1>
+            <h1 className="font-sans">{name}</h1>
           </div>
           {posts.map((post: BlogPost) => (
             <BlogCard key={post.id} post={post} />

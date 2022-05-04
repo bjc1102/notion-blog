@@ -4,7 +4,11 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Noto Sans KR'],
+      },
+    },
   },
   plugins: [require('@tailwindcss/typography')],
 };

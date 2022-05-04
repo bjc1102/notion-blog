@@ -38,8 +38,8 @@ const Post = ({
           content="노션을 CMS로 이용하는 블로그입니다"
         />
       </Head>
-      <h3>title</h3>
       <div className="bg-gray-900">
+        <h3>title</h3>
         <NotionRenderer
           recordMap={recordMap}
           darkMode={true}
