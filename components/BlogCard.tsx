@@ -17,19 +17,25 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
         pathname: `/post/${post.slug}`,
       }}
     >
-      <div className="card-contents">
+      <div className="">
         {/* Image */}
-        <div className="card-content__image">
-          <img src={post.cover} alt={'cover-image'} />
+        <div className="flex">
+          <img
+            className="w-96 h-48 object-cover"
+            src={post.cover}
+            alt={'cover-image'}
+          />
         </div>
         {/* Text */}
-        <h1>{post.title}</h1>
-        <div className="card-content__text">
+        <h1 className="text-lg">{post.title}</h1>
+        <div className="text-base">
           <h4>{dayjs(post.date).format('LL')}</h4>
         </div>
-        <div className="card-content__tags">
+        <div className="flex gap-2">
           {post.tags.map((tag) => (
-            <span key={tag.id}>#{tag.name}</span>
+            <span className="bg-primary text-base" key={tag.id}>
+              #{tag.name}
+            </span>
           ))}
         </div>
       </div>

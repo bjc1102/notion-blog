@@ -8,6 +8,9 @@ module.exports = {
       fontFamily: {
         sans: ['Noto Sans KR'],
       },
+      colors: {
+        primary: '#243c5a',
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],

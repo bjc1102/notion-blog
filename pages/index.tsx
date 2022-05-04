@@ -24,7 +24,7 @@ const Home: NextPage = ({
   const title = 'Test Blog';
   const description = 'Welcome to my Notion blog';
   return (
-    <>
+    <div className="flex flex-col">
       <Head>
         <title>{title}</title>
         <meta
@@ -33,17 +33,17 @@ const Home: NextPage = ({
           content={description}
         />
       </Head>
-      <div>
-        <div className="">
-          <div className="main-article__title">
-            <h1 className="font-sans">{name}</h1>
-          </div>
+      <div className="mx-auto overflow-hidden">
+        <div className="my-4">
+          <h1 className="text-xl">{name}</h1>
+        </div>
+        <div>
           {posts.map((post: BlogPost) => (
             <BlogCard key={post.id} post={post} />
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
