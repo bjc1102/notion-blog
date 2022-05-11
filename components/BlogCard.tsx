@@ -14,9 +14,9 @@ type BlogCardProps = {
 const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
   return (
     <Link href={`/post/${post.slug}`}>
-      <a className="bg-gray-300">
+      <a className="bg-gray-300 flex w-full">
         {/* Image */}
-        <div className="relative w-96 h-48">
+        <div className="relative w-48 h-28">
           <Image
             layout="fill"
             objectFit="cover"
@@ -25,20 +25,25 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
           />
         </div>
         {/* Text */}
-        <h1 className="text-lg">{post.title}</h1>
-        <div className="text-base">
-          <h4>{dayjs(post.date).format('LL')}</h4>
+        <div>
+          <h1 className="text-lg font-semibold">{post.title}</h1>
+          <div className="text-sm font-thin">
+            <p>{post.description}</p>
+          </div>
+          <div className="text-base">
+            <h5>{dayjs(post.date).format('LL')}</h5>
+          </div>
+          <ul className="flex gap-2 flex-wrap">
+            {post.tags.map((tag) => (
+              <li
+                className="border-solid border-2 rounded-sm border-gray-300"
+                key={tag.id}
+              >
+                <span className="px-1">#{tag.name}</span>
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul className="flex gap-2 flex-wrap">
-          {post.tags.map((tag) => (
-            <li
-              className="border-solid border-2 rounded-sm border-gray-300"
-              key={tag.id}
-            >
-              #{tag.name}
-            </li>
-          ))}
-        </ul>
       </a>
     </Link>
   );

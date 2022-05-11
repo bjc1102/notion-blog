@@ -21,7 +21,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const Home: NextPage = ({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const title = 'Test Blog';
+  const title = 'HOME | NOTION BLOG';
   const description = 'Welcome to my Notion blog';
   return (
     <>
@@ -34,13 +34,15 @@ const Home: NextPage = ({
         />
       </Head>
       <div className="flex flex-col bg-primary text-textColor">
-        <div className="mx-auto overflow-hidden">
+        <div className="mx-auto">
           <div className="my-4">
             <h1 className="text-xl">{name}</h1>
           </div>
-          {posts.map((post: BlogPost) => (
-            <BlogCard key={post.id} post={post} />
-          ))}
+          <div className="grid-cols-1">
+            {posts.map((post: BlogPost) => (
+              <BlogCard key={post.id} post={post} />
+            ))}
+          </div>
         </div>
       </div>
     </>
