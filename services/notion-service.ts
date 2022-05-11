@@ -64,7 +64,6 @@ export default class NotionService {
     if (!response.results[0]) {
       throw 'No results available';
     }
-
     // grab page from notion
     const recordMap = await this.notion.getPage(response.results[0].id);
     return recordMap;
@@ -80,7 +79,7 @@ export default class NotionService {
         cover = page.cover.external.url;
         break;
       default:
-        // Add default cover image if you want...
+        // 기본 커버 이미지
         cover = '';
     }
 

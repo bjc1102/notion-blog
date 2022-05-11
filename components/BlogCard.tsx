@@ -3,6 +3,7 @@ import { BlogPost } from '../@types/schema';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import dayjs from 'dayjs';
 import Link from 'next/link';
+import Image from 'next/image';
 
 dayjs.extend(localizedFormat);
 
@@ -12,16 +13,13 @@ type BlogCardProps = {
 
 const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
   return (
-    <Link
-      href={{
-        pathname: `/post/${post.slug}`,
-      }}
-    >
-      <div className="">
+    <Link href={`/post/${post.slug}`}>
+      <a className="bg-gray-300">
         {/* Image */}
-        <div className="flex">
-          <img
-            className="w-96 h-48 object-cover"
+        <div className="relative w-96 h-48">
+          <Image
+            layout="fill"
+            objectFit="cover"
             src={post.cover}
             alt={'cover-image'}
           />
@@ -31,14 +29,17 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
         <div className="text-base">
           <h4>{dayjs(post.date).format('LL')}</h4>
         </div>
-        <div className="flex gap-2">
+        <ul className="flex gap-2 flex-wrap">
           {post.tags.map((tag) => (
-            <span className="bg-accent text-base" key={tag.id}>
+            <li
+              className="border-solid border-2 rounded-sm border-gray-300"
+              key={tag.id}
+            >
               #{tag.name}
-            </span>
+            </li>
           ))}
-        </div>
-      </div>
+        </ul>
+      </a>
     </Link>
   );
 };

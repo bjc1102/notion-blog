@@ -38,11 +38,9 @@ const Home: NextPage = ({
           <div className="my-4">
             <h1 className="text-xl">{name}</h1>
           </div>
-          <div className="flex flex-col gap-y-4">
-            {posts.map((post: BlogPost) => (
-              <BlogCard key={post.id} post={post} />
-            ))}
-          </div>
+          {posts.map((post: BlogPost) => (
+            <BlogCard key={post.id} post={post} />
+          ))}
         </div>
       </div>
     </>
