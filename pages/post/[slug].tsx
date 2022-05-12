@@ -12,6 +12,7 @@ import { Equation } from 'react-notion-x/build/third-party/equation';
 import { Pdf } from 'react-notion-x/build/third-party/pdf';
 import { getPageTitle } from 'notion-utils';
 import { useRouter } from 'next/router';
+import { name } from '../../site.config';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
@@ -30,7 +31,9 @@ const Post = ({
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>
+          {name} | {title}
+        </title>
         <meta name={'og:title'} title={'og:title'} content={title} />
         <meta
           name={'og:description'}
@@ -39,7 +42,7 @@ const Post = ({
         />
       </Head>
       <div className="bg-gray-900">
-        <h3>title</h3>
+        <h3>{title}</h3>
         <NotionRenderer
           recordMap={recordMap}
           darkMode={true}

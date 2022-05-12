@@ -16,11 +16,11 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
     <Link href={`/post/${post.slug}`}>
       <a>
         {/* Text */}
-        <article className="border-solid border-l-2 pl-3">
+        <article className="border-solidborder-l-2 px-6 hover:translate-x-5 transition-all hover:border-l-4 hover:border-accent">
           <div className="flex items-center gap-3">
             {/* Image */}
             {post.cover && (
-              <div className="relative w-12 h-12 rounded-2xl overflow-hidden">
+              <div className="relative w-12 h-12 rounded-3xl overflow-hidden">
                 <Image
                   layout="fill"
                   objectFit="cover"
@@ -31,21 +31,22 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
             )}
             <h1 className="font-semibold text-2xl py-2">{post.title}</h1>
           </div>
-          <div className="font-thin text-lg py-1">
+          <div className="font-thin text-base py-1">
             <p>{post.description}</p>
           </div>
           <ul className="flex gap-2 flex-wrap py-1 text-gray-400">
-            <h5 className="">{dayjs(post.date).format('LL')}</h5>
+            <h5>{dayjs(post.date).format('LL')}</h5>
+            <span>|</span>
             {post.tags.map((tag) => (
-              <li
-                className="border-solid border-2 rounded-lg border-gray-400"
-                key={tag.id}
-              >
-                <span className="px-3">#{tag.name}</span>
+              <li className="flex rounded-lg bg-gray-600" key={tag.id}>
+                <span className="px-2 text-gray-300 items-center justify-center">
+                  #{tag.name}
+                </span>
               </li>
             ))}
           </ul>
         </article>
+        <div className="border-b bg-gray-400 my-6 mx-2" />
       </a>
     </Link>
   );

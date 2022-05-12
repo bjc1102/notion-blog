@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import { name } from '../site.config';
+import Footer from '../components/Footer';
+
 import '../styles/global.css';
 // core styles shared by all of react-notion-x (required)
 import 'react-notion-x/src/styles.css';
@@ -18,6 +20,7 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
       </Head>
       <div className="box-border bg-primary font-sans outline-none block text-textColor">
         <Component {...pageProps} />
+        <Footer />
       </div>
     </>
   );

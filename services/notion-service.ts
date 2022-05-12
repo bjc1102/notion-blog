@@ -70,7 +70,8 @@ export default class NotionService {
   }
 
   private static pageToPostTransformer(page: any): BlogPost {
-    let cover = page.cover;
+    let cover = page.cover !== null ? page.cover : '';
+
     switch (cover.type) {
       case 'file':
         cover = page.cover.file;
@@ -78,8 +79,10 @@ export default class NotionService {
       case 'external':
         cover = page.cover.external.url;
         break;
+      case null:
+        cover = 'https://picsum.photos/200/300?grayscale'; // 기본 커버 이미지
+        break;
       default:
-        // 기본 커버 이미지
         cover = 'https://picsum.photos/200/300?grayscale';
     }
 

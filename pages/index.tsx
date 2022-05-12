@@ -34,9 +34,9 @@ const Home: NextPage = ({
         />
       </Head>
       <div className="w-full">
-        <main className="w-50 mx-auto px-5">
+        <main className="w-50 mx-auto px-5 flex-col justify-center">
           <h1 className="text-xl py-4">{name}</h1>
-          <ul className="grid-cols-1 w-50 my-9 content-center">
+          <ul className="grid-cols-1 w-full my-9">
             {posts.map((post: BlogPost) => (
               <li key={post.id}>
                 <BlogCard post={post} />
