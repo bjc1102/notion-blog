@@ -6,6 +6,7 @@ export type Tag = {
 
 export type BlogPost = {
   id: string;
+  type: '개발' | '회고';
   slug: string;
   cover: string;
   title: string;

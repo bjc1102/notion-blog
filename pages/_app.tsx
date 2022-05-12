@@ -16,7 +16,9 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{name}</title>
       </Head>
-      <Component {...pageProps} />
+      <div className="box-border bg-primary font-sans outline-none block text-textColor">
+        <Component {...pageProps} />
+      </div>
     </>
   );
 }

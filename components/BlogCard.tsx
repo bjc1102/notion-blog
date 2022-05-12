@@ -14,36 +14,38 @@ type BlogCardProps = {
 const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
   return (
     <Link href={`/post/${post.slug}`}>
-      <a className="bg-gray-300 flex w-full">
-        {/* Image */}
-        <div className="relative w-48 h-28">
-          <Image
-            layout="fill"
-            objectFit="cover"
-            src={post.cover}
-            alt={'cover-image'}
-          />
-        </div>
+      <a>
         {/* Text */}
-        <div>
-          <h1 className="text-lg font-semibold">{post.title}</h1>
-          <div className="text-sm font-thin">
+        <article className="border-solid border-l-2 pl-3">
+          <div className="flex items-center gap-3">
+            {/* Image */}
+            {post.cover && (
+              <div className="relative w-12 h-12 rounded-2xl overflow-hidden">
+                <Image
+                  layout="fill"
+                  objectFit="cover"
+                  src={post.cover}
+                  alt={'cover-image'}
+                />
+              </div>
+            )}
+            <h1 className="font-semibold text-2xl py-2">{post.title}</h1>
+          </div>
+          <div className="font-thin text-lg py-1">
             <p>{post.description}</p>
           </div>
-          <div className="text-base">
-            <h5>{dayjs(post.date).format('LL')}</h5>
-          </div>
-          <ul className="flex gap-2 flex-wrap">
+          <ul className="flex gap-2 flex-wrap py-1 text-gray-400">
+            <h5 className="">{dayjs(post.date).format('LL')}</h5>
             {post.tags.map((tag) => (
               <li
-                className="border-solid border-2 rounded-sm border-gray-300"
+                className="border-solid border-2 rounded-lg border-gray-400"
                 key={tag.id}
               >
-                <span className="px-1">#{tag.name}</span>
+                <span className="px-3">#{tag.name}</span>
               </li>
             ))}
           </ul>
-        </div>
+        </article>
       </a>
     </Link>
   );

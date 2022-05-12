@@ -33,17 +33,17 @@ const Home: NextPage = ({
           content={description}
         />
       </Head>
-      <div className="flex flex-col bg-primary text-textColor">
-        <div className="mx-auto">
-          <div className="my-4">
-            <h1 className="text-xl">{name}</h1>
-          </div>
-          <div className="grid-cols-1">
+      <div className="w-full">
+        <main className="w-50 mx-auto px-5">
+          <h1 className="text-xl py-4">{name}</h1>
+          <ul className="grid-cols-1 w-50 my-9 content-center">
             {posts.map((post: BlogPost) => (
-              <BlogCard key={post.id} post={post} />
+              <li key={post.id}>
+                <BlogCard post={post} />
+              </li>
             ))}
-          </div>
-        </div>
+          </ul>
+        </main>
       </div>
     </>
   );

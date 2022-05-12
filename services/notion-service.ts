@@ -80,12 +80,13 @@ export default class NotionService {
         break;
       default:
         // 기본 커버 이미지
-        cover = '';
+        cover = 'https://picsum.photos/200/300?grayscale';
     }
 
     return {
       id: page.id,
       cover: cover,
+      type: page.properties.Type.rich_text[0].plain_text,
       title: page.properties.Name.title[0].plain_text,
       tags: page.properties.Tags.multi_select,
       description: page.properties.Description.rich_text[0].plain_text,
