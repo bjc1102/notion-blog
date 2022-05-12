@@ -1,5 +1,5 @@
 import { Client } from '@notionhq/client';
-import { BlogPost, PostPage } from '../@types/schema';
+import { BlogPost } from '../@types/schema';
 import { NotionToMarkdown } from 'notion-to-md';
 import { NotionAPI } from 'notion-client';
 import { ExtendedRecordMap } from '../node_modules/notion-types/build/maps';

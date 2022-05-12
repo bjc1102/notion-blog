@@ -7,7 +7,7 @@ import { name } from '../site.config';
 import { BlogPost } from '../@types/schema';
 import BlogCard from '../components/BlogCard';
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
   const posts = await notionService.getPublishedBlogPosts();
 
