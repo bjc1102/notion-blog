@@ -33,7 +33,6 @@ const Home: NextPage = ({
           content={description}
         />
       </Head>
-
       <main className="min-h-screen overflow-hidden">
         <Landing />
         <div className="max-w-5xl mx-auto">

@@ -27,7 +27,7 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
   return (
     <Link href={`/post/${post.slug}`}>
       <a className="block h-36">
-        <article className="flex flex-col overflow-hidden px-10  border-solid transition duration-300 hover:translate-x-4 hover:border-l-4 border-accent">
+        <article className="flex flex-col overflow-hidden px-10 rounded-r-2xl border-solid transition duration-300 hover:translate-x-4 hover:border-l-4 border-accent hover:bg-gray-800">
           {/* Image */}
           <div className="flex gap-3 py-2 items-center">
             <div className="relative w-12 h-12 rounded-3xl overflow-hidden flex-none">

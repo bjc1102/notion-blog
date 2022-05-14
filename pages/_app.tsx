@@ -20,9 +20,9 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
         <title>{name}</title>
       </Head>
       <Header />
-      <main className="block bg-primary text-white py-16 font-sans">
+      <div className="block bg-primary text-white py-16 font-sans">
         <Component {...pageProps} />
-      </main>
+      </div>
       <Footer />
     </>
   );
