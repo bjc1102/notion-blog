@@ -5,6 +5,7 @@ import Head from 'next/head';
 import NotionService from '../services/notion-service';
 import { BlogPost } from '../@types/schema';
 import BlogCard from '../components/BlogCard';
+import Landing from '../components/Landing';
 
 export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
@@ -32,14 +33,19 @@ const Home: NextPage = ({
           content={description}
         />
       </Head>
+
       <main className="min-h-screen overflow-hidden">
+        <Landing />
         <div className="max-w-5xl mx-auto">
-          <div className="flex items-center justify-start px-10 mt-10">
-            <h1 className="font-extrabold text-3xl md:text-xl">최신 포스트</h1>
+          <div className="flex items-center justify-start px-10 mt-10 md:justify-center">
+            <h1 className="font-extrabold text-3xl md:text-2xl">최신 포스트</h1>
           </div>
           <section className="grid grid-cols-1 gap-y-8 py-16">
             {posts.map((post: BlogPost, idx: number) => (
-              <BlogCard key={post.id} post={post} />
+              <React.Fragment key={post.id}>
+                <BlogCard post={post} />
+                <span className="block h-1 bg-gray-800"></span>
+              </React.Fragment>
             ))}
           </section>
         </div>

@@ -25,9 +25,6 @@ const Post = ({
   title,
   recordMap,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const router = useRouter();
-  const { post } = router.query;
-
   return (
     <>
       <Head>
