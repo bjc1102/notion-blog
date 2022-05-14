@@ -3,7 +3,6 @@ import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
 import Head from 'next/head';
 
 import NotionService from '../services/notion-service';
-import { name } from '../site.config';
 import { BlogPost } from '../@types/schema';
 import BlogCard from '../components/BlogCard';
 
@@ -33,18 +32,18 @@ const Home: NextPage = ({
           content={description}
         />
       </Head>
-      <div className="w-full">
-        <main className="w-50 mx-auto px-5 flex-col justify-center">
-          <h1 className="text-xl py-4">{name}</h1>
-          <ul className="grid-cols-1 w-full my-9">
-            {posts.map((post: BlogPost) => (
-              <li key={post.id}>
-                <BlogCard post={post} />
-              </li>
+      <main className="min-h-screen overflow-hidden">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex items-center justify-start px-10 mt-10">
+            <h1 className="font-extrabold text-3xl md:text-xl">최신 포스트</h1>
+          </div>
+          <section className="grid grid-cols-1 gap-y-8 py-16">
+            {posts.map((post: BlogPost, idx: number) => (
+              <BlogCard key={post.id} post={post} />
             ))}
-          </ul>
-        </main>
-      </div>
+          </section>
+        </div>
+      </main>
     </>
   );
 };

@@ -1,5 +1,13 @@
 export type Tag = {
-  color: string;
+  color:
+    | 'gray'
+    | 'brown'
+    | 'orange'
+    | 'green'
+    | 'blue'
+    | 'purple'
+    | 'pink'
+    | 'red';
   id: string;
   name: string;
 };

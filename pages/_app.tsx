@@ -2,8 +2,9 @@ import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import { name } from '../site.config';
 import Footer from '../components/Footer';
-
+import Header from '../components/Header';
 import '../styles/global.css';
+
 // core styles shared by all of react-notion-x (required)
 import 'react-notion-x/src/styles.css';
 // used for code syntax highlighting (optional)
@@ -18,10 +19,11 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{name}</title>
       </Head>
-      <div className="box-border bg-primary font-sans outline-none block text-textColor">
+      <Header />
+      <main className="block bg-primary text-white py-16">
         <Component {...pageProps} />
-        <Footer />
-      </div>
+      </main>
+      <Footer />
     </>
   );
 }

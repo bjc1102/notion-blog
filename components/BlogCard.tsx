@@ -12,41 +12,59 @@ type BlogCardProps = {
 };
 
 const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
+  const TagsTypeMap = {
+    gray: 'bg-[#616363] text-white',
+    brown: 'bg-[#554C2C] text-white',
+    yellow: 'bg-[#685d00] text-white',
+    orange: 'bg-[#8a6e46] text-white',
+    green: 'bg-[#32504c] text-white',
+    blue: 'bg-[#264259] text-white',
+    purple: 'bg-[#3A3159] text-white',
+    pink: 'bg-[#551036] text-white',
+    red: 'bg-[#501616] text-white',
+  };
+
   return (
     <Link href={`/post/${post.slug}`}>
-      <a>
-        {/* Text */}
-        <article className="border-solidborder-l-2 px-6 hover:translate-x-5 transition-all hover:border-l-4 hover:border-accent">
-          <div className="flex items-center gap-3">
-            {/* Image */}
-            {post.cover && (
-              <div className="relative w-12 h-12 rounded-3xl overflow-hidden">
-                <Image
-                  layout="fill"
-                  objectFit="cover"
-                  src={post.cover}
-                  alt={'cover-image'}
-                />
-              </div>
-            )}
-            <h1 className="font-semibold text-2xl py-2">{post.title}</h1>
-          </div>
-          <div className="font-thin text-base py-1">
-            <p>{post.description}</p>
-          </div>
-          <ul className="flex gap-2 flex-wrap py-1 text-gray-400">
-            <h5>{dayjs(post.date).format('LL')}</h5>
+      <a className="block h-36">
+        <article className="flex flex-col overflow-hidden px-10  border-solid transition duration-300 hover:translate-x-4 hover:border-l-4 border-accent">
+          {/* Image */}
+          <div className="flex gap-3 py-2 items-center">
+            <div className="relative w-12 h-12 rounded-3xl overflow-hidden flex-none">
+              <Image
+                layout="fill"
+                objectFit="cover"
+                src={post.cover}
+                alt={'cover-image'}
+              />
+            </div>
             <span>|</span>
-            {post.tags.map((tag) => (
-              <li className="flex rounded-lg bg-gray-600" key={tag.id}>
-                <span className="px-2 text-gray-300 items-center justify-center">
-                  #{tag.name}
-                </span>
-              </li>
-            ))}
-          </ul>
+            <h1 className="font-semibold text-2xl lg:text-xl py-2">
+              {post.title}
+            </h1>
+          </div>
+          {/* Text */}
+          <div className="flex-1 flex flex-col justify-between">
+            <p>{post.description}</p>
+            <div className="flex gap-2 flex-wrap py-3 text-gray-300 items-center">
+              <h5 className="post-date">{dayjs(post.date).format('LL')}</h5>
+              <span>|</span>
+              {post.tags.map((tag) => {
+                const tagType = TagsTypeMap[tag.color]
+                  ? TagsTypeMap[tag.color]
+                  : 'bg-sub text-white';
+                return (
+                  <span
+                    key={tag.id}
+                    className={`${tagType} p-1 rounded text-sm`}
+                  >
+                    #{tag.name}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
         </article>
-        <div className="border-b bg-gray-400 my-6 mx-2" />
       </a>
     </Link>
   );

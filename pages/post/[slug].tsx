@@ -41,8 +41,8 @@ const Post = ({
           content="노션을 CMS로 이용하는 블로그입니다"
         />
       </Head>
-      <div className="bg-gray-900">
-        <h3>{title}</h3>
+      <div className="divide-y-2 pb-20">
+        <h3 className="text-center py-12 text-2xl font-bold">{title}</h3>
         <NotionRenderer
           recordMap={recordMap}
           darkMode={true}
