@@ -10,8 +10,7 @@ import { Code } from 'react-notion-x/build/third-party/code';
 import { Collection } from 'react-notion-x/build/third-party/collection';
 import { Equation } from 'react-notion-x/build/third-party/equation';
 import { Pdf } from 'react-notion-x/build/third-party/pdf';
-import { getPageTitle } from 'notion-utils';
-import { useRouter } from 'next/router';
+import { getPageTitle, getPageProperty } from 'notion-utils';
 import { name } from '../../site.config';
 
 const Modal = dynamic(
@@ -68,6 +67,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   if (!recordMap) {
     throw '';
   }
+  // const block = recordMap?.block?.[keys[0]]?.value;
+  // console.log(block);
 
   return {
     props: {
