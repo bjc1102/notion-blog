@@ -44,7 +44,9 @@ const Home: NextPage = ({
             {posts.map((post: BlogPost, idx: number) => (
               <React.Fragment key={post.id}>
                 <BlogCard post={post} />
-                <span className="block h-1 bg-gray-800"></span>
+                {idx !== posts.length - 1 && (
+                  <span className="block h-1 bg-gray-800" />
+                )}
               </React.Fragment>
             ))}
           </section>
