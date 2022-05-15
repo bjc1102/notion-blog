@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import {
+  GetStaticProps,
+  InferGetStaticPropsType,
+  InferGetServerSidePropsType,
+} from 'next';
 import Head from 'next/head';
 import NotionService from '../../services/notion-service';
 import Link from 'next/link';
@@ -23,7 +27,9 @@ const Modal = dynamic(
 const Post = ({
   title,
   recordMap,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  console.log(recordMap);
+
   return (
     <>
       <Head>
@@ -57,7 +63,7 @@ const Post = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
 
   // @ts-ignore
@@ -78,21 +84,21 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export async function getStaticPaths() {
-  const notionService = new NotionService();
+// export async function getStaticPaths() {
+//   const notionService = new NotionService();
 
-  const posts = await notionService.getPublishedBlogPosts();
+//   const posts = await notionService.getPublishedBlogPosts();
 
-  // Because we are generating static paths, you will have to redeploy your site whenever
-  // you make a change in Notion.
-  const paths = posts.map((post) => {
-    return `/post/${post.slug}`;
-  });
+//   // Because we are generating static paths, you will have to redeploy your site whenever
+//   // you make a change in Notion.
+//   const paths = posts.map((post) => {
+//     return `/post/${post.slug}`;
+//   });
 
-  return {
-    paths,
-    fallback: false,
-  };
-}
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
 
 export default Post;
