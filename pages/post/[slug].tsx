@@ -3,6 +3,7 @@ import {
   GetStaticProps,
   InferGetStaticPropsType,
   InferGetServerSidePropsType,
+  GetServerSideProps,
 } from 'next';
 import Head from 'next/head';
 import NotionService from '../../services/notion-service';
@@ -63,7 +64,7 @@ const Post = ({
   );
 };
 
-export const getServerSideProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const notionService = new NotionService();
 
   // @ts-ignore

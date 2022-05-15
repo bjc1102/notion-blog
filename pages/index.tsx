@@ -1,5 +1,11 @@
 import React from 'react';
-import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
+import {
+  GetStaticProps,
+  InferGetStaticPropsType,
+  NextPage,
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+} from 'next';
 import Head from 'next/head';
 
 import NotionService from '../services/notion-service';
@@ -7,7 +13,18 @@ import { BlogPost } from '../@types/schema';
 import BlogCard from '../components/BlogCard';
 import Landing from '../components/Landing';
 
-export const getStaticProps: GetStaticProps = async () => {
+// export const getStaticProps: GetStaticProps = async () => {
+//   const notionService = new NotionService();
+//   const posts = await notionService.getPublishedBlogPosts();
+
+//   return {
+//     props: {
+//       posts,
+//     },
+//   };
+// };
+
+export const getServerSideProps: GetServerSideProps = async () => {
   const notionService = new NotionService();
   const posts = await notionService.getPublishedBlogPosts();
 
@@ -20,7 +37,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Home: NextPage = ({
   posts,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const title = 'HOME | NOTION BLOG';
   const description = 'Welcome to my Notion blog';
   return (
