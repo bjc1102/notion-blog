@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Noto Sans KR'],
+        akashi: ['Akashi'],
       },
       colors: {
         primary: '#0F172A',

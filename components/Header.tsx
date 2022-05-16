@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Header() {
   const [scroll, setScroll] = useState(false);
@@ -20,11 +21,9 @@ export default function Header() {
         scroll && 'bg-sub/70'
       }`}
     >
-      <div className="max-w-5xl mx-auto px-10 py-6 flex justify-between">
+      <div className="max-w-5xl mx-auto px-10 py-6 flex justify-between font-akashi">
         <Link href="/">
-          <a className="cursor-pointer">
-            <h2>Dev Blog</h2>
-          </a>
+          <a className="cursor-pointer relative">BJ Choi</a>
         </Link>
         <Link href="/search">
           <a className="cursor-pointer">search</a>
