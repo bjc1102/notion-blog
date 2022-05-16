@@ -29,13 +29,13 @@ const Post = ({
   title,
   recordMap,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log(recordMap);
+  // InferGetStaticPropsType getStaticProps
 
   return (
     <>
       <Head>
         <title>
-          {name} | {title}
+          {title} | {name}
         </title>
         <meta name={'og:title'} title={'og:title'} content={title} />
         <meta
@@ -84,6 +84,27 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   };
 };
+
+// export const getStaticProps: GetStaticProps = async (context) => {
+//   const notionService = new NotionService();
+
+//   // @ts-ignore
+//   const recordMap = await notionService.getSingleBlogPost(context.params?.slug);
+//   const title = getPageTitle(recordMap);
+
+//   if (!recordMap) {
+//     throw '';
+//   }
+//   // const block = recordMap?.block?.[keys[0]]?.value;
+//   // console.log(block);
+
+//   return {
+//     props: {
+//       recordMap,
+//       title,
+//     },
+//   };
+// };
 
 // export async function getStaticPaths() {
 //   const notionService = new NotionService();

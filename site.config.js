@@ -1,6 +1,6 @@
 module.exports = {
   // basic site info (required)
-  name: 'CBJ Notion blog',
+  name: 'BJ Choi Blog',
   domain: '',
   author: 'Byeong Ju Choi',
 
