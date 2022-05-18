@@ -12,6 +12,7 @@ import NotionService from '../services/notion-service';
 import { BlogPost } from '../@types/schema';
 import BlogCard from '../components/BlogCard';
 import Landing from '../components/Landing';
+import { name } from '../site.config';
 
 // export const getStaticProps: GetStaticProps = async () => {
 //   const notionService = new NotionService();
@@ -38,12 +39,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const Home: NextPage = ({
   posts,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const title = 'HOME | NOTION BLOG';
   const description = 'Welcome to my Notion blog';
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>HOME | {name}</title>
         <meta
           name={'description'}
           title={'description'}

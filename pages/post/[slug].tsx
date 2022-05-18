@@ -29,7 +29,8 @@ const Post = ({
   title,
   recordMap,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  // InferGetStaticPropsType getStaticProps
+  //InferGetStaticPropsType getStaticProps
+  //InferGetServerSidePropsType getServerSideProps
 
   return (
     <>
@@ -45,7 +46,7 @@ const Post = ({
         />
       </Head>
       <div className="divide-y-2 pb-20">
-        <h3 className="text-center py-12 text-2xl font-bold">{title}</h3>
+        <h3 className="text-center px-4 py-12 text-2xl font-bold">{title}</h3>
         <NotionRenderer
           recordMap={recordMap}
           darkMode={true}
@@ -74,8 +75,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!recordMap) {
     throw '';
   }
-  // const block = recordMap?.block?.[keys[0]]?.value;
-  // console.log(block);
 
   return {
     props: {
@@ -95,8 +94,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 //   if (!recordMap) {
 //     throw '';
 //   }
-//   // const block = recordMap?.block?.[keys[0]]?.value;
-//   // console.log(block);
 
 //   return {
 //     props: {

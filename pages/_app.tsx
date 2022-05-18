@@ -1,6 +1,4 @@
-import Head from 'next/head';
 import type { AppProps } from 'next/app';
-import { name } from '../site.config';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import '../styles/global.css';
@@ -11,14 +9,12 @@ import 'react-notion-x/src/styles.css';
 import 'prismjs/themes/prism-tomorrow.css';
 // used for rendering equations (optional)
 import 'katex/dist/katex.min.css';
+import Meta from '../components/Meta';
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{name}</title>
-      </Head>
+      <Meta />
       <Header />
       <div className="block bg-primary text-white py-16 font-sans">
         <Component {...pageProps} />
