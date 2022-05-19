@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../styles/global.css';
 
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import NProgress from 'nprogress';
 
 // core styles shared by all of react-notion-x (required)
@@ -18,6 +18,8 @@ import Skeleton from '../components/Skeleton';
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
   useEffect(() => {
     const start = () => {
       // NProgress.start();
@@ -27,7 +29,6 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
       // NProgress.done();
       setIsLoading(false);
     };
-
     Router.events.on('routeChangeStart', start);
     Router.events.on('routeChangeComplete', end);
     Router.events.on('routeChangeError', end);
@@ -39,13 +40,10 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
     };
   }, []);
 
-  console.log(isLoading);
-
   return (
     <>
       <Meta />
       <Header />
-
       <div className="block bg-primary text-white py-16 font-sans">
         {isLoading ? <Skeleton /> : <Component {...pageProps} />}
       </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function Skeleton() {
-  const arr = [0, 1, 2, 3];
   return (
     <div className="min-h-screen mx-auto">
       <div className="relative max-w-6xl h-80 mx-auto mb-20 md:rounded-none rounded-3xl overflow-hidden bg-gray-700 animate-pulse" />

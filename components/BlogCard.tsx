@@ -24,7 +24,6 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
   //   pink: 'bg-[#551036] text-white',
   //   red: 'bg-[#501616] text-white',
   // };
-
   return (
     <Link
       href={{

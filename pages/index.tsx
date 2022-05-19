@@ -40,6 +40,7 @@ const Home: NextPage = ({
   posts,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const description = 'Welcome to my Notion blog';
+
   return (
     <>
       <Head>
