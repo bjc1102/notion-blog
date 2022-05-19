@@ -52,8 +52,10 @@ const Post = ({
       </Head>
       <div className="divide-y-2 pb-20">
         <div>
-          <h3 className="text-center px-4 py-12 text-2xl font-bold">{title}</h3>
-          <div>
+          <h3 className="text-center px-4 pt-12 pb-6 text-2xl font-bold">
+            {title}
+          </h3>
+          <div className="text-center px-3 pb-6 text-gray-500">
             <span>
               {date} | {tags}
             </span>
