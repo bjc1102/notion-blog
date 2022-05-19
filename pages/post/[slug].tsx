@@ -6,17 +6,20 @@ import {
   GetServerSideProps,
 } from 'next';
 import Head from 'next/head';
-import NotionService from '../../services/notion-service';
 import Link from 'next/link';
 import Image from 'next/image';
-import { NotionRenderer } from 'react-notion-x';
 import dynamic from 'next/dynamic';
+
+import NotionService from '../../services/notion-service';
+
+import { NotionRenderer } from 'react-notion-x';
 import { Code } from 'react-notion-x/build/third-party/code';
 import { Collection } from 'react-notion-x/build/third-party/collection';
 import { Equation } from 'react-notion-x/build/third-party/equation';
 import { Pdf } from 'react-notion-x/build/third-party/pdf';
 import { getPageTitle, getPageProperty } from 'notion-utils';
 import { name } from '../../site.config';
+import dayjs from 'dayjs';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
@@ -26,8 +29,10 @@ const Modal = dynamic(
 );
 
 const Post = ({
-  title,
   recordMap,
+  title,
+  date,
+  tags,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   //InferGetStaticPropsType getStaticProps
   //InferGetServerSidePropsType getServerSideProps
@@ -46,9 +51,17 @@ const Post = ({
         />
       </Head>
       <div className="divide-y-2 pb-20">
-        <h3 className="text-center px-4 py-12 text-2xl font-bold">{title}</h3>
+        <div>
+          <h3 className="text-center px-4 py-12 text-2xl font-bold">{title}</h3>
+          <div>
+            <span>
+              {date} | {tags}
+            </span>
+          </div>
+        </div>
         <NotionRenderer
           recordMap={recordMap}
+          showTableOfContents={true}
           darkMode={true}
           components={{
             nextImage: Image,
@@ -76,10 +89,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     throw '';
   }
 
+  const keys = Object.keys(recordMap?.block || {});
+  const block = recordMap?.block?.[keys[0]]?.value;
+
+  const date = new Date(block.last_edited_time);
+
   return {
     props: {
       recordMap,
       title,
+      date: dayjs(date).format('LL'),
+      tags: block.properties['}d~}'],
     },
   };
 };

@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
-import Footer from '../components/Footer';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import '../styles/global.css';
 
 // core styles shared by all of react-notion-x (required)

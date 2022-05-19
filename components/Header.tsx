@@ -23,7 +23,7 @@ export default function Header() {
     >
       <div className="max-w-5xl mx-auto px-10 py-6 flex justify-between font-akashi">
         <Link href="/">
-          <a className="cursor-pointer relative">BJ Choi</a>
+          <a className="cursor-pointer relative">Choi</a>
         </Link>
         <Link href="/search">
           <a className="cursor-pointer">search</a>

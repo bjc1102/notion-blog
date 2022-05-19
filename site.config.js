@@ -1,11 +1,11 @@
 module.exports = {
   // basic site info (required)
-  name: 'BJ Choi Blog',
+  name: 'CBJ Blog',
   domain: '',
   author: 'Byeong Ju Choi',
 
   // open graph metadata (optional)
-  description: 'Example site description',
+  description: 'CBJ Notion dev blog',
   socialImageTitle: 'Transitive Bullshit',
   socialImageSubtitle: 'Hello World! 👋',
 
