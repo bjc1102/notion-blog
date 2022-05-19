@@ -26,7 +26,13 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
   // };
 
   return (
-    <Link href={`/post/${post.slug}`}>
+    <Link
+      href={{
+        pathname: `/post/${post.slug}`,
+        query: { image: post.cover },
+      }}
+      as={`/post/${post.slug}`}
+    >
       <a className="block h-36">
         <article className="flex flex-col overflow-hidden px-10 rounded-r-2xl border-solid transition duration-300 hover:translate-x-4 hover:border-l-4 border-accent hover:bg-gray-800">
           {/* Image */}

@@ -80,10 +80,10 @@ export default class NotionService {
         cover = page.cover.external.url;
         break;
       case null:
-        cover = 'https://picsum.photos/200/300?grayscale'; // 기본 커버 이미지
+        cover = 'https://picsum.photos/1920/1080'; // 기본 커버 이미지
         break;
       default:
-        cover = 'https://picsum.photos/200/300?grayscale';
+        cover = 'https://picsum.photos/1920/1080';
     }
 
     return {

@@ -1,12 +1,16 @@
 import React from 'react';
 import Image from 'next/image';
 
-export default function Landing() {
+interface IProps {
+  image?: string;
+}
+
+export default function Landing({ image }: IProps) {
   return (
     <div className="relative">
       <div className="relative max-w-6xl h-80 mx-auto mb-20 md:rounded-none rounded-3xl overflow-hidden">
         <Image
-          src="/images/earth-1756274_1920.jpg"
+          src={image ? image : '/images/earth-1756274_1920.jpg'}
           priority={true}
           layout="fill"
           objectFit="cover"

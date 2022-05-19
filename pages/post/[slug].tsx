@@ -9,8 +9,10 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 import NotionService from '../../services/notion-service';
+import Landing from '../../components/Landing';
 
 import { NotionRenderer } from 'react-notion-x';
 import { Code } from 'react-notion-x/build/third-party/code';
@@ -36,6 +38,16 @@ const Post = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   //InferGetStaticPropsType getStaticProps
   //InferGetServerSidePropsType getServerSideProps
+  const router = useRouter();
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    if (recordMap) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1500);
+    }
+  }, [recordMap]);
 
   return (
     <>
@@ -51,6 +63,7 @@ const Post = ({
         />
       </Head>
       <div className="divide-y-2 pb-20">
+        <Landing image={router.query.image as string} />
         <div>
           <h3 className="text-center px-4 pt-12 pb-6 text-2xl font-bold">
             {title}

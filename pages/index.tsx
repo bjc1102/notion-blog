@@ -53,7 +53,7 @@ const Home: NextPage = ({
       <main className="min-h-screen overflow-hidden">
         <Landing />
         <div className="max-w-5xl mx-auto">
-          <div className="flex items-center justify-start px-10 mt-10 md:justify-center">
+          <div className="flex items-center px-10 pt-12 pb-3 justify-center">
             <h1 className="font-extrabold text-3xl md:text-2xl">최신 포스트</h1>
           </div>
           <section className="grid grid-cols-1 gap-y-8 py-16">
