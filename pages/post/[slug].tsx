@@ -45,7 +45,7 @@ const Post = ({
     if (recordMap) {
       setTimeout(() => {
         setLoading(false);
-      }, 1500);
+      }, 0);
     }
   }, [recordMap]);
 
