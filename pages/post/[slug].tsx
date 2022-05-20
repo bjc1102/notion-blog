@@ -35,7 +35,7 @@ const Post = ({
   title,
   date,
   tags,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   //InferGetStaticPropsType getStaticProps
   //InferGetServerSidePropsType getServerSideProps
   const router = useRouter();
@@ -93,7 +93,33 @@ const Post = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   const notionService = new NotionService();
+
+//   // @ts-ignore
+//   const recordMap = await notionService.getSingleBlogPost(context.params?.slug);
+//   const title = getPageTitle(recordMap);
+
+//   if (!recordMap) {
+//     throw '';
+//   }
+
+//   const keys = Object.keys(recordMap?.block || {});
+//   const block = recordMap?.block?.[keys[0]]?.value;
+
+//   const date = new Date(block.last_edited_time);
+
+//   return {
+//     props: {
+//       recordMap,
+//       title,
+//       date: dayjs(date).format('LL'),
+//       tags: block.properties['}d~}'],
+//     },
+//   };
+// };
+
+export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
 
   // @ts-ignore
@@ -119,40 +145,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-// export const getStaticProps: GetStaticProps = async (context) => {
-//   const notionService = new NotionService();
+export async function getStaticPaths() {
+  const notionService = new NotionService();
 
-//   // @ts-ignore
-//   const recordMap = await notionService.getSingleBlogPost(context.params?.slug);
-//   const title = getPageTitle(recordMap);
+  const posts = await notionService.getPublishedBlogPosts();
 
-//   if (!recordMap) {
-//     throw '';
-//   }
+  const paths = posts.map((post) => {
+    return `/post/${post.slug}`;
+  });
 
-//   return {
-//     props: {
-//       recordMap,
-//       title,
-//     },
-//   };
-// };
-
-// export async function getStaticPaths() {
-//   const notionService = new NotionService();
-
-//   const posts = await notionService.getPublishedBlogPosts();
-
-//   // Because we are generating static paths, you will have to redeploy your site whenever
-//   // you make a change in Notion.
-//   const paths = posts.map((post) => {
-//     return `/post/${post.slug}`;
-//   });
-
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
+  return {
+    paths,
+    fallback: false,
+  };
+}
 
 export default Post;
