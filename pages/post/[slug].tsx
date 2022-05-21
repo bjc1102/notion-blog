@@ -151,4 +151,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 //   };
 // }
 
-// export default Post;
+export default Post;
