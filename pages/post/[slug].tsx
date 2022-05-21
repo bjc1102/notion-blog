@@ -35,19 +35,10 @@ const Post = ({
   title,
   date,
   tags,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   //InferGetStaticPropsType getStaticProps
   //InferGetServerSidePropsType getServerSideProps
   const router = useRouter();
-  const [loading, setLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    if (recordMap) {
-      setTimeout(() => {
-        setLoading(false);
-      }, 0);
-    }
-  }, [recordMap]);
 
   return (
     <>
@@ -93,33 +84,7 @@ const Post = ({
   );
 };
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const notionService = new NotionService();
-
-//   // @ts-ignore
-//   const recordMap = await notionService.getSingleBlogPost(context.params?.slug);
-//   const title = getPageTitle(recordMap);
-
-//   if (!recordMap) {
-//     throw '';
-//   }
-
-//   const keys = Object.keys(recordMap?.block || {});
-//   const block = recordMap?.block?.[keys[0]]?.value;
-
-//   const date = new Date(block.last_edited_time);
-
-//   return {
-//     props: {
-//       recordMap,
-//       title,
-//       date: dayjs(date).format('LL'),
-//       tags: block.properties['}d~}'],
-//     },
-//   };
-// };
-
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const notionService = new NotionService();
 
   // @ts-ignore
@@ -145,19 +110,45 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export async function getStaticPaths() {
-  const notionService = new NotionService();
+// export const getStaticProps: GetStaticProps = async (context) => {
+//   const notionService = new NotionService();
 
-  const posts = await notionService.getPublishedBlogPosts();
+//   // @ts-ignore
+//   const recordMap = await notionService.getSingleBlogPost(context.params?.slug);
+//   const title = getPageTitle(recordMap);
 
-  const paths = posts.map((post) => {
-    return `/post/${post.slug}`;
-  });
+//   if (!recordMap) {
+//     throw '';
+//   }
 
-  return {
-    paths,
-    fallback: false,
-  };
-}
+//   const keys = Object.keys(recordMap?.block || {});
+//   const block = recordMap?.block?.[keys[0]]?.value;
 
-export default Post;
+//   const date = new Date(block.last_edited_time);
+
+//   return {
+//     props: {
+//       recordMap,
+//       title,
+//       date: dayjs(date).format('LL'),
+//       tags: block.properties['}d~}'],
+//     },
+//   };
+// };
+
+// export async function getStaticPaths() {
+//   const notionService = new NotionService();
+
+//   const posts = await notionService.getPublishedBlogPosts();
+
+//   const paths = posts.map((post) => {
+//     return `/post/${post.slug}`;
+//   });
+
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
+
+// export default Post;
