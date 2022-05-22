@@ -36,7 +36,7 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
         <article className="flex flex-col overflow-hidden px-10 rounded-r-2xl border-solid transition duration-300 hover:translate-x-4 hover:border-l-4 border-accent hover:bg-gray-800">
           {/* Image */}
           <div className="flex gap-3 py-2 items-center">
-            <div className="relative w-12 h-12 rounded-3xl overflow-hidden flex-none">
+            <div className="relative w-12 h-12 rounded-3xl overflow-hidden flex-none  md:hidden">
               <Image
                 layout="fill"
                 objectFit="cover"
@@ -44,13 +44,13 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
                 alt={'cover-image'}
               />
             </div>
-            <span>|</span>
-            <h1 className="font-semibold text-2xl lg:text-xl py-2">
+            <span className="md:hidden">|</span>
+            <h1 className="font-semibold text-xl lg:text-base py-2">
               {post.title}
             </h1>
           </div>
           {/* Text */}
-          <div className="flex-1 flex flex-col justify-between">
+          <div className="flex-1 flex flex-col justify-between lg:text-sm">
             <p>{post.description}</p>
             <div className="flex gap-2 flex-wrap py-3 text-gray-300 items-center">
               <h5 className="post-date">{dayjs(post.date).format('LL')}</h5>
