@@ -33,10 +33,10 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
       as={`/post/${post.slug}`}
     >
       <a className="block h-36">
-        <article className="flex flex-col overflow-hidden px-10 rounded-r-2xl border-solid transition duration-300 hover:translate-x-4 hover:border-l-4 border-accent hover:bg-gray-800">
+        <article className="flex flex-col overflow-hidden px-10 md:px-2 rounded-r-2xl border-solid transition duration-300 hover:translate-x-4 hover:border-l-4 border-accent hover:bg-gray-800">
           {/* Image */}
           <div className="flex gap-3 py-2 items-center">
-            <div className="relative w-12 h-12 rounded-3xl overflow-hidden flex-none  md:hidden">
+            <div className="relative w-12 h-12 rounded-3xl overflow-hidden flex-none">
               <Image
                 layout="fill"
                 objectFit="cover"
@@ -44,7 +44,7 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
                 alt={'cover-image'}
               />
             </div>
-            <span className="md:hidden">|</span>
+            <span>|</span>
             <h1 className="font-semibold text-xl lg:text-base py-2">
               {post.title}
             </h1>

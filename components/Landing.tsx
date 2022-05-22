@@ -8,7 +8,7 @@ interface IProps {
 export default function Landing({ image }: IProps) {
   return (
     <div className="relative">
-      <div className="relative max-w-6xl h-80 mx-auto mb-20 md:rounded-none rounded-3xl overflow-hidden ">
+      <div className="relative max-w-6xl h-80 mx-auto mb-20 lg:rounded-none rounded-3xl overflow-hidden ">
         <Image
           src={image ? image : '/images/earth-1756274_1920.jpg'}
           priority={true}
