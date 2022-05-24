@@ -62,7 +62,7 @@ const Home: NextPage = ({
               <React.Fragment key={post.id}>
                 <BlogCard post={post} />
                 {idx !== posts.length - 1 && (
-                  <span className="block h-1 bg-gray-800" />
+                  <span className="block h-1 bg-gray-800 md:hidden" />
                 )}
               </React.Fragment>
             ))}
