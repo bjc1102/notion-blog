@@ -53,11 +53,11 @@ const Home: NextPage = ({
       </Head>
       <main className="min-h-screen overflow-hidden">
         <Landing />
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center px-10 pt-12 pb-3 justify-center">
+        <div className="max-w-3xl mx-auto">
+          <div className="flex items-center px-10 pt-12 pb-12 justify-center border-b-white border-solid border-b-2">
             <h1 className="font-extrabold text-3xl md:text-xl">최신 포스트</h1>
           </div>
-          <section className="grid grid-cols-1 gap-y-8 py-16 px-14 md:gap-y-6 md:overflow-auto md:px-0 overflow-hidden">
+          <section className="grid grid-cols-1 gap-y-8 py-8 px-7 md:gap-y-6 md:overflow-auto md:px-0 overflow-hidden">
             {posts.map((post: BlogPost, idx: number) => (
               <React.Fragment key={post.id}>
                 <BlogCard post={post} />
