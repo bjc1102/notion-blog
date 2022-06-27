@@ -6,7 +6,6 @@ import '../styles/global.css';
 
 import Router, { useRouter } from 'next/router';
 import Meta from '../components/Meta';
-import NProgress from 'nprogress';
 
 // core styles shared by all of react-notion-x (required)
 import 'react-notion-x/src/styles.css';
@@ -19,6 +18,7 @@ import Skeleton from '../components/Skeleton';
 export default function CustomApp({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { pathname } = useRouter();
+  console.log(Router);
 
   useEffect(() => {
     const start = () => {

@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  GetStaticProps,
-  InferGetStaticPropsType,
-  InferGetServerSidePropsType,
-  GetServerSideProps,
-} from 'next';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -35,7 +30,7 @@ const Post = ({
   title,
   date,
   tags,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   //InferGetStaticPropsType getStaticProps
   //InferGetServerSidePropsType getServerSideProps
   const router = useRouter();
@@ -84,33 +79,7 @@ const Post = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const notionService = new NotionService();
-
-  // @ts-ignore
-  const recordMap = await notionService.getSingleBlogPost(context.params?.slug);
-  const title = getPageTitle(recordMap);
-
-  if (!recordMap) {
-    throw '';
-  }
-
-  const keys = Object.keys(recordMap?.block || {});
-  const block = recordMap?.block?.[keys[0]]?.value;
-
-  const date = new Date(block.last_edited_time);
-
-  return {
-    props: {
-      recordMap,
-      title,
-      date: dayjs(date).format('LL'),
-      tags: block.properties['}d~}'],
-    },
-  };
-};
-
-// export const getStaticProps: GetStaticProps = async (context) => {
+// export const getServerSideProps: GetServerSideProps = async (context) => {
 //   const notionService = new NotionService();
 
 //   // @ts-ignore
@@ -136,19 +105,46 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 //   };
 // };
 
-// export async function getStaticPaths() {
-//   const notionService = new NotionService();
+export const getStaticProps: GetStaticProps = async (context) => {
+  const notionService = new NotionService();
 
-//   const posts = await notionService.getPublishedBlogPosts();
+  // @ts-ignore
+  const recordMap = await notionService.getSingleBlogPost(context.params?.slug);
+  const title = getPageTitle(recordMap);
 
-//   const paths = posts.map((post) => {
-//     return `/post/${post.slug}`;
-//   });
+  if (!recordMap) {
+    throw '';
+  }
 
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
+  const keys = Object.keys(recordMap?.block || {});
+  const block = recordMap?.block?.[keys[0]]?.value;
+
+  const date = new Date(block.last_edited_time);
+
+  return {
+    props: {
+      recordMap,
+      title,
+      date: dayjs(date).format('LL'),
+      tags: block.properties['}d~}'],
+    },
+    revalidate: 60,
+  };
+};
+
+export async function getStaticPaths() {
+  const notionService = new NotionService();
+
+  const posts = await notionService.getPublishedBlogPosts();
+
+  const paths = posts.map((post) => {
+    return `/post/${post.slug}`;
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
 
 export default Post;
