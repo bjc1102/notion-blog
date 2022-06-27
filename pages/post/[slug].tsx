@@ -31,8 +31,6 @@ const Post = ({
   date,
   tags,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  //InferGetStaticPropsType getStaticProps
-  //InferGetServerSidePropsType getServerSideProps
   const router = useRouter();
 
   return (
@@ -79,32 +77,6 @@ const Post = ({
   );
 };
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const notionService = new NotionService();
-
-//   // @ts-ignore
-//   const recordMap = await notionService.getSingleBlogPost(context.params?.slug);
-//   const title = getPageTitle(recordMap);
-
-//   if (!recordMap) {
-//     throw '';
-//   }
-
-//   const keys = Object.keys(recordMap?.block || {});
-//   const block = recordMap?.block?.[keys[0]]?.value;
-
-//   const date = new Date(block.last_edited_time);
-
-//   return {
-//     props: {
-//       recordMap,
-//       title,
-//       date: dayjs(date).format('LL'),
-//       tags: block.properties['}d~}'],
-//     },
-//   };
-// };
-
 export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
 
@@ -128,7 +100,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       date: dayjs(date).format('LL'),
       tags: block.properties['}d~}'],
     },
-    revalidate: 60,
+    revalidate: 120,
   };
 };
 
