@@ -18,7 +18,6 @@ import Skeleton from '../components/Skeleton';
 export default function CustomApp({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { pathname } = useRouter();
-  console.log(Router);
 
   useEffect(() => {
     const start = () => {
