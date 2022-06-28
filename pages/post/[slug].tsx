@@ -66,7 +66,7 @@ const Post = ({
             nextImage: Image,
             nextLink: Link,
             Code,
-            Collection,
+            // Collection,
             Equation,
             Modal,
             Pdf,
