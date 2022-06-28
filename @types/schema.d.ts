@@ -12,6 +12,12 @@ export type Tag = {
   name: string;
 };
 
+export interface PropertiesType {
+  'VUv^': string; // description
+  '\\GFL': string; // Type
+  '}d~}': string; // Tags
+}
+
 export type BlogPost = {
   id: string;
   type: '개발' | '회고';

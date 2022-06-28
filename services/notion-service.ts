@@ -40,33 +40,19 @@ export default class NotionService {
   }
 
   async getSingleBlogPost(slug: string): Promise<ExtendedRecordMap> {
+    //get page property
     const database = process.env.NOTION_DB_ID ?? '';
-    // list of blog posts
-    const response = await this.client.databases.query({
-      database_id: database,
-      filter: {
-        property: 'Slug',
-        formula: {
-          text: {
-            equals: slug, // slug
-          },
-        },
-        // add option for tags in the future
-      },
-      sorts: [
-        {
-          property: 'Updated',
-          direction: 'descending',
-        },
-      ],
-    });
+    (async () => {
+      const response = await this.client.databases.retrieve({
+        database_id: database,
+      });
+      console.log(response);
+    })();
+    // if (!response.results[0]) {
+    //   throw 'No results available';
+    // }
 
-    if (!response.results[0]) {
-      throw 'No results available';
-    }
-    // grab page from notion
-    const recordMap = await this.notion.getPage(response.results[0].id);
-    return recordMap;
+    return this.notion.getPage(slug);
   }
 
   private static pageToPostTransformer(page: any): BlogPost {
@@ -98,3 +84,23 @@ export default class NotionService {
     };
   }
 }
+
+// API Request
+// const response = await this.client.databases.query({
+//   database_id: database,
+//   filter: {
+//     property: 'Slug',
+//     formula: {
+//       text: {
+//         equals: slug, // slug
+//       },
+//     },
+//     // add option for tags in the future
+//   },
+//   sorts: [
+//     {
+//       property: 'Updated',
+//       direction: 'descending',
+//     },
+//   ],
+// });
