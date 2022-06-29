@@ -32,7 +32,7 @@ const Home: NextPage = ({
     setPostsState(() => {
       return [...posts];
     });
-  }, []);
+  });
 
   return (
     <>

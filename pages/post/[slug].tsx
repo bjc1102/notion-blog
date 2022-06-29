@@ -11,7 +11,6 @@ import { Equation } from 'react-notion-x/build/third-party/equation';
 import { Pdf } from 'react-notion-x/build/third-party/pdf';
 import { getPageTitle } from 'notion-utils';
 import dayjs from 'dayjs';
-import _ from 'lodash';
 
 import NotionService from '../../services/notion-service';
 import Landing from '../../components/Landing';
