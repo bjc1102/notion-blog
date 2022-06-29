@@ -13,6 +13,7 @@ import { postsState } from '../atoms/atoms';
 export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
   const posts = await notionService.getPublishedBlogPosts();
+
   return {
     props: {
       posts,

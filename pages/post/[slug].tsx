@@ -17,9 +17,6 @@ import NotionService from '../../services/notion-service';
 import Landing from '../../components/Landing';
 
 import { name } from '../../site.config';
-import { useRecoilValue } from 'recoil';
-import { postsState } from '../../atoms/atoms';
-import { BlogPost } from '../../types/schema';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
@@ -81,9 +78,10 @@ const Post = ({
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
+  const pageID = context.params?.slug;
 
   // @ts-ignore
-  const recordMap = await notionService.getSingleBlogPost(context.params?.slug);
+  const recordMap = await notionService.getSingleBlogPost(pageID);
   const title = getPageTitle(recordMap);
 
   if (!recordMap) {
@@ -93,7 +91,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const keys = Object.keys(recordMap.block);
   const block = recordMap?.block?.[keys[0]]?.value;
 
+  // @ts-ignore
+  // const pageProperty = await notionService.getPageRetrieve(pageID);
   const date = new Date(block.last_edited_time);
+
   return {
     props: {
       recordMap,

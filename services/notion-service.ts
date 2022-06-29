@@ -40,19 +40,12 @@ export default class NotionService {
   }
 
   async getSingleBlogPost(slug: string): Promise<ExtendedRecordMap> {
-    //get page property
-    const database = process.env.NOTION_DB_ID ?? '';
-    (async () => {
-      const response = await this.client.databases.retrieve({
-        database_id: database,
-      });
-      console.log(response);
-    })();
-    // if (!response.results[0]) {
-    //   throw 'No results available';
-    // }
-
     return this.notion.getPage(slug);
+  }
+
+  async getPageRetrieve(pageID: string) {
+    // const response = await this.notion.getCollectionData()
+    // return response;
   }
 
   private static pageToPostTransformer(page: any): BlogPost {
