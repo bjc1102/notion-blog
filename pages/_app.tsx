@@ -14,6 +14,7 @@ import 'prismjs/themes/prism-tomorrow.css';
 // used for rendering equations (optional)
 import 'katex/dist/katex.min.css';
 import Skeleton from '../components/Skeleton';
+import { RecoilRoot } from 'recoil';
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(false);
@@ -43,14 +44,16 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
     <>
       <Meta />
       <Header />
-      <div className="block bg-primary text-white py-16 font-sans">
-        {isLoading && pathname !== '/post/[slug]' ? (
-          <Skeleton />
-        ) : (
-          <Component {...pageProps} />
-        )}
-      </div>
-      <Footer />
+      <RecoilRoot>
+        <div className="block bg-primary text-white py-16 font-sans">
+          {isLoading && pathname !== '/post/[slug]' ? (
+            <Skeleton />
+          ) : (
+            <Component {...pageProps} />
+          )}
+        </div>
+        <Footer />
+      </RecoilRoot>
     </>
   );
 }

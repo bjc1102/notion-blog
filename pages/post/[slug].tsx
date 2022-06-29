@@ -5,17 +5,21 @@ import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-
-import NotionService from '../../services/notion-service';
-import Landing from '../../components/Landing';
-
 import { NotionRenderer } from 'react-notion-x';
 import { Code } from 'react-notion-x/build/third-party/code';
 import { Equation } from 'react-notion-x/build/third-party/equation';
 import { Pdf } from 'react-notion-x/build/third-party/pdf';
 import { getPageTitle } from 'notion-utils';
-import { name } from '../../site.config';
 import dayjs from 'dayjs';
+import _ from 'lodash';
+
+import NotionService from '../../services/notion-service';
+import Landing from '../../components/Landing';
+
+import { name } from '../../site.config';
+import { useRecoilValue } from 'recoil';
+import { postsState } from '../../atoms/atoms';
+import { BlogPost } from '../../types/schema';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
@@ -31,6 +35,7 @@ const Post = ({
   tags,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
+
   return (
     <>
       <Head>
@@ -85,11 +90,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
     throw '';
   }
 
-  const keys = Object.keys(recordMap?.block || {});
+  const keys = Object.keys(recordMap.block);
   const block = recordMap?.block?.[keys[0]]?.value;
 
   const date = new Date(block.last_edited_time);
-  console.log(date);
   return {
     props: {
       recordMap,
