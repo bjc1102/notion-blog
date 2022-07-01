@@ -3,6 +3,12 @@ import { BlogPost } from '../types/schema';
 import { NotionToMarkdown } from 'notion-to-md';
 import { NotionAPI } from 'notion-client';
 import { ExtendedRecordMap } from '../node_modules/notion-types/build/maps';
+import { dbProperty } from '../data/Database';
+
+interface IGetRetrive {
+  page_id: string;
+  condition: typeof dbProperty;
+}
 
 export default class NotionService {
   client: Client;
@@ -43,9 +49,13 @@ export default class NotionService {
     return this.notion.getPage(slug);
   }
 
-  async getPageRetrieve(pageID: string) {
-    // const response = await this.notion.getCollectionData()
-    // return response;
+  async getDateRetrieve({ page_id, condition }: IGetRetrive) {
+    // const propertyId = dbProperty[condition];
+
+    const resposne = this.client.pages.retrieve({
+      //@ts-ignore
+      page_id,
+    });
   }
 
   private static pageToPostTransformer(page: any): BlogPost {

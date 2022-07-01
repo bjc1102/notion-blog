@@ -9,6 +9,7 @@ import Landing from '../components/Landing';
 import { name } from '../site.config';
 import { useSetRecoilState } from 'recoil';
 import { postsState } from '../atoms/atoms';
+import { dbProperty } from '../data/Database';
 
 export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
@@ -33,6 +34,9 @@ const Home: NextPage = ({
       return [...posts];
     });
   });
+
+  const obj = Object.keys(dbProperty);
+  console.log(typeof obj);
 
   return (
     <>
