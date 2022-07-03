@@ -51,9 +51,12 @@ const Post = ({
             {title}
           </h3>
           <div className="text-center px-3 pb-6 text-gray-500">
-            <span>
-              {getDate(router.query.date as string)} | {tags}
-            </span>
+            <div className="flex flex-col gap-5">
+              <span>{getDate(router.query.date as string)}</span>
+              {tags.map((v: string, index: number) => {
+                return <span key={index}>{v}</span>;
+              })}
+            </div>
           </div>
         </div>
         <NotionRenderer
