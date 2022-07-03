@@ -82,6 +82,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   // @ts-ignore
   const recordMap = await notionService.getSingleBlogPost(pageID);
+  // @ts-ignore
+  const date2: IDate = await notionService.getDateRetrieve(pageID);
   const title = getPageTitle(recordMap);
 
   if (!recordMap) {
@@ -91,10 +93,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const keys = Object.keys(recordMap.block);
   const block =
     recordMap?.block?.[keys[0]]?.value ?? recordMap?.block?.[keys[1]]?.value;
-
-  // @ts-ignore
-  // const pageProperty = await notionService.getPageRetrieve(pageID);
-  const date = new Date(block.last_edited_time);
+  const date = new Date(date2.last_edited_time ?? block.last_edited_time);
 
   return {
     props: {
