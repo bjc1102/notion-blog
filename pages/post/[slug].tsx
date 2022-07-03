@@ -28,10 +28,14 @@ const Modal = dynamic(
 const Post = ({
   recordMap,
   title,
+  block,
+  date2,
   date,
   tags,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
+  console.log(block);
+  console.log(date2);
 
   return (
     <>
@@ -94,12 +98,16 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const block =
     recordMap?.block?.[keys[0]]?.value ?? recordMap?.block?.[keys[1]]?.value;
   const date = new Date(date2.last_edited_time ?? block.last_edited_time);
+  console.log(block.last_edited_time);
+  console.log(date2.last_edited_time);
 
   return {
     props: {
       recordMap,
       title,
       date: dayjs(date).format('LL'),
+      block: block.last_edited_time,
+      date2: date2.last_edited_time,
       tags: block.properties['}d~}'],
     },
     revalidate: 120,
