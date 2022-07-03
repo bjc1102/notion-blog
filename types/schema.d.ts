@@ -12,10 +12,11 @@ export type Tag = {
   name: string;
 };
 
-export interface PropertiesType {
-  'VUv^': string; // description
-  '\\GFL': string; // Type
-  '}d~}': string; // Tags
+export interface IDate {
+  object?: string;
+  type?: string;
+  id?: 'P%5Eya';
+  last_edited_time?: string;
 }
 
 export type BlogPost = {

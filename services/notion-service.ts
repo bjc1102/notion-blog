@@ -1,14 +1,10 @@
 import { Client } from '@notionhq/client';
-import { BlogPost } from '../types/schema';
+import { BlogPost, IDate } from '../types/schema';
 import { NotionToMarkdown } from 'notion-to-md';
 import { NotionAPI } from 'notion-client';
 import { ExtendedRecordMap } from '../node_modules/notion-types/build/maps';
 import { dbProperty } from '../data/Database';
-
-interface IGetRetrive {
-  page_id: string;
-  condition: typeof dbProperty;
-}
+import { GetPagePropertyResponse } from '@notionhq/client/build/src/api-endpoints';
 
 export default class NotionService {
   client: Client;
@@ -49,13 +45,19 @@ export default class NotionService {
     return this.notion.getPage(slug);
   }
 
-  async getDateRetrieve({ page_id, condition }: IGetRetrive) {
-    // const propertyId = dbProperty[condition];
-
-    const resposne = this.client.pages.retrieve({
+  async getDateRetrieve(
+    pageId: string
+  ): Promise<GetPagePropertyResponse & IDate> {
+    const property_id = dbProperty.Updated.id;
+    const split = pageId.split('-');
+    const page_id = split[split.length - 1];
+    const resposne = this.client.pages.properties.retrieve({
       //@ts-ignore
       page_id,
+      property_id,
     });
+
+    return resposne;
   }
 
   private static pageToPostTransformer(page: any): BlogPost {

@@ -16,6 +16,7 @@ import NotionService from '../../services/notion-service';
 import Landing from '../../components/Landing';
 
 import { name } from '../../site.config';
+import { IDate } from '../../types/schema';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
@@ -77,7 +78,7 @@ const Post = ({
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
-  const pageID = context.params?.slug;
+  const pageID = context.params?.slug ?? 'error';
 
   // @ts-ignore
   const recordMap = await notionService.getSingleBlogPost(pageID);
@@ -88,7 +89,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
 
   const keys = Object.keys(recordMap.block);
-  const block = recordMap?.block?.[keys[0]]?.value;
+  const block =
+    recordMap?.block?.[keys[0]]?.value ?? recordMap?.block?.[keys[1]]?.value;
 
   // @ts-ignore
   // const pageProperty = await notionService.getPageRetrieve(pageID);

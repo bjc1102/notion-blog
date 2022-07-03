@@ -101,3 +101,5 @@ export const dbProperty = {
     title: {},
   },
 };
+
+export const getDBPropertyKeys = Object.keys(dbProperty);
