@@ -52,7 +52,7 @@ const Post = ({
           </h3>
           <div className="text-center px-3 pb-6 text-gray-500">
             <span>
-              {getDate(router.query.date)} | {tags}
+              {getDate(router.query.date as string)} | {tags}
             </span>
           </div>
         </div>
