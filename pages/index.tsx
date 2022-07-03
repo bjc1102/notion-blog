@@ -35,8 +35,6 @@ const Home: NextPage = ({
     });
   });
 
-  const obj = Object.keys(dbProperty);
-
   return (
     <>
       <Head>

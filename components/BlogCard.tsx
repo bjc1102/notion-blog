@@ -5,6 +5,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getDate } from '../utils/getDate';
 
 dayjs.extend(localizedFormat);
 
@@ -42,7 +43,7 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
           <div className="flex-1 flex flex-col justify-between lg:text-sm">
             <p>{post.description}</p>
             <div className="flex gap-2 flex-wrap py-3 text-gray-300 items-center">
-              <h5 className="post-date">{dayjs(post.date).format('LL')}</h5>
+              <h5 className="post-date">{getDate(post.date)}</h5>
               <span>|</span>
               {post.tags.map((tag) => {
                 const tagType = TagsTypeMap[tag.color]

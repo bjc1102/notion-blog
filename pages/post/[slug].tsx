@@ -14,9 +14,8 @@ import dayjs from 'dayjs';
 
 import NotionService from '../../services/notion-service';
 import Landing from '../../components/Landing';
-
 import { name } from '../../site.config';
-import { IDate } from '../../types/schema';
+import { getDate } from '../../utils/getDate';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
@@ -28,14 +27,10 @@ const Modal = dynamic(
 const Post = ({
   recordMap,
   title,
-  block,
-  date2,
   date,
   tags,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
-  console.log(block);
-  console.log(date2);
 
   return (
     <>
@@ -58,7 +53,7 @@ const Post = ({
           </h3>
           <div className="text-center px-3 pb-6 text-gray-500">
             <span>
-              {date} | {tags}
+              {getDate(date)} | {tags}
             </span>
           </div>
         </div>
@@ -86,8 +81,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   // @ts-ignore
   const recordMap = await notionService.getSingleBlogPost(pageID);
-  // @ts-ignore
-  const date2: IDate = await notionService.getDateRetrieve(pageID);
   const title = getPageTitle(recordMap);
 
   if (!recordMap) {
@@ -96,18 +89,16 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const keys = Object.keys(recordMap.block);
   const block =
-    recordMap?.block?.[keys[0]]?.value ?? recordMap?.block?.[keys[1]]?.value;
-  const date = new Date(date2.last_edited_time ?? block.last_edited_time);
-  console.log(block.last_edited_time);
-  console.log(date2.last_edited_time);
+    recordMap?.block?.[keys[0]]?.value ??
+    recordMap?.block?.[keys[1]]?.value ??
+    recordMap?.block?.[keys[2]]?.value;
+  const checkDate = block.last_edited_time;
 
   return {
     props: {
       recordMap,
       title,
-      date: dayjs(date).format('LL'),
-      block: block.last_edited_time,
-      date2: date2.last_edited_time,
+      checkDate,
       tags: block.properties['}d~}'],
     },
     revalidate: 120,
@@ -116,9 +107,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 export async function getStaticPaths() {
   const notionService = new NotionService();
-
   const posts = await notionService.getPublishedBlogPosts();
-
   const paths = posts.map((post) => {
     return `/post/${post.slug}`;
   });
