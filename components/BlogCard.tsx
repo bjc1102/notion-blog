@@ -18,7 +18,7 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
     <Link
       href={{
         pathname: `/post/${post.slug}`,
-        query: { image: post.cover },
+        query: { image: post.cover, date: post.date },
       }}
       as={`/post/${post.slug}`}
     >

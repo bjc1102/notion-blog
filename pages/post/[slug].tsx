@@ -27,7 +27,6 @@ const Modal = dynamic(
 const Post = ({
   recordMap,
   title,
-  date,
   tags,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
@@ -53,7 +52,7 @@ const Post = ({
           </h3>
           <div className="text-center px-3 pb-6 text-gray-500">
             <span>
-              {getDate(date)} | {tags}
+              {getDate(router.query.date)} | {tags}
             </span>
           </div>
         </div>
@@ -92,13 +91,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
     recordMap?.block?.[keys[0]]?.value ??
     recordMap?.block?.[keys[1]]?.value ??
     recordMap?.block?.[keys[2]]?.value;
-  const checkDate = block.last_edited_time;
 
   return {
     props: {
       recordMap,
       title,
-      checkDate,
       tags: block.properties['}d~}'],
     },
     revalidate: 120,
