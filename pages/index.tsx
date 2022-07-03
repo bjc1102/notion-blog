@@ -1,7 +1,6 @@
 import React from 'react';
 import { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
-
 import NotionService from '../services/notion-service';
 import { BlogPost } from '../types/schema';
 import BlogCard from '../components/BlogCard';
@@ -9,7 +8,6 @@ import Landing from '../components/Landing';
 import { name } from '../site.config';
 import { useSetRecoilState } from 'recoil';
 import { postsState } from '../atoms/atoms';
-import { dbProperty } from '../data/Database';
 
 export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
@@ -56,7 +54,7 @@ const Home: NextPage = ({
               <React.Fragment key={post.id}>
                 <BlogCard post={post} />
                 {idx !== posts.length - 1 && (
-                  <span className="block h-1 bg-gray-800 md:hidden" />
+                  <span className="block h-1 bg-gray-800" />
                 )}
               </React.Fragment>
             ))}

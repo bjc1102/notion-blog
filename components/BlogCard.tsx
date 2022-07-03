@@ -1,13 +1,10 @@
 import { FunctionComponent } from 'react';
 import { BlogPost } from '../types/schema';
-import { TagsTypeMap } from '../styles/tagstype.map';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
-import dayjs from 'dayjs';
+import { TagsColoreMap } from '../styles/tagColor.map';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { getDate } from '../utils/getDate';
-
-dayjs.extend(localizedFormat);
 
 type BlogCardProps = {
   post: BlogPost;
@@ -46,13 +43,10 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
               <h5 className="post-date">{getDate(post.date)}</h5>
               <span>|</span>
               {post.tags.map((tag) => {
-                const tagType = TagsTypeMap[tag.color]
-                  ? TagsTypeMap[tag.color]
-                  : 'bg-sub text-white';
                 return (
                   <span
                     key={tag.id}
-                    className={`${tagType} p-1 rounded text-sm`}
+                    className={`text-white bg-gray-700 p-1 rounded text-sm`}
                   >
                     #{tag.name}
                   </span>
