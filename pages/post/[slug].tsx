@@ -30,7 +30,6 @@ const Post = ({
   tags,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
-
   return (
     <>
       <Head>
@@ -46,16 +45,22 @@ const Post = ({
       </Head>
       <div className="divide-y-2 pb-20">
         <Landing image={router.query.image as string} />
-        <div>
+        <div className="w-50 mx-auto">
           <h3 className="text-center px-4 pt-12 pb-6 text-2xl font-bold">
             {title}
           </h3>
           <div className="text-center px-3 pb-6 text-gray-500">
             <div className="flex flex-col gap-5">
               <span>{getDate(router.query.date as string)}</span>
-              {tags.map((v: string, index: number) => {
-                return <span key={index}>{v}</span>;
-              })}
+              <div className="flex flexCenter gap-2">
+                {tags[0][0].split(',').map((v: string, index: number) => {
+                  return (
+                    <span key={index} className="tagContainer">
+                      {v}
+                    </span>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

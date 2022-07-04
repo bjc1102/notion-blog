@@ -44,10 +44,7 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
               <span>|</span>
               {post.tags.map((tag) => {
                 return (
-                  <span
-                    key={tag.id}
-                    className={`text-white bg-gray-700 p-1 rounded text-sm`}
-                  >
+                  <span key={tag.id} className="tagContainer">
                     #{tag.name}
                   </span>
                 );

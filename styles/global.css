@@ -7,6 +7,15 @@
   src: url('../public/fonts/akashi.ttf');
 }
 
+@layer components {
+  .flexCenter {
+    @apply flex justify-center items-center;
+  }
+  .tagContainer {
+    @apply text-white bg-gray-700 p-1 rounded text-sm;
+  }
+}
+
 /* http://meyerweb.com/eric/tools/css/reset/ v2.0 | 20110126 License: none (public domain) */
 html,
 body,
