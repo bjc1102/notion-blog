@@ -12,9 +12,9 @@ import { Pdf } from 'react-notion-x/build/third-party/pdf';
 import { getPageTitle } from 'notion-utils';
 
 import NotionService from '../../services/notion-service';
-import Landing from '../../components/Landing';
 import { name } from '../../site.config';
 import { getDate } from '../../utils/getDate';
+import { revalidate_time } from '../../utils/revalidate';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
@@ -22,6 +22,47 @@ const Modal = dynamic(
     ssr: false,
   }
 );
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const notionService = new NotionService();
+  const pageID = context.params?.slug ?? 'error';
+
+  // @ts-ignore
+  const recordMap = await notionService.getSingleBlogPost(pageID);
+  const title = getPageTitle(recordMap);
+
+  if (!recordMap) {
+    throw '';
+  }
+
+  const keys = Object.keys(recordMap.block);
+  const block =
+    recordMap?.block?.[keys[0]]?.value ??
+    recordMap?.block?.[keys[1]]?.value ??
+    recordMap?.block?.[keys[2]]?.value;
+
+  return {
+    props: {
+      recordMap,
+      title,
+      tags: block.properties['}d~}'],
+    },
+    revalidate: revalidate_time,
+  };
+};
+
+export async function getStaticPaths() {
+  const notionService = new NotionService();
+  const posts = await notionService.getPublishedBlogPosts();
+  const paths = posts.map((post) => {
+    return `/post/${post.slug}`;
+  });
+
+  return {
+    paths,
+    fallback: 'blocking',
+  };
+}
 
 const Post = ({
   recordMap,
@@ -79,46 +120,5 @@ const Post = ({
     </>
   );
 };
-
-export const getStaticProps: GetStaticProps = async (context) => {
-  const notionService = new NotionService();
-  const pageID = context.params?.slug ?? 'error';
-
-  // @ts-ignore
-  const recordMap = await notionService.getSingleBlogPost(pageID);
-  const title = getPageTitle(recordMap);
-
-  if (!recordMap) {
-    throw '';
-  }
-
-  const keys = Object.keys(recordMap.block);
-  const block =
-    recordMap?.block?.[keys[0]]?.value ??
-    recordMap?.block?.[keys[1]]?.value ??
-    recordMap?.block?.[keys[2]]?.value;
-
-  return {
-    props: {
-      recordMap,
-      title,
-      tags: block.properties['}d~}'],
-    },
-    revalidate: 120,
-  };
-};
-
-export async function getStaticPaths() {
-  const notionService = new NotionService();
-  const posts = await notionService.getPublishedBlogPosts();
-  const paths = posts.map((post) => {
-    return `/post/${post.slug}`;
-  });
-
-  return {
-    paths,
-    fallback: 'blocking',
-  };
-}
 
 export default Post;

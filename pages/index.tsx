@@ -7,6 +7,7 @@ import BlogCard from '../components/BlogCard';
 import { name } from '../site.config';
 import { useSetRecoilState } from 'recoil';
 import { postsState } from '../atoms/atoms';
+import { revalidate_time } from '../utils/revalidate';
 
 export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
@@ -16,7 +17,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       posts,
     },
-    revalidate: 120,
+    revalidate: revalidate_time,
   };
 };
 
