@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -15,10 +15,11 @@ import 'prismjs/themes/prism-tomorrow.css';
 import 'katex/dist/katex.min.css';
 import Skeleton from '../components/Skeleton';
 import { RecoilRoot } from 'recoil';
+import Landing from '../components/Landing';
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const { pathname } = useRouter();
+  const { pathname, query } = useRouter();
 
   useEffect(() => {
     const start = () => {
@@ -49,7 +50,10 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
           {isLoading && pathname !== '/post/[slug]' ? (
             <Skeleton />
           ) : (
-            <Component {...pageProps} />
+            <React.Fragment>
+              <Landing image={query.image as string} />
+              <Component {...pageProps} />
+            </React.Fragment>
           )}
         </div>
         <Footer />

@@ -10,7 +10,6 @@ import { Code } from 'react-notion-x/build/third-party/code';
 import { Equation } from 'react-notion-x/build/third-party/equation';
 import { Pdf } from 'react-notion-x/build/third-party/pdf';
 import { getPageTitle } from 'notion-utils';
-import dayjs from 'dayjs';
 
 import NotionService from '../../services/notion-service';
 import Landing from '../../components/Landing';
@@ -44,7 +43,6 @@ const Post = ({
         />
       </Head>
       <div className="divide-y-2 pb-20">
-        <Landing image={router.query.image as string} />
         <div className="w-50 mx-auto">
           <h3 className="text-center px-4 pt-12 pb-6 text-2xl font-bold">
             {title}

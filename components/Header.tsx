@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Modal from './Modal';
 
 export default function Header() {
   const [scroll, setScroll] = useState(false);
@@ -25,9 +24,9 @@ export default function Header() {
         <Link href="/">
           <a className="cursor-pointer relative">Choi</a>
         </Link>
-        <button className="cursor-pointer" onClick={() => <Modal />}>
-          search
-        </button>
+        <Link href="/search">
+          <a className="cursor-pointer">search</a>
+        </Link>
       </div>
     </header>
   );

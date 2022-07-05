@@ -4,7 +4,6 @@ import Head from 'next/head';
 import NotionService from '../services/notion-service';
 import { BlogPost } from '../types/schema';
 import BlogCard from '../components/BlogCard';
-import Landing from '../components/Landing';
 import { name } from '../site.config';
 import { useSetRecoilState } from 'recoil';
 import { postsState } from '../atoms/atoms';
@@ -44,7 +43,6 @@ const Home: NextPage = ({
         />
       </Head>
       <main className="min-h-screen overflow-hidden">
-        <Landing />
         <div className="max-w-3xl mx-auto">
           <div className="flex items-center px-10 pt-12 pb-12 justify-center border-b-white border-solid border-b-2">
             <h1 className="font-extrabold text-3xl md:text-xl">최신 포스트</h1>
