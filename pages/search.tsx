@@ -24,6 +24,9 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 const Search: NextPage<Props> = ({
   property,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const properties_tag = property.properties['Tags'];
+
+  console.log(properties_tag);
   return <div>Search</div>;
 };
 
