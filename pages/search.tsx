@@ -10,16 +10,11 @@ interface Props {
 }
 
 interface ITags {
-  type: 'multi_select';
-  multi_select: {
-    options: Array<{
-      name: string;
-      id?: string;
-      color?: string;
-    }>;
-  };
-  id: string;
-  name: string;
+  options: Array<{
+    name: string;
+    id?: string;
+    color?: string;
+  }>;
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
@@ -37,11 +32,26 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 const Search: NextPage<Props> = ({
   property,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const [search, setSearch] = React.useState('');
   //@ts-ignore
-  const properties_tag: ITags = property.properties.Tags;
+  const properties_tag: ITags = property.properties.Tags.multi_select;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSearch(value);
+  };
 
-  console.log(properties_tag.multi_select.options);
-  return <div>Search</div>;
+  return (
+    <div className="max-w-3xl mx-auto mt-24 py-8 px-12 box-border">
+      <div className="flex flex-col overflow-hidden">
+        <input
+          className="border-2 text-sm rounded-lg block w-full p-2.5 pl-12 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 outline-none"
+          placeholder="검색어를 입력하세요"
+          onChange={handleChange}
+          value={search}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default Search;
