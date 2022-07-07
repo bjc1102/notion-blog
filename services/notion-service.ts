@@ -17,10 +17,9 @@ export default class NotionService {
   }
 
   async getPublishedBlogPosts(): Promise<BlogPost[]> {
-    const database = process.env.NOTION_DB_ID ?? '';
     // list blog posts
     const response = await this.client.databases.query({
-      database_id: database,
+      database_id: process.env.NOTION_DB_ID ?? '',
       filter: {
         property: 'Published',
         checkbox: {

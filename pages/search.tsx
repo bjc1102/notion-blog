@@ -9,6 +9,19 @@ interface Props {
   property: GetDatabaseResponse;
 }
 
+interface ITags {
+  type: 'multi_select';
+  multi_select: {
+    options: Array<{
+      name: string;
+      id?: string;
+      color?: string;
+    }>;
+  };
+  id: string;
+  name: string;
+}
+
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const notionService = new NotionService();
   const property = await notionService.getDBproperty();
@@ -24,9 +37,10 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 const Search: NextPage<Props> = ({
   property,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const properties_tag = property.properties['Tags'];
+  //@ts-ignore
+  const properties_tag: ITags = property.properties.Tags;
 
-  console.log(properties_tag);
+  console.log(properties_tag.multi_select.options);
   return <div>Search</div>;
 };
 
