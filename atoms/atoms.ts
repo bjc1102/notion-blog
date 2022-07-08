@@ -6,8 +6,3 @@ export const postsState = atom<BlogPost[]>({
   key: nanoid(),
   default: [],
 });
-
-export const propertyState = atom({
-  key: nanoid(),
-  default: {},
-});
