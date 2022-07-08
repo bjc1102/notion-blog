@@ -1,6 +1,7 @@
 import { GetDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
 import React from 'react';
+import SearchIcon from '../public/assets/Search';
 
 import NotionService from '../services/notion-service';
 import { revalidate_time } from '../utils/revalidate';
@@ -42,7 +43,10 @@ const Search: NextPage<Props> = ({
 
   return (
     <div className="max-w-3xl mx-auto mt-24 py-8 px-12 box-border">
-      <div className="flex flex-col overflow-hidden">
+      <div className="relative felxCenter overflow-hidden">
+        <div className="absolute bottom-2 left-4">
+          <SearchIcon />
+        </div>
         <input
           className="border-2 text-sm rounded-lg block w-full p-2.5 pl-12 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-accent focus:border-accent outline-none"
           placeholder="검색어를 입력하세요"
