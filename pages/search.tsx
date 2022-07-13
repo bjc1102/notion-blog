@@ -50,6 +50,23 @@ const Search: NextPage<Props> = ({
     const { value } = e.target;
     setSearch(value);
   };
+  const setFilterTag = (id: string) => {
+    setFilterTags((prevState: string[]) => {
+      return [...prevState, id];
+    });
+  };
+  const deleteFilterTag = (id: string) => {
+    const index = filterTags.indexOf(id);
+    setFilterTags((prevState: string[]) => {
+      return [...prevState.slice(0, index), ...prevState.slice(index + 1)];
+    });
+  };
+
+  const handleTagClicK = (TagId: string) => {
+    filterTags.includes(TagId ?? '')
+      ? deleteFilterTag(TagId)
+      : setFilterTag(TagId);
+  };
 
   return (
     <div className="max-w-3xl mx-auto mt-24 py-8 px-12 box-border">
@@ -62,7 +79,13 @@ const Search: NextPage<Props> = ({
       <div className="grid grid-cols-8 lg:grid-cols-4 gap-2 w-full px-2 py-10 border">
         {properties_tag.options.map((v) => {
           return (
-            <span className="tagContainer flexCenter cursor-pointer" key={v.id}>
+            <span
+              className={`tagContainer flexCenter cursor-pointer ${
+                filterTags.includes(v.id ?? '') && 'bg-accent text-gray-600'
+              }`}
+              key={v.id}
+              onClick={() => handleTagClicK(v.id ?? '')}
+            >
               {v.name}
             </span>
           );
