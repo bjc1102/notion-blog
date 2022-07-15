@@ -6,8 +6,6 @@ import Input from '../components/Input';
 
 import NotionService from '../services/notion-service';
 import { revalidate_time } from '../utils/revalidate';
-import { useRecoilValue } from 'recoil';
-import { postsState } from '../atoms/atoms';
 import { BlogPost } from '../types/schema';
 import BlogCardSection from '../components/BlogCardSection';
 
@@ -42,6 +40,7 @@ const Search: NextPage<Props> = ({
   property,
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const [postLists, setpostLists] = React.useState(posts);
   const [search, setSearch] = React.useState('');
   const [filterTags, setFilterTags] = React.useState<string[]>([]);
   //@ts-ignore
@@ -50,13 +49,13 @@ const Search: NextPage<Props> = ({
     const { value } = e.target;
     setSearch(value);
   };
-  const setFilterTag = (id: string) => {
+  const setFilterTag = (name: string) => {
     setFilterTags((prevState: string[]) => {
-      return [...prevState, id];
+      return [...prevState, name];
     });
   };
-  const deleteFilterTag = (id: string) => {
-    const index = filterTags.indexOf(id);
+  const deleteFilterTag = (name: string) => {
+    const index = filterTags.indexOf(name);
     setFilterTags((prevState: string[]) => {
       return [...prevState.slice(0, index), ...prevState.slice(index + 1)];
     });
@@ -68,6 +67,8 @@ const Search: NextPage<Props> = ({
       : setFilterTag(TagId);
   };
 
+  React.useEffect(() => {}, [filterTags, search]);
+
   return (
     <div className="max-w-3xl mx-auto mt-24 py-8 px-12 box-border">
       <div className="relative felxCenter overflow-hidden">
@@ -76,22 +77,22 @@ const Search: NextPage<Props> = ({
         </div>
         <Input name="search" onChange={handleChange} value={search} />
       </div>
-      <div className="grid grid-cols-8 lg:grid-cols-4 gap-2 w-full px-2 py-10 border">
+      <div className="grid grid-cols-8 lg:grid-cols-4 gap-2 w-full py-10 border">
         {properties_tag.options.map((v) => {
           return (
-            <span
-              className={`tagContainer flexCenter cursor-pointer ${
-                filterTags.includes(v.id ?? '') && 'bg-accent text-gray-600'
+            <button
+              className={`tagContainer flexCenter cursor-pointer focus:ring focus:ring-gray-400 ${
+                filterTags.includes(v.name ?? '') && 'bg-accent text-gray-200'
               }`}
               key={v.id}
-              onClick={() => handleTagClicK(v.id ?? '')}
+              onClick={() => handleTagClicK(v.name ?? '')}
             >
               {v.name}
-            </span>
+            </button>
           );
         })}
       </div>
-      <BlogCardSection posts={posts} />
+      <BlogCardSection posts={postLists} />
     </div>
   );
 };
