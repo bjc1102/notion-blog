@@ -8,6 +8,7 @@ import NotionService from '../services/notion-service';
 import { revalidate_time } from '../utils/revalidate';
 import { BlogPost } from '../types/schema';
 import BlogCardSection from '../components/BlogCardSection';
+import _ from 'lodash';
 
 interface Props {
   property: GetDatabaseResponse;
@@ -42,32 +43,19 @@ const Search: NextPage<Props> = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [postLists, setpostLists] = React.useState(posts);
   const [search, setSearch] = React.useState('');
-  const [filterTags, setFilterTags] = React.useState<string[]>([]);
+  const [filterTag, setFilterTag] = React.useState<string>();
   //@ts-ignore
   const properties_tag: ITags = property.properties.Tags.multi_select;
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearch(value);
   };
-  const setFilterTag = (name: string) => {
-    setFilterTags((prevState: string[]) => {
-      return [...prevState, name];
-    });
-  };
-  const deleteFilterTag = (name: string) => {
-    const index = filterTags.indexOf(name);
-    setFilterTags((prevState: string[]) => {
-      return [...prevState.slice(0, index), ...prevState.slice(index + 1)];
-    });
+
+  const handleTagClicK = (TagName: string) => {
+    setFilterTag(TagName);
   };
 
-  const handleTagClicK = (TagId: string) => {
-    filterTags.includes(TagId ?? '')
-      ? deleteFilterTag(TagId)
-      : setFilterTag(TagId);
-  };
-
-  // React.useEffect(() => {}, [filterTags, search]);
+  // React.useEffect(() => {}, [filterTag, search]);
 
   return (
     <div className="max-w-3xl mx-auto mt-24 py-8 px-12 box-border">
@@ -82,7 +70,7 @@ const Search: NextPage<Props> = ({
           return (
             <button
               className={`tagContainer flexCenter cursor-pointer focus:ring focus:ring-gray-400 ${
-                filterTags.includes(v.name ?? '') && 'bg-accent text-gray-200'
+                v.name === filterTag && 'bg-accent text-gray-200'
               }`}
               key={v.id}
               onClick={() => handleTagClicK(v.name ?? '')}
