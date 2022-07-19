@@ -8,8 +8,12 @@ import NotionService from '../services/notion-service';
 import { revalidate_time } from '../utils/revalidate';
 import { BlogPost } from '../types/schema';
 import BlogCardSection from '../components/BlogCardSection';
-import _ from 'lodash';
+import _, { filter } from 'lodash';
 
+interface actionType {
+  type: string;
+  data: string;
+}
 interface Props {
   property: GetDatabaseResponse;
   posts: BlogPost[];
@@ -41,21 +45,38 @@ const Search: NextPage<Props> = ({
   property,
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const [postLists, setpostLists] = React.useState(posts);
-  const [search, setSearch] = React.useState('');
-  const [filterTag, setFilterTag] = React.useState<string>();
+  const [postLists, setPostLists] = React.useState(posts);
+  const [searchText, setSearchText] = React.useState('');
+  const [selectedTag, setSelecetedTag] = React.useState('');
   //@ts-ignore
   const properties_tag: ITags = property.properties.Tags.multi_select;
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setSearch(value);
+    setSearchText(value);
+    setSelecetedTag('');
+    setPostLists(() => {
+      const newValue = posts.filter((v) => {
+        return v.title.toLowerCase().includes(value.toLowerCase()) && v;
+      });
+      return newValue;
+    });
   };
 
   const handleTagClicK = (TagName: string) => {
-    setFilterTag(TagName);
+    setSearchText('');
+    setSelecetedTag(TagName);
+    setPostLists(() => {
+      const newValue = posts.filter((v) => {
+        let isTagPost = false;
+        for (let i = 0; i < v.tags.length; i++) {
+          if (v.tags[i].name === TagName) isTagPost = true;
+        }
+        return isTagPost && v;
+      });
+      return newValue;
+    });
   };
-
-  // React.useEffect(() => {}, [filterTag, search]);
 
   return (
     <div className="max-w-3xl mx-auto mt-24 py-8 px-12 box-border">
@@ -63,14 +84,14 @@ const Search: NextPage<Props> = ({
         <div className="absolute w-6 h-6 bottom-2 left-3">
           <SearchIcon />
         </div>
-        <Input name="search" onChange={handleChange} value={search} />
+        <Input name="search" onChange={handleChange} value={searchText} />
       </div>
       <div className="grid grid-cols-8 lg:grid-cols-4 gap-2 w-full py-10 border">
         {properties_tag.options.map((v) => {
           return (
             <button
               className={`tagContainer flexCenter cursor-pointer focus:ring focus:ring-gray-400 ${
-                v.name === filterTag && 'bg-accent text-gray-200'
+                v.name === selectedTag && 'bg-accent text-gray-200'
               }`}
               key={v.id}
               onClick={() => handleTagClicK(v.name ?? '')}
@@ -80,6 +101,7 @@ const Search: NextPage<Props> = ({
           );
         })}
       </div>
+      <span className="w-full h-px"></span>
       <BlogCardSection posts={postLists} />
     </div>
   );

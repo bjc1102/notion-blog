@@ -24,7 +24,7 @@ module.exports = {
       colors: {
         primary: '#0F172A',
         sub: '#1F2937',
-        accent: '#EC994B',
+        accent: '#2b695a',
         textColor: '#ffffff',
         ...TagsColoreMap,
       },
