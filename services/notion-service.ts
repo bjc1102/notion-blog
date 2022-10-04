@@ -1,9 +1,9 @@
-import { Client } from '@notionhq/client';
-import { BlogPost } from '../types/schema';
-import { NotionToMarkdown } from 'notion-to-md';
-import { NotionAPI } from 'notion-client';
-import { ExtendedRecordMap } from '../node_modules/notion-types/build/maps';
-import { GetDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import {Client} from '@notionhq/client';
+import {BlogPost} from '../types/schema';
+import {NotionToMarkdown} from 'notion-to-md';
+import {NotionAPI} from 'notion-client';
+import {ExtendedRecordMap} from 'notion-types';
+import {GetDatabaseResponse} from '@notionhq/client/build/src/api-endpoints';
 
 export default class NotionService {
   client: Client;
@@ -44,11 +44,9 @@ export default class NotionService {
   }
 
   async getDBproperty(): Promise<GetDatabaseResponse> {
-    const response = await this.client.databases.retrieve({
+    return await this.client.databases.retrieve({
       database_id: process.env.NOTION_DB_ID ?? '',
     });
-
-    return response;
   }
 
   private static pageToPostTransformer(page: any): BlogPost {

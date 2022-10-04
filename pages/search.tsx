@@ -1,19 +1,14 @@
-import { GetDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
-import { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
+import {GetDatabaseResponse} from '@notionhq/client/build/src/api-endpoints';
+import {GetStaticProps, InferGetStaticPropsType, NextPage} from 'next';
 import React from 'react';
 import SearchIcon from '../public/assets/SearchIcon';
 import Input from '../components/Input';
 
 import NotionService from '../services/notion-service';
-import { revalidate_time } from '../utils/revalidate';
-import { BlogPost } from '../types/schema';
+import {revalidate_time} from '../utils/revalidate';
+import {BlogPost} from '../types/schema';
 import BlogCardSection from '../components/BlogCardSection';
-import _, { filter } from 'lodash';
 
-interface actionType {
-  type: string;
-  data: string;
-}
 interface Props {
   property: GetDatabaseResponse;
   posts: BlogPost[];
@@ -56,10 +51,9 @@ const Search: NextPage<Props> = ({
     setSearchText(value);
     setSelecetedTag('');
     setPostLists(() => {
-      const newValue = posts.filter((v) => {
+      return posts.filter((v) => {
         return v.title.toLowerCase().includes(value.toLowerCase()) && v;
       });
-      return newValue;
     });
   };
 
@@ -67,20 +61,19 @@ const Search: NextPage<Props> = ({
     setSearchText('');
     setSelecetedTag(TagName);
     setPostLists(() => {
-      const newValue = posts.filter((v) => {
+      return posts.filter((v) => {
         let isTagPost = false;
         for (let i = 0; i < v.tags.length; i++) {
           if (v.tags[i].name === TagName) isTagPost = true;
         }
         return isTagPost && v;
       });
-      return newValue;
     });
   };
 
   return (
     <div className="max-w-3xl mx-auto mt-24 py-8 px-12 box-border">
-      <div className="relative felxCenter overflow-hidden">
+      <div className="relative flexCenter overflow-hidden">
         <div className="absolute w-6 h-6 bottom-2 left-3">
           <SearchIcon />
         </div>

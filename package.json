@@ -13,6 +13,7 @@
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "dayjs": "^1.11.1",
     "eslint-config-prettier": "^8.3.0",
+    "framer-motion": "^7.5.1",
     "lodash": "^4.17.21",
     "nanoid": "^4.0.0",
     "next": "12.0.8",
