@@ -26,7 +26,7 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
       <RecoilRoot>
         <div className="block bg-primary text-white py-16 font-sans">
           <React.Fragment>
-            <Landing image={query.image as string} />
+            {/* <Landing image={query.image as string} /> */}
             <Component {...pageProps} />
           </React.Fragment>
         </div>
