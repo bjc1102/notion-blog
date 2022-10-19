@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
@@ -8,12 +7,12 @@ import { NotionRenderer } from 'react-notion-x';
 import { Code } from 'react-notion-x/build/third-party/code';
 import { Equation } from 'react-notion-x/build/third-party/equation';
 import { Pdf } from 'react-notion-x/build/third-party/pdf';
-import { getPageTitle } from 'notion-utils';
 
 import NotionService from '@/services/notion-service';
-import { getDate } from '@/utils/getDate';
 import { revalidate_time } from '@/utils/revalidate';
-import { name } from '../../site.config';
+import Meta from '@/components/Meta';
+import { dehydrate, QueryClient } from 'react-query';
+import { BlogPost } from '@/types/schema';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
@@ -26,11 +25,15 @@ const Modal = dynamic(
 export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
   const pageID = context.params?.slug ?? 'error';
+  const queryClient = new QueryClient();
+  if (!queryClient.getQueryData(['posts'])) {
+    const posts = await notionService.getPublishedBlogPosts();
+    queryClient.setQueryData(['posts'], posts);
+  }
 
   // @ts-ignore
   const recordMap = await notionService.getSingleBlogPost(pageID);
-  const title = getPageTitle(recordMap);
-
+  // const test = await notionService.test(pageID);
   if (!recordMap) {
     throw '';
   }
@@ -40,11 +43,17 @@ export const getStaticProps: GetStaticProps = async (context) => {
     recordMap?.block?.[keys[0]]?.value ??
     recordMap?.block?.[keys[1]]?.value ??
     recordMap?.block?.[keys[2]]?.value;
+
+  // const toc = getPageTableOfContents(, recordMap);
+  const posts: BlogPost[] = queryClient.getQueryData(['posts']) ?? [];
+  const index = posts.findIndex((v) => v.slug === pageID);
+
   return {
     props: {
       recordMap,
-      title,
-      tags: block.properties['}d~}'],
+      tags: posts[index].tags,
+      cover: posts[index].cover,
+      dehydratedState: dehydrate(queryClient),
     },
     revalidate: revalidate_time,
   };
@@ -65,21 +74,12 @@ export async function getStaticPaths() {
 
 const Post = ({
   recordMap,
-  title,
+  tags,
+  cover,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  console.log(tags, cover);
   return (
     <>
-      <Head>
-        <title>
-          {title} | {name}
-        </title>
-        <meta name={'og:title'} title={'og:title'} content={title} />
-        <meta
-          name={'og:description'}
-          title={'og:description'}
-          content="노션을 CMS로 이용하는 블로그입니다"
-        />
-      </Head>
       <NotionRenderer
         recordMap={recordMap}
         showTableOfContents={true}

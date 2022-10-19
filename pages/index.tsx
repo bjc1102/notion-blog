@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
 import NotionService from '@/services/notion-service';
-import { dehydrate, QueryClient, useQuery } from 'react-query';
+import { dehydrate, QueryClient } from 'react-query';
 
 import { revalidate_time } from '@/utils/revalidate';
 import BlogCardSection from '@/components/BlogCardSection';
@@ -15,10 +15,14 @@ interface IHomeProps {
 
 export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
-  const posts = await notionService.getPublishedBlogPosts();
   const queryClient = new QueryClient();
 
-  queryClient.setQueryData('posts', posts);
+  let posts = queryClient.getQueryData(['posts']);
+
+  if (!posts) {
+    posts = await notionService.getPublishedBlogPosts();
+    queryClient.setQueryData(['posts'], posts);
+  }
   // return {
   // 	props: {
   // 		dehydratedState: dehydrate(queryClient),

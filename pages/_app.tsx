@@ -3,10 +3,9 @@ import type { AppProps } from 'next/app';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Landing from '@/components/Landing';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 import '@/styles/global.css';
-import Router, { useRouter } from 'next/router';
 import Meta from '@/components/Meta';
 
 // core styles shared by all of react-notion-x (required)
@@ -36,6 +35,10 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
               <React.Fragment>
                 {/* <Landing image={query.image as string} /> */}
                 <Component {...pageProps} />
+                <ReactQueryDevtools
+                  initialIsOpen={false}
+                  position="bottom-right"
+                />
               </React.Fragment>
             </div>
             <Footer />
