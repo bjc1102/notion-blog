@@ -1,12 +1,13 @@
 import React from 'react';
 import { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
-import NotionService from '../services/notion-service';
+import NotionService from '@/services/notion-service';
+
+import { revalidate_time } from '@/utils/revalidate';
+import BlogCardSection from '@/components/BlogCardSection';
+import { BlogPost } from '@/types/schema';
 
 import { name } from '../site.config';
-import { revalidate_time } from '../utils/revalidate';
-import BlogCardSection from '../components/BlogCardSection';
-import { BlogPost } from '../types/schema';
 
 interface IHomeProps {
   posts: BlogPost[];

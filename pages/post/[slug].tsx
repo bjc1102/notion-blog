@@ -11,10 +11,10 @@ import { Equation } from 'react-notion-x/build/third-party/equation';
 import { Pdf } from 'react-notion-x/build/third-party/pdf';
 import { getPageTitle } from 'notion-utils';
 
-import NotionService from '../../services/notion-service';
+import NotionService from '@/services/notion-service';
+import { getDate } from '@/utils/getDate';
+import { revalidate_time } from '@/utils/revalidate';
 import { name } from '../../site.config';
-import { getDate } from '../../utils/getDate';
-import { revalidate_time } from '../../utils/revalidate';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
@@ -40,7 +40,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     recordMap?.block?.[keys[0]]?.value ??
     recordMap?.block?.[keys[1]]?.value ??
     recordMap?.block?.[keys[2]]?.value;
-
   return {
     props: {
       recordMap,

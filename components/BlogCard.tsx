@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
 import { BlogPost } from '../types/schema';
-import { TagsColoreMap } from '../styles/tagColor.map';
 
 import Link from 'next/link';
 import Image from 'next/image';
