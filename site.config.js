@@ -5,7 +5,9 @@ module.exports = {
   author: 'Byeong Ju Choi',
 
   // open graph metadata (optional)
+  title: 'CBJ notion blog',
   description: 'CBJ Notion dev blog',
+  keywords: 'notion blog, nextjs, ssg',
   socialImageTitle: 'Transitive Bullshit',
   socialImageSubtitle: 'Hello World! 👋',
 
