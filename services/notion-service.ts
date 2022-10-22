@@ -9,7 +9,9 @@ export default class NotionService {
   notion: NotionAPI;
 
   constructor() {
-    this.client = new Client({ auth: process.env.NOTION_ACCESS_TOKEN });
+    this.client = new Client({
+      auth: process.env.NOTION_ACCESS_TOKEN,
+    });
     this.notion = new NotionAPI();
   }
 
@@ -44,6 +46,12 @@ export default class NotionService {
     return await this.client.databases.retrieve({
       database_id: process.env.NOTION_DB_ID ?? '',
     });
+  }
+
+  async RetrievePage(pageId: string) {
+    const response = await this.client.pages.retrieve({ page_id: pageId });
+
+    return response;
   }
 
   private static pageToPostTransformer(page: any): BlogPost {
