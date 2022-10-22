@@ -1,4 +1,4 @@
-export interface RootObject {
+export interface PageProperty {
   object: string;
   id: string;
   created_time: string;

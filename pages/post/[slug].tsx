@@ -11,7 +11,6 @@ import { Pdf } from 'react-notion-x/build/third-party/pdf';
 import NotionService from '@/services/notion-service';
 import { revalidate_time } from '@/utils/revalidate';
 import Meta from '@/components/Meta';
-import { BlogPost } from '@/types/schema';
 import parseID from '@/utils/parseID';
 import { PageProperty } from '@/types/property';
 
@@ -37,7 +36,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   )) as PageProperty;
   const { properties } = PageProperty;
 
-  const keys = Object.keys(recordMap.block);
   // const toc = getPageTableOfContents(, recordMap);
 
   return {
@@ -74,19 +72,25 @@ const Post = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
-      <NotionRenderer
-        recordMap={recordMap}
-        showTableOfContents={true}
-        darkMode={true}
-        components={{
-          nextImage: Image,
-          nextLink: Link,
-          Code,
-          Equation,
-          Modal,
-          Pdf,
-        }}
-      />
+      <div
+        className="min-h-screen min-w-full relative bg-cover bg-no-repeat bg-center bg-fixed"
+        style={{ backgroundImage: `url(${cover.file.url})` }}
+      ></div>
+      <div className="rounded-t-xl py-6 overflow-hidden">
+        <NotionRenderer
+          recordMap={recordMap}
+          showTableOfContents={true}
+          darkMode={true}
+          components={{
+            nextImage: Image,
+            nextLink: Link,
+            Code,
+            Equation,
+            Modal,
+            Pdf,
+          }}
+        />
+      </div>
     </>
   );
 };
