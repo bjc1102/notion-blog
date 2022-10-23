@@ -10,7 +10,7 @@ const useScroll = () => {
   }, []);
 
   const handleScrollEvent = () => {
-    setScroll(window.scrollY);
+    setScroll(window.pageYOffset);
   };
 
   return { scroll };

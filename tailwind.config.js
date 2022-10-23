@@ -1,15 +1,3 @@
-const TagsColoreMap = {
-  tgray: '#616363',
-  tbrown: '#554c2c',
-  tyellow: '#685d00',
-  torange: '#8a6e46',
-  tgreen: '#32504c',
-  tblue: '#264259',
-  tpurple: '#3A3159',
-  tpink: '#551036',
-  tred: '#501616',
-};
-
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -26,7 +14,6 @@ module.exports = {
         sub: '#1F2937',
         accent: '#2b695a',
         textColor: '#ffffff',
-        ...TagsColoreMap,
       },
       width: {
         50: '50rem',

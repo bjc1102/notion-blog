@@ -38,7 +38,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { properties } = PageProperty;
 
   // const toc = getPageTableOfContents(, recordMap);
-  console.log(PageProperty.cover);
 
   return {
     props: {
