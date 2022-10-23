@@ -1,12 +1,13 @@
 import React from 'react';
 import { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
-import Head from 'next/head';
-import NotionService from '../services/notion-service';
+import NotionService from '@/services/notion-service';
+import { dehydrate, QueryClient } from 'react-query';
 
-import { name } from '../site.config';
-import { revalidate_time } from '../utils/revalidate';
-import BlogCardSection from '../components/BlogCardSection';
-import { BlogPost } from '../types/schema';
+import { revalidate_time } from '@/utils/revalidate';
+import BlogCardSection from '@/components/BlogCardSection';
+import { BlogPost } from '@/types/schema';
+
+import Meta from '@/components/Meta';
 
 interface IHomeProps {
   posts: BlogPost[];
@@ -14,11 +15,24 @@ interface IHomeProps {
 
 export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
-  const posts = await notionService.getPublishedBlogPosts();
+  const queryClient = new QueryClient();
+
+  let posts = queryClient.getQueryData(['posts']);
+
+  if (!posts) {
+    posts = await notionService.getPublishedBlogPosts();
+    queryClient.setQueryData(['posts'], posts);
+  }
+  // return {
+  // 	props: {
+  // 		dehydratedState: dehydrate(queryClient),
+  // 	},
+  // }
 
   return {
     props: {
       posts,
+      dehydratedState: dehydrate(queryClient),
     },
     revalidate: revalidate_time,
   };
@@ -31,14 +45,7 @@ const Home: NextPage<IHomeProps> = ({
 
   return (
     <>
-      <Head>
-        <title>HOME | {name}</title>
-        <meta
-          name={'description'}
-          title={'description'}
-          content={description}
-        />
-      </Head>
+      <Meta title="HOME" description={description} keywords="notion,blog" />
       <main className="min-h-screen overflow-hidden">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-center px-10 pt-12 pb-12 justify-center border-b-white border-solid border-b-2">

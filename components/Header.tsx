@@ -1,33 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import useScroll from '@/hooks/useScroll';
 
 export default function Header() {
-  const [scroll, setScroll] = useState(false);
-  useEffect(() => {
-    window.addEventListener('scroll', handleScrollEvent);
-    return () => {
-      window.removeEventListener('scroll', handleScrollEvent);
-    };
-  }, []);
-
-  const handleScrollEvent = () => {
-    window.scrollY >= 50 ? setScroll(true) : setScroll(false);
-  };
+  const { scroll } = useScroll();
 
   return (
-    <header
-      className={`w-full fixed top-0 h-16 text-white z-10 backdrop-blur-md transition duration-300 ${
-        scroll && 'bg-sub/70'
+    <nav
+      className={`w-full fixed top-0 py-5 h-16 text-white z-10 transition duration-300 ${
+        scroll > 50 && 'bg-primary border-solid border-b border-gray-600/70'
       }`}
     >
-      <div className="max-w-5xl mx-auto px-10 py-6 flex justify-between font-akashi">
-        <Link href="/">
-          <a className="cursor-pointer relative">Choi</a>
-        </Link>
-        <Link href="/search">
-          <a className="cursor-pointer">search</a>
-        </Link>
+      <div className="max-w-5xl mx-auto px-10">
+        <div className="flex justify-between items-center font-akashi text-lg">
+          <Link href="/">
+            <a className="cursor-pointer">Choi</a>
+          </Link>
+          <div>
+            {/* <Link href="/search">
+              <a className="cursor-pointer">search</a>
+            </Link> */}
+          </div>
+        </div>
       </div>
-    </header>
+    </nav>
   );
 }

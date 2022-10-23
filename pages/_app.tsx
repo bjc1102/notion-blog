@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import type { AppProps } from 'next/app';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import '../styles/global.css';
+import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
-import Router, { useRouter } from 'next/router';
-import Meta from '../components/Meta';
+import '@/styles/global.css';
+import Meta from '@/components/Meta';
 
 // core styles shared by all of react-notion-x (required)
 import 'react-notion-x/src/styles.css';
@@ -13,51 +14,39 @@ import 'react-notion-x/src/styles.css';
 import 'prismjs/themes/prism-tomorrow.css';
 // used for rendering equations (optional)
 import 'katex/dist/katex.min.css';
-import Skeleton from '../components/Skeleton';
+import siteConfig from 'site.config';
 import { RecoilRoot } from 'recoil';
-import Landing from '../components/Landing';
+import { useRouter } from 'next/router';
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
-  const [isLoading, setIsLoading] = useState(false);
-  const { pathname, query } = useRouter();
-
-  useEffect(() => {
-    const start = () => {
-      // NProgress.start();
-      window.scrollTo(0, 0);
-      setIsLoading(true);
-    };
-    const end = () => {
-      // NProgress.done();
-      setIsLoading(false);
-    };
-    Router.events.on('routeChangeStart', start);
-    Router.events.on('routeChangeComplete', end);
-    Router.events.on('routeChangeError', end);
-    return () => {
-      Router.events.off('routeChangeStart', start);
-      Router.events.off('routeChangeComplete', end);
-      Router.events.off('routeChangeError', end);
-    };
-  }, []);
+  const [queryClient] = React.useState(() => new QueryClient());
+  const router = useRouter();
+  const exceptRoute = ['/post/[slug]'];
 
   return (
     <>
-      <Meta />
+      <Meta
+        title={siteConfig.title}
+        keywords={siteConfig.keywords}
+        description={siteConfig.description}
+      />
       <Header />
-      <RecoilRoot>
-        <div className="block bg-primary text-white py-16 font-sans">
-          {isLoading && pathname !== '/post/[slug]' ? (
-            <Skeleton />
-          ) : (
-            <React.Fragment>
-              <Landing image={query.image as string} />
-              <Component {...pageProps} />
-            </React.Fragment>
-          )}
-        </div>
-        <Footer />
-      </RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <RecoilRoot>
+            <div className="block relative bg-primary text-white font-sans">
+              <React.Fragment>
+                <Component {...pageProps} />
+                <ReactQueryDevtools
+                  initialIsOpen={false}
+                  position="bottom-right"
+                />
+              </React.Fragment>
+            </div>
+            <Footer />
+          </RecoilRoot>
+        </Hydrate>
+      </QueryClientProvider>
     </>
   );
 }

@@ -1,18 +1,17 @@
-import {Client} from '@notionhq/client';
-import {BlogPost} from '../types/schema';
-import {NotionToMarkdown} from 'notion-to-md';
-import {NotionAPI} from 'notion-client';
-import {ExtendedRecordMap} from 'notion-types';
-import {GetDatabaseResponse} from '@notionhq/client/build/src/api-endpoints';
+import { Client } from '@notionhq/client';
+import { BlogPost } from '../types/schema';
+import { NotionAPI } from 'notion-client';
+import { ExtendedRecordMap } from 'notion-types';
+import { GetDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 
 export default class NotionService {
   client: Client;
-  n2m: NotionToMarkdown;
   notion: NotionAPI;
 
   constructor() {
-    this.client = new Client({ auth: process.env.NOTION_ACCESS_TOKEN });
-    this.n2m = new NotionToMarkdown({ notionClient: this.client });
+    this.client = new Client({
+      auth: process.env.NOTION_ACCESS_TOKEN,
+    });
     this.notion = new NotionAPI();
   }
 
@@ -47,6 +46,12 @@ export default class NotionService {
     return await this.client.databases.retrieve({
       database_id: process.env.NOTION_DB_ID ?? '',
     });
+  }
+
+  async RetrievePage(pageId: string) {
+    const response = await this.client.pages.retrieve({ page_id: pageId });
+
+    return response;
   }
 
   private static pageToPostTransformer(page: any): BlogPost {
