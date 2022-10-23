@@ -4,7 +4,7 @@ import NotionService from '@/services/notion-service';
 import { dehydrate, QueryClient } from 'react-query';
 
 import { revalidate_time } from '@/utils/revalidate';
-import BlogCardSection from '@/components/BlogCardSection';
+import PostBlogCardSection from '@/components/PostCardSection';
 import { BlogPost } from '@/types/schema';
 
 import Meta from '@/components/Meta';
@@ -51,7 +51,7 @@ const Home: NextPage<IHomeProps> = ({
           <div className="flex items-center px-10 pt-12 pb-12 justify-center border-b-white border-solid border-b-2">
             <h1 className="font-extrabold text-3xl md:text-xl">최신 포스트</h1>
           </div>
-          <BlogCardSection posts={posts} />
+          <PostBlogCardSection posts={posts} />
         </div>
       </main>
     </>

@@ -1,19 +1,19 @@
 import React from 'react';
 
-import BlogCard from './BlogCard';
+import PostCard from './PostCard';
 import { BlogPost } from '../types/schema';
 
-interface IBlogCardSectionProps {
+interface IPostCardSectionProps {
   posts: BlogPost[];
 }
 
-const BlogCardSection: React.FC<IBlogCardSectionProps> = ({ posts }) => {
+const PostCardSection: React.FC<IPostCardSectionProps> = ({ posts }) => {
   return (
     <section className="grid grid-cols-1 gap-y-8 py-8 px-7 md:gap-y-6 md:overflow-hidden md:px-0 overflow-hidden box-border">
       {posts.length ? (
         posts.map((post: BlogPost, idx: number) => (
           <React.Fragment key={post.id}>
-            <BlogCard post={post} />
+            <PostCard post={post} />
             {idx !== posts.length - 1 && (
               <span className="md:hidden block h-1 bg-gray-800" />
             )}
@@ -28,4 +28,4 @@ const BlogCardSection: React.FC<IBlogCardSectionProps> = ({ posts }) => {
   );
 };
 
-export default BlogCardSection;
+export default PostCardSection;

@@ -13,7 +13,7 @@ import { revalidate_time } from '@/utils/revalidate';
 import Meta from '@/components/Meta';
 import parseID from '@/utils/parseID';
 import { PageProperty } from '@/types/property';
-import PostLanding from '@/components/postLanding';
+import PostLanding from '@/components/postHeader';
 import ImgUrlParse from '@/utils/imageTransform';
 
 const Modal = dynamic(

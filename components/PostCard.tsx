@@ -5,11 +5,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getDate } from '../utils/getDate';
 
-type BlogCardProps = {
+type PostCardProps = {
   post: BlogPost;
 };
 
-const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
+const PostCard: FunctionComponent<PostCardProps> = ({ post }) => {
   return (
     <Link
       href={{
@@ -56,4 +56,4 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ post }) => {
   );
 };
 
-export default BlogCard;
+export default PostCard;
