@@ -13,6 +13,8 @@ import { revalidate_time } from '@/utils/revalidate';
 import Meta from '@/components/Meta';
 import parseID from '@/utils/parseID';
 import { PageProperty } from '@/types/property';
+import PostLanding from '@/components/postLanding';
+import ImgUrlParse from '@/utils/imageTransform';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
@@ -21,7 +23,6 @@ const Modal = dynamic(
   }
 );
 
-//TODO: 날짜, 이미지, Tag같이 속성 우선 가져오기
 export const getStaticProps: GetStaticProps = async (context) => {
   const notionService = new NotionService();
   const pageID = parseID(context.params?.slug as string);
@@ -37,6 +38,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { properties } = PageProperty;
 
   // const toc = getPageTableOfContents(, recordMap);
+  console.log(PageProperty.cover);
 
   return {
     props: {
@@ -70,12 +72,15 @@ const Post = ({
   tags,
   description,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const url = ImgUrlParse(cover);
   return (
     <>
-      <div
-        className="min-h-screen min-w-full relative bg-cover bg-no-repeat bg-center bg-fixed"
-        style={{ backgroundImage: `url(${cover.file.url})` }}
-      ></div>
+      <PostLanding
+        cover={url}
+        date={date.last_edited_time}
+        tags={tags.multi_select.map((v: any) => v.name)}
+        description={description.rich_text[0].plain_text}
+      />
       <div className="rounded-t-xl py-6 overflow-hidden">
         <NotionRenderer
           recordMap={recordMap}

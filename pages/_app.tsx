@@ -16,9 +16,12 @@ import 'prismjs/themes/prism-tomorrow.css';
 import 'katex/dist/katex.min.css';
 import siteConfig from 'site.config';
 import { RecoilRoot } from 'recoil';
+import { useRouter } from 'next/router';
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(() => new QueryClient());
+  const router = useRouter();
+  const exceptRoute = ['/post/[slug]'];
 
   return (
     <>
@@ -31,7 +34,7 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <RecoilRoot>
-            <div className="block relative bg-primary text-white py-16 font-sans">
+            <div className="block relative bg-primary text-white font-sans">
               <React.Fragment>
                 <Component {...pageProps} />
                 <ReactQueryDevtools

@@ -25,13 +25,13 @@ interface Properties {
   Name: Name;
 }
 
-interface Name {
+export interface Name {
   id: string;
   type: string;
   title: function[];
 }
 
-interface Tags {
+export interface Tags {
   id: string;
   type: string;
   multi_select: function[];
@@ -43,7 +43,7 @@ interface Published {
   checkbox: boolean;
 }
 
-interface Description {
+export interface Description {
   id: string;
   type: string;
   rich_text: function[];
@@ -72,9 +72,12 @@ interface Parent {
   database_id: string;
 }
 
-interface Cover {
+export interface Cover {
   type: string;
   file: File;
+  external?: {
+    url: string;
+  };
 }
 
 interface File {
