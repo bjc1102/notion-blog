@@ -1,14 +1,8 @@
-import { Cover, Description, PageProperty, Tags } from '@/types/property';
 import React from 'react';
+import { PostHeaderProps } from '@/types/postHeader';
+import PostHeaderContent from './PostHeaderContent';
 
-interface LandingProps {
-  cover: string;
-  date: string;
-  description: string;
-  tags: string[];
-}
-
-const PostLanding: React.FC<Readonly<LandingProps>> = ({
+const PostLanding: React.FC<Readonly<PostHeaderProps>> = ({
   cover,
   date,
   description,
@@ -19,7 +13,9 @@ const PostLanding: React.FC<Readonly<LandingProps>> = ({
       className="relative items-center justify-center min-h-screen min-w-full bg-cover bg-no-repeat bg-center bg-fixed"
       style={{ backgroundImage: `url(${cover})` }}
     >
-      <div className="min-h-screen bg-gray-900/70"></div>
+      <div className="min-h-screen flexCenter flex-col bg-gray-900/70">
+        <PostHeaderContent date={date} description={description} tags={tags} />
+      </div>
     </header>
   );
 };
