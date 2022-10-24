@@ -3,7 +3,7 @@ import { BlogPost } from '../types/schema';
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { getDate } from '../utils/getDate';
+import { formatDate } from '@/utils/formatDate';
 
 type PostCardProps = {
   post: BlogPost;
@@ -39,7 +39,7 @@ const PostCard: FunctionComponent<PostCardProps> = ({ post }) => {
           <div className="flex-1 flex flex-col justify-between lg:text-sm">
             <p>{post.description}</p>
             <div className="flex gap-2 flex-wrap py-3 text-gray-300 items-center">
-              <h5 className="post-date">{getDate(post.date)}</h5>
+              <h5 className="post-date">{formatDate(post.date)}</h5>
               <span>|</span>
               {post.tags.map((tag) => {
                 return (

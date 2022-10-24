@@ -7,19 +7,20 @@ import { NotionRenderer } from 'react-notion-x';
 import { Code } from 'react-notion-x/build/third-party/code';
 import { Equation } from 'react-notion-x/build/third-party/equation';
 import { Pdf } from 'react-notion-x/build/third-party/pdf';
+import { getPageTitle } from 'notion-utils';
 
 import NotionService from '@/services/notion-service';
 import { revalidate_time } from '@/utils/revalidate';
 import Meta from '@/components/Meta';
 import parseID from '@/utils/parseID';
 import { PageProperty } from '@/types/property';
-import PostLanding from '@/components/postHeader';
+import PostHeader from '@/components/postHeader';
 import ImgUrlParse from '@/utils/imageTransform';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
   {
-    ssr: false,
+    ssr: true,
   }
 );
 
@@ -32,6 +33,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   if (!recordMap) {
     throw '';
   }
+  const title = getPageTitle(recordMap);
   const PageProperty = (await notionService.RetrievePage(
     pageID
   )) as PageProperty;
@@ -42,6 +44,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       recordMap,
+      title,
       cover: PageProperty.cover,
       date: properties.Created,
       tags: properties.Tags,
@@ -66,6 +69,7 @@ export async function getStaticPaths() {
 
 const Post = ({
   recordMap,
+  title,
   cover,
   date,
   tags,
@@ -74,7 +78,8 @@ const Post = ({
   const url = ImgUrlParse(cover);
   return (
     <>
-      <PostLanding
+      <PostHeader
+        title={title}
         cover={url}
         date={date.last_edited_time}
         tags={tags.multi_select.map((v: any) => v.name)}
