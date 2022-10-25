@@ -20,8 +20,6 @@ import { useRouter } from 'next/router';
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(() => new QueryClient());
-  const router = useRouter();
-  const exceptRoute = ['/post/[slug]'];
 
   return (
     <>
