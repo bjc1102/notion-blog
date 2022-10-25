@@ -14,7 +14,7 @@ import { revalidate_time } from '@/utils/revalidate';
 import Meta from '@/components/Meta';
 import parseID from '@/utils/parseID';
 import { PageProperty } from '@/types/property';
-import PostHeader from '@/components/postHeader';
+import PostHeader from '@/components/PostHeader';
 import ImgUrlParse from '@/utils/imageTransform';
 
 const Modal = dynamic(

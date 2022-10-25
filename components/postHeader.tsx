@@ -2,7 +2,7 @@ import React from 'react';
 import { PostHeaderProps } from '@/types/postHeader';
 import PostHeaderContent from './PostHeaderContent';
 
-const PostLanding: React.FC<Readonly<PostHeaderProps>> = ({
+const PostHeader: React.FC<Readonly<PostHeaderProps>> = ({
   title,
   cover,
   date,
@@ -26,4 +26,4 @@ const PostLanding: React.FC<Readonly<PostHeaderProps>> = ({
   );
 };
 
-export default PostLanding;
+export default PostHeader;
