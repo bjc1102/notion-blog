@@ -1,0 +1,12 @@
+name: revalidate
+on:
+  schedule:
+    - cron: '*/50 * * * *'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call our API route
+        run: |
+          curl --request POST \
+          --url 'https://api.vercel.com/v1/integrations/deploy/prj_yGAxkv3wHOEkzMduRcdNGTzPx1fw/87O200kB4N' \

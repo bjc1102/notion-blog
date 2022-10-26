@@ -1,7 +1,7 @@
 module.exports = {
   // basic site info (required)
   name: 'CBJ Blog',
-  domain: '',
+  domain: 'https://choi-notion-blog.vercel.app/',
   author: 'Byeong Ju Choi',
 
   // open graph metadata (optional)

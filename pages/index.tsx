@@ -23,18 +23,12 @@ export const getStaticProps: GetStaticProps = async () => {
     posts = await notionService.getPublishedBlogPosts();
     queryClient.setQueryData(['posts'], posts);
   }
-  // return {
-  // 	props: {
-  // 		dehydratedState: dehydrate(queryClient),
-  // 	},
-  // }
 
   return {
     props: {
       posts,
       dehydratedState: dehydrate(queryClient),
     },
-    revalidate: revalidate_time,
   };
 };
 
