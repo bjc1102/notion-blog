@@ -16,7 +16,6 @@ import 'prismjs/themes/prism-tomorrow.css';
 import 'katex/dist/katex.min.css';
 import siteConfig from 'site.config';
 import { RecoilRoot } from 'recoil';
-import { useRouter } from 'next/router';
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(() => new QueryClient());

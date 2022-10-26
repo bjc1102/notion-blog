@@ -3,7 +3,6 @@ import { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
 import NotionService from '@/services/notion-service';
 import { dehydrate, QueryClient } from 'react-query';
 
-import { revalidate_time } from '@/utils/revalidate';
 import PostBlogCardSection from '@/components/PostCardSection';
 import { BlogPost } from '@/types/schema';
 
@@ -23,18 +22,12 @@ export const getStaticProps: GetStaticProps = async () => {
     posts = await notionService.getPublishedBlogPosts();
     queryClient.setQueryData(['posts'], posts);
   }
-  // return {
-  // 	props: {
-  // 		dehydratedState: dehydrate(queryClient),
-  // 	},
-  // }
 
   return {
     props: {
       posts,
       dehydratedState: dehydrate(queryClient),
     },
-    revalidate: revalidate_time,
   };
 };
 

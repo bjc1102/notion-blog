@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { NotionRenderer } from 'react-notion-x';
+
 import { Code } from 'react-notion-x/build/third-party/code';
 import { Equation } from 'react-notion-x/build/third-party/equation';
 import { Pdf } from 'react-notion-x/build/third-party/pdf';
@@ -30,9 +31,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   // @ts-ignore
   const recordMap = await notionService.getSingleBlogPost(pageID);
+  const keys = Object.keys(recordMap?.block || {});
+
   if (!recordMap) {
     throw '';
   }
+
   const title = getPageTitle(recordMap);
   const PageProperty = (await notionService.RetrievePage(
     pageID
@@ -41,6 +45,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   // const toc = getPageTableOfContents(, recordMap);
 
+  console.log(revalidate_time);
   return {
     props: {
       recordMap,
@@ -50,7 +55,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       tags: properties.Tags,
       description: properties.Description,
     },
-    revalidate: revalidate_time,
   };
 };
 
