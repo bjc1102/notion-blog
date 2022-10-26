@@ -6,7 +6,6 @@ import Footer from '@/components/Footer';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 import '@/styles/global.css';
-import Meta from '@/components/Meta';
 
 // core styles shared by all of react-notion-x (required)
 import 'react-notion-x/src/styles.css';
@@ -14,7 +13,6 @@ import 'react-notion-x/src/styles.css';
 import 'prismjs/themes/prism-tomorrow.css';
 // used for rendering equations (optional)
 import 'katex/dist/katex.min.css';
-import siteConfig from 'site.config';
 import { RecoilRoot } from 'recoil';
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
