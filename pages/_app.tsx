@@ -1,12 +1,11 @@
 import React from 'react';
 import type { AppProps } from 'next/app';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
-import Header from '@/components/Header';
+import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 import '@/styles/global.css';
-import Meta from '@/components/Meta';
 
 // core styles shared by all of react-notion-x (required)
 import 'react-notion-x/src/styles.css';
@@ -14,7 +13,6 @@ import 'react-notion-x/src/styles.css';
 import 'prismjs/themes/prism-tomorrow.css';
 // used for rendering equations (optional)
 import 'katex/dist/katex.min.css';
-import siteConfig from 'site.config';
 import { RecoilRoot } from 'recoil';
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
@@ -22,12 +20,7 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Meta
-        title={siteConfig.title}
-        keywords={siteConfig.keywords}
-        description={siteConfig.description}
-      />
-      <Header />
+      <Nav />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <RecoilRoot>

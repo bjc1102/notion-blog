@@ -1,13 +1,4 @@
 export type Tag = {
-  color:
-    | 'gray'
-    | 'brown'
-    | 'orange'
-    | 'green'
-    | 'blue'
-    | 'purple'
-    | 'pink'
-    | 'red';
   id: string;
   name: string;
 };
@@ -21,7 +12,7 @@ export interface IDate {
 
 export type BlogPost = {
   id: string;
-  type: '개발' | '회고';
+  type: string;
   slug: string;
   cover: string;
   title: string;
