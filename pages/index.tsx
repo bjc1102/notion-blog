@@ -3,7 +3,6 @@ import { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
 import NotionService from '@/services/notion-service';
 import { dehydrate, QueryClient } from 'react-query';
 
-import { revalidate_time } from '@/utils/revalidate';
 import PostBlogCardSection from '@/components/PostCardSection';
 import { BlogPost } from '@/types/schema';
 

@@ -5,11 +5,10 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { NotionRenderer } from 'react-notion-x';
 
-import { PageBlock } from 'notion-types';
 import { Code } from 'react-notion-x/build/third-party/code';
 import { Equation } from 'react-notion-x/build/third-party/equation';
 import { Pdf } from 'react-notion-x/build/third-party/pdf';
-import { getPageTitle, getPageProperty } from 'notion-utils';
+import { getPageTitle } from 'notion-utils';
 
 import NotionService from '@/services/notion-service';
 import { revalidate_time } from '@/utils/revalidate';
@@ -18,7 +17,6 @@ import parseID from '@/utils/parseID';
 import { PageProperty } from '@/types/property';
 import PostHeader from '@/components/PostHeader';
 import ImgUrlParse from '@/utils/imageTransform';
-import { mapImageUrl } from '@/utils/map-image-url';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
@@ -34,7 +32,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   // @ts-ignore
   const recordMap = await notionService.getSingleBlogPost(pageID);
   const keys = Object.keys(recordMap?.block || {});
-  const block = recordMap?.block?.[keys[0]]?.value;
 
   if (!recordMap) {
     throw '';
