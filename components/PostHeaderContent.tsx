@@ -10,7 +10,7 @@ const PostHeaderContent: React.FC<PostHeaderContentsProps> = ({
   tags,
 }) => {
   return (
-    <div className="flex flex-col gap-9 px-6">
+    <div className="flex flex-col gap-9">
       <h1 className="text-4xl font-black md:text-2xl">{title}</h1>
       <p className="text-xl md:text-lg">{description}</p>
 

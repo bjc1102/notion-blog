@@ -45,7 +45,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   // const toc = getPageTableOfContents(, recordMap);
 
-  console.log(revalidate_time);
   return {
     props: {
       recordMap,

@@ -1,7 +1,7 @@
 import React from 'react';
 import type { AppProps } from 'next/app';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
-import Header from '@/components/Header';
+import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
@@ -27,7 +27,7 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
         keywords={siteConfig.keywords}
         description={siteConfig.description}
       />
-      <Header />
+      <Nav />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <RecoilRoot>

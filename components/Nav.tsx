@@ -2,12 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import useScroll from '@/hooks/useScroll';
 
-export default function Header() {
+export default function Nav() {
   const { scroll } = useScroll();
 
   return (
     <nav
-      className={`w-full fixed top-0 py-5 h-16 text-white z-10 transition duration-300 ${
+      className={`w-full fixed top-0 py-5 h-16 text-white z-50 transition duration-300 ${
         scroll > 50 && 'bg-primary border-solid border-b border-gray-600/70'
       }`}
     >
