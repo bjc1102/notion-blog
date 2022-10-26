@@ -22,11 +22,6 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Meta
-        title={siteConfig.title}
-        keywords={siteConfig.keywords}
-        description={siteConfig.description}
-      />
       <Nav />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>

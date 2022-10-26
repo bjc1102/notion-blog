@@ -11,12 +11,12 @@ import { Pdf } from 'react-notion-x/build/third-party/pdf';
 import { getPageTitle } from 'notion-utils';
 
 import NotionService from '@/services/notion-service';
-import { revalidate_time } from '@/utils/revalidate';
 import Meta from '@/components/Meta';
 import parseID from '@/utils/parseID';
 import { PageProperty } from '@/types/property';
 import PostHeader from '@/components/PostHeader';
 import ImgUrlParse from '@/utils/imageTransform';
+import getTagName from '@/utils/getTagName';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
@@ -42,8 +42,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     pageID
   )) as PageProperty;
   const { properties } = PageProperty;
-
-  // const toc = getPageTableOfContents(, recordMap);
 
   return {
     props: {
@@ -79,14 +77,22 @@ const Post = ({
   description,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const url = ImgUrlParse(cover);
+  const tagNames = getTagName(tags);
+  const descriptionText = description.rich_text[0].plain_text;
+
   return (
     <>
+      <Meta
+        title={title}
+        keywords={tagNames.join(' ')}
+        description={descriptionText}
+      />
       <PostHeader
         title={title}
         cover={url}
         date={date.last_edited_time}
-        tags={tags.multi_select.map((v: any) => v.name)}
-        description={description.rich_text[0].plain_text}
+        tags={tagNames}
+        description={descriptionText}
       />
       <div className="rounded-t-xl py-6 overflow-hidden">
         <NotionRenderer
