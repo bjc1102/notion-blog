@@ -4,6 +4,7 @@ import { BlogPost } from '../types/schema';
 import Link from 'next/link';
 import Image from 'next/image';
 import { formatISO } from '@/utils/formatDate';
+import Category from './Category';
 
 type PostCardProps = {
   post: BlogPost;
@@ -14,21 +15,23 @@ const PostCard: FunctionComponent<PostCardProps> = ({ post }) => {
     <Link href={{ pathname: `/post/${post.slug}` }} as={`/post/${post.slug}`}>
       <a>
         {/* 전체 wrapper */}
-        <article className="w-80">
+        <article className="w-80 m-auto">
           {/* Image */}
-          <div className="relative w-full h-44 border border-solid border-white">
+          <div className="relative w-full h-44 border border-solid border-white rounded">
             <Image
+              className="rounded"
               layout="fill"
               objectFit="cover"
               src={post.cover}
               alt={'cover-image'}
             />
           </div>
-          <div>
-            <span className="">{formatISO(post.date)}</span>
-            <span className="">{post.category}</span>
-            <h3>{post.title}</h3>
-            <p>{post.description}</p>
+          <div className="mt-5 font-normal">
+            <span className="text-gray-400">{formatISO(post.date)}</span>
+            <span className="mx-2">&#183;</span>
+            <Category category={post.category} />
+            <h3 className="text-xl font-bold py-6">{post.title}</h3>
+            <p className="text-gray-400">{post.description}</p>
           </div>
           {/* Text */}
         </article>

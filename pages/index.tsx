@@ -42,7 +42,7 @@ const Home: NextPage<IHomeProps> = ({
       <Meta title="HOME" description={description} keywords="notion,blog" />
       <main className="min-h-screen overflow-hidden">
         <Landing />
-        <div className="max-w-6xl mx-auto mt-24">
+        <div className="max-w-6xl mx-auto my-24">
           <PostBlogCardSection posts={posts} />
         </div>
       </main>

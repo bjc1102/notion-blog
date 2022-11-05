@@ -9,7 +9,7 @@ interface IPostCardSectionProps {
 
 const PostCardSection: React.FC<IPostCardSectionProps> = ({ posts }) => {
   return (
-    <section className="grid grid-cols-3 gap-y-8">
+    <section className="grid grid-cols-3 gap-y-8 md:grid-cols-1">
       {posts.length ? (
         posts.map((post: BlogPost) => (
           <React.Fragment key={post.id}>

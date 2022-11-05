@@ -54,6 +54,7 @@ export default class NotionService {
     return response;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private static pageToPostTransformer(page: any): BlogPost {
     let cover = page.cover !== null ? page.cover : '';
 

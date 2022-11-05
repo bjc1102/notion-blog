@@ -3,16 +3,12 @@ import Image from 'next/image';
 import BannerImage from '../public/images/earth-1756274_1920.jpg';
 import ProfileImage from '../public/images/71929440.jpg';
 
-interface IProps {
-  image?: string;
-}
-
 export default function Landing() {
   return (
     <div className="relative w-full pt-16">
-      <div className="relative max-w-6xl h-80 mx-auto rounded-3xl border border-solid">
+      <div className="relative max-w-6xl h-80 mx-auto rounded-3xl border border-solid md:rounded-none md:border-l-0 md:border-r-0">
         <Image
-          className="rounded-3xl"
+          className="rounded-3xl md:rounded-none"
           layout="fill"
           objectFit="fill"
           src={BannerImage}

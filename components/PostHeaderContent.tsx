@@ -1,13 +1,12 @@
 import { PostHeaderContentsProps } from '@/types/postHeader';
 import { formatISO } from '@/utils/formatDate';
 import React from 'react';
-import Tag from './Tag';
 
 const PostHeaderContent: React.FC<PostHeaderContentsProps> = ({
   title,
   description,
   date,
-  tags,
+  category,
 }) => {
   return (
     <div className="flex flex-col gap-9">
@@ -17,7 +16,7 @@ const PostHeaderContent: React.FC<PostHeaderContentsProps> = ({
       <div className="flex gap-3 items-center text-lg">
         <span>{formatISO(date)}</span>
         <span>&#183;</span>
-        <Tag tags={tags} />
+        <span>{category}</span>
       </div>
     </div>
   );

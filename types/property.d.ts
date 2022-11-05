@@ -21,7 +21,7 @@ interface Properties {
   Type: Description;
   Published: Published;
   Created: Updated;
-  Tags: Tags;
+  Category: Tags;
   Name: Name;
 }
 
@@ -31,10 +31,10 @@ export interface Name {
   title: function[];
 }
 
-export interface Tags {
+export interface Category {
   id: string;
-  type: string;
-  multi_select: function[];
+  color: string;
+  name: string;
 }
 
 interface Published {

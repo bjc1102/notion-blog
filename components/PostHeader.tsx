@@ -8,7 +8,7 @@ const PostHeader: React.FC<Readonly<PostHeaderProps>> = ({
   cover,
   date,
   description,
-  tags,
+  category,
 }) => {
   return (
     <header className="relative min-h-screen min-w-full">
@@ -26,7 +26,7 @@ const PostHeader: React.FC<Readonly<PostHeaderProps>> = ({
             title={title}
             date={date}
             description={description}
-            tags={tags}
+            category={category}
           />
         </div>
       </div>
