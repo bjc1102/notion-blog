@@ -35,11 +35,12 @@ export const getStaticProps: GetStaticProps = async () => {
 const Home: NextPage<IHomeProps> = ({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const description = 'Welcome to my Notion blog';
+  const title = 'CBJ Notion Blog developed with Next.js';
+  const description = '노션을 CMS로 활용하여 회고글을 작성하고 있습니다.';
 
   return (
     <>
-      <Meta title="HOME" description={description} keywords="notion,blog" />
+      <Meta title={title} description={description} keywords="notion,blog" />
       <main className="min-h-screen overflow-hidden">
         <Landing />
         <div className="max-w-6xl mx-auto my-24">
