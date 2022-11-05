@@ -1,7 +1,8 @@
 import React from 'react';
 
-import PostCard from './PostCard';
+import PostCard from '@/components/PostCard';
 import { BlogPost } from '../types/schema';
+import MainPostCard from './MainPostCard';
 
 interface IPostCardSectionProps {
   posts: BlogPost[];
@@ -9,21 +10,19 @@ interface IPostCardSectionProps {
 
 const PostCardSection: React.FC<IPostCardSectionProps> = ({ posts }) => {
   return (
-    <section className="grid grid-cols-1 gap-y-8 py-8 px-7 md:gap-y-6 md:overflow-hidden md:px-0 overflow-hidden box-border">
-      {posts.length ? (
-        posts.map((post: BlogPost, idx: number) => (
-          <React.Fragment key={post.id}>
-            <PostCard post={post} />
-            {idx !== posts.length - 1 && (
-              <span className="md:hidden block h-1 bg-gray-800" />
-            )}
-          </React.Fragment>
-        ))
-      ) : (
-        <span className="w-full text-gray-400">
-          현재 조건을 만족하는 포스트가 없습니다.
-        </span>
-      )}
+    <section>
+      <MainPostCard post={posts[0]} />
+      <div className="grid grid-cols-3 gap-y-8 lg:gap-x-5 lg:grid-cols-1">
+        {posts
+          .filter((v, index) => index !== 0) // 첫번쨰 post는 pass
+          .map((post: BlogPost) => {
+            return (
+              <React.Fragment key={post.id}>
+                <PostCard post={post} />
+              </React.Fragment>
+            );
+          })}
+      </div>
     </section>
   );
 };

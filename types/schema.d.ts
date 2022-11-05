@@ -12,11 +12,10 @@ export interface IDate {
 
 export type BlogPost = {
   id: string;
-  type: string;
   slug: string;
   cover: string;
   title: string;
-  tags: Tag[];
+  category: string;
   description: string;
   date: string;
 };

@@ -1,5 +1,6 @@
 module.exports = {
   content: [
+    './utils/**/*.{js,jsx,ts,tsx,json}',
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
   ],

@@ -7,6 +7,7 @@ import PostBlogCardSection from '@/components/PostCardSection';
 import { BlogPost } from '@/types/schema';
 
 import Meta from '@/components/Meta';
+import Landing from '@/components/Landing';
 
 interface IHomeProps {
   posts: BlogPost[];
@@ -34,16 +35,15 @@ export const getStaticProps: GetStaticProps = async () => {
 const Home: NextPage<IHomeProps> = ({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const description = 'Welcome to my Notion blog';
+  const title = 'CBJ Notion Blog developed with Next.js';
+  const description = '노션을 CMS로 활용하여 회고글을 작성하고 있습니다.';
 
   return (
     <>
-      <Meta title="HOME" description={description} keywords="notion,blog" />
+      <Meta title={title} description={description} keywords="notion,blog" />
       <main className="min-h-screen overflow-hidden">
-        <div className="max-w-3xl mx-auto">
-          <div className="flex items-center px-10 pt-12 pb-12 justify-center border-b-white border-solid border-b-2">
-            <h1 className="font-extrabold text-3xl md:text-xl">최신 포스트</h1>
-          </div>
+        <Landing />
+        <div className="max-w-6xl mx-auto my-24">
           <PostBlogCardSection posts={posts} />
         </div>
       </main>

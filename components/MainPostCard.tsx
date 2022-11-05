@@ -1,37 +1,37 @@
-import { FunctionComponent } from 'react';
-import { BlogPost } from '../types/schema';
-
-import Link from 'next/link';
+import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+
+import { BlogPost } from '@/types/schema';
 import { formatISO } from '@/utils/formatDate';
 import Category from '@/components/Category';
 
-type PostCardProps = {
+interface MainPostCardProps {
   post: BlogPost;
-};
+}
 
-const PostCard: FunctionComponent<PostCardProps> = ({ post }) => {
+const MainPostCard: React.FC<MainPostCardProps> = ({ post }) => {
   return (
     <Link href={{ pathname: `/post/${post.slug}` }} as={`/post/${post.slug}`}>
       <a>
         {/* 전체 wrapper */}
-        <article className="w-80 lg:w-full m-auto lg:px-4 py-8">
+        <article className="flex lg:flex-col px-8 py-20 lg:py-0">
           {/* Image */}
-          <div className="relative h-44 border border-solid border-white rounded">
+          <div className="relative h-80 w-1/2 border border-solid border-white rounded">
             <Image
-              className="rounded"
+              className="rounded lg:h-9"
               layout="fill"
               objectFit="cover"
               src={post.cover}
               alt="cover-image"
             />
           </div>
-          <div className="mt-5 font-normal">
+          <div className="text-lg px-5 font-normal">
+            <h3 className="text-2xl font-bold py-6">{post.title}</h3>
             <span className="text-gray-400">{formatISO(post.date)}</span>
             <span className="mx-2">&#183;</span>
             <Category category={post.category} />
-            <h3 className="text-xl font-bold py-6">{post.title}</h3>
-            <p className="text-gray-400">{post.description}</p>
+            <p className="py-5 text-gray-400">{post.description}</p>
           </div>
           {/* Text */}
         </article>
@@ -40,4 +40,4 @@ const PostCard: FunctionComponent<PostCardProps> = ({ post }) => {
   );
 };
 
-export default PostCard;
+export default MainPostCard;
