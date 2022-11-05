@@ -3,7 +3,7 @@ export interface PostHeaderProps {
   title: string;
   date: string;
   description: string;
-  category: string[];
+  category: string;
 }
 
 export type PostHeaderContentsProps = Omit<PostHeaderProps, 'cover'>;
