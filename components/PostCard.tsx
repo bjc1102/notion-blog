@@ -4,7 +4,7 @@ import { BlogPost } from '../types/schema';
 import Link from 'next/link';
 import Image from 'next/image';
 import { formatISO } from '@/utils/formatDate';
-import Category from './Category';
+import Category from '@/components/Category';
 
 type PostCardProps = {
   post: BlogPost;
@@ -15,15 +15,15 @@ const PostCard: FunctionComponent<PostCardProps> = ({ post }) => {
     <Link href={{ pathname: `/post/${post.slug}` }} as={`/post/${post.slug}`}>
       <a>
         {/* 전체 wrapper */}
-        <article className="w-80 m-auto">
+        <article className="w-80 lg:w-full m-auto lg:px-4 py-8">
           {/* Image */}
-          <div className="relative w-full h-44 border border-solid border-white rounded">
+          <div className="relative h-44 border border-solid border-white rounded">
             <Image
               className="rounded"
               layout="fill"
               objectFit="cover"
               src={post.cover}
-              alt={'cover-image'}
+              alt="cover-image"
             />
           </div>
           <div className="mt-5 font-normal">
