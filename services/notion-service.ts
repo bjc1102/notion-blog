@@ -74,9 +74,8 @@ export default class NotionService {
     return {
       id: page.id,
       cover: cover,
-      type: page.properties.Type.rich_text[0].plain_text,
       title: page.properties.Name.title[0].plain_text,
-      tags: page.properties.Tags.multi_select,
+      category: page.properties.Category.select.name,
       description: page.properties.Description.rich_text[0].plain_text,
       date: page.properties.Updated.last_edited_time,
       slug: page.properties.Slug.formula.string,
