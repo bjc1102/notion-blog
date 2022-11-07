@@ -8,6 +8,7 @@ import { BlogPost } from '@/types/schema';
 
 import Meta from '@/components/Meta';
 import Landing from '@/components/Landing';
+import MainText from '@/components/MainText';
 
 interface IHomeProps {
   posts: BlogPost[];
@@ -43,7 +44,8 @@ const Home: NextPage<IHomeProps> = ({
       <Meta title={title} description={description} keywords="notion,blog" />
       <main className="min-h-screen overflow-hidden">
         <Landing />
-        <div className="max-w-6xl mx-auto my-24">
+        <MainText />
+        <div className="max-w-6xl mx-auto my-12">
           <PostBlogCardSection posts={posts} />
         </div>
       </main>

@@ -15,7 +15,7 @@ const PostCard: FunctionComponent<PostCardProps> = ({ post }) => {
     <Link href={{ pathname: `/post/${post.slug}` }} as={`/post/${post.slug}`}>
       <a>
         {/* 전체 wrapper */}
-        <article className="w-80 lg:w-full m-auto lg:px-4 py-8">
+        <article className="w-80 lg:w-full lg:px-4 py-4">
           {/* Image */}
           <div className="relative h-44 border border-solid border-white rounded">
             <Image
@@ -30,7 +30,7 @@ const PostCard: FunctionComponent<PostCardProps> = ({ post }) => {
             <span className="text-gray-400">{formatISO(post.date)}</span>
             <span className="mx-2">&#183;</span>
             <Category category={post.category} />
-            <h3 className="text-xl font-bold py-6">{post.title}</h3>
+            <h3 className="text-2xl lg:text-xl font-bold py-6">{post.title}</h3>
             <p className="text-gray-400">{post.description}</p>
           </div>
           {/* Text */}

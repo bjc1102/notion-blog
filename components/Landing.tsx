@@ -6,9 +6,8 @@ import ProfileImage from '../public/images/71929440.jpg';
 export default function Landing() {
   return (
     <div className="relative w-full pt-16">
-      <div className="relative max-w-6xl h-80 mx-auto rounded-3xl border border-solid md:rounded-none md:border-l-0 md:border-r-0">
+      <div className="relative h-80 mx-auto border border-solid border-l-0 border-r-0">
         <Image
-          className="rounded-3xl md:rounded-none"
           layout="fill"
           objectFit="fill"
           src={BannerImage}

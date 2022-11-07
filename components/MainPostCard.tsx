@@ -15,9 +15,9 @@ const MainPostCard: React.FC<MainPostCardProps> = ({ post }) => {
     <Link href={{ pathname: `/post/${post.slug}` }} as={`/post/${post.slug}`}>
       <a>
         {/* 전체 wrapper */}
-        <article className="flex lg:flex-col px-8 py-20 lg:py-0">
+        <article className="flex lg:flex-col px-6 py-10 lg:py-0">
           {/* Image */}
-          <div className="relative h-80 w-1/2 border border-solid border-white rounded">
+          <div className="relative h-80 w-1/2 lg:w-full border border-solid border-white rounded">
             <Image
               className="rounded lg:h-9"
               layout="fill"
