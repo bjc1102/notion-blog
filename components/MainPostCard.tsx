@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { BlogPost } from '@/types/schema';
 import { formatISO } from '@/utils/formatDate';
-import Category from '@/components/Category';
+import Category from '@/components/CategoryBox';
 
 interface MainPostCardProps {
   post: BlogPost;

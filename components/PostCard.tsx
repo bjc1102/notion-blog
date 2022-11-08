@@ -4,7 +4,7 @@ import { BlogPost } from '../types/schema';
 import Link from 'next/link';
 import Image from 'next/image';
 import { formatISO } from '@/utils/formatDate';
-import Category from '@/components/Category';
+import Category from '@/components/CategoryBox';
 
 type PostCardProps = {
   post: BlogPost;

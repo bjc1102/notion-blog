@@ -11,9 +11,7 @@ const Category: React.FC<CategoryProps> = ({ category }) => {
 
   return (
     <span
-      className={
-        categoryClass + ' text-gray-200 py-1 px-2 rounded-full text-sm'
-      }
+      className={categoryClass + ' text-gray-200 py-1 px-2 rounded-lg text-sm'}
     >
       {category}
     </span>

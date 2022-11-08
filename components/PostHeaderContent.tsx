@@ -1,7 +1,7 @@
 import { PostHeaderContentsProps } from '@/types/postHeader';
 import { formatISO } from '@/utils/formatDate';
 import React from 'react';
-import Category from '@/components/Category';
+import Category from '@/components/CategoryBox';
 
 const PostHeaderContent: React.FC<PostHeaderContentsProps> = ({
   title,
