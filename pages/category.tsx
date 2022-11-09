@@ -1,9 +1,13 @@
 import React from 'react';
 import FilterOptionMenu from '@/components/FilterOptionMenu';
 import Landing from '@/components/Landing';
+import { Posts } from '@/types/schema';
+import NotionService from '@/services/notion-service';
+import { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
 
-// TODO: 태그 추가, 카테고리 페이지 추가, 데이터를 캐싱으로 받아오기
-const Category = () => {
+const Category: NextPage<Posts> = ({
+  posts,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div className="min-h-screen">
       <Landing />
@@ -16,3 +20,14 @@ const Category = () => {
 };
 
 export default Category;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const notionService = new NotionService();
+  const posts = await notionService.getPublishedBlogPosts();
+
+  return {
+    props: {
+      posts,
+    },
+  };
+};
