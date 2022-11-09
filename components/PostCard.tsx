@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { formatISO } from '@/utils/formatDate';
 import Category from '@/components/CategoryBox';
+import Tag from '@/components/Tag';
+import { tagSpread } from '@/utils/parseTag';
 
 type PostCardProps = {
   post: BlogPost;
@@ -32,8 +34,10 @@ const PostCard: FunctionComponent<PostCardProps> = ({ post }) => {
             <Category category={post.category} />
             <h3 className="text-2xl lg:text-xl font-bold py-6">{post.title}</h3>
             <p className="text-gray-400">{post.description}</p>
+            <div className="flex flex-wrap gap-2 mt-5">
+              {tagSpread(post.tags)}
+            </div>
           </div>
-          {/* Text */}
         </article>
       </a>
     </Link>

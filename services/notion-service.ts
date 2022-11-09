@@ -3,6 +3,7 @@ import { BlogPost } from '../types/schema';
 import { NotionAPI } from 'notion-client';
 import { ExtendedRecordMap } from 'notion-types';
 import { GetDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import { parseTag } from '@/utils/parseTag';
 
 export default class NotionService {
   client: Client;
@@ -72,6 +73,10 @@ export default class NotionService {
         cover = 'https://picsum.photos/1920/1080';
     }
 
+    const tags = parseTag(
+      page.properties.Tag.rich_text[0].plain_text as string
+    );
+
     return {
       id: page.id,
       cover: cover,
@@ -80,6 +85,7 @@ export default class NotionService {
       description: page.properties.Description.rich_text[0].plain_text,
       date: page.properties.Updated.last_edited_time,
       slug: page.properties.Slug.formula.string,
+      tags: tags,
     };
   }
 }

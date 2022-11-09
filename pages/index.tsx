@@ -1,39 +1,26 @@
 import React from 'react';
 import { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
 import NotionService from '@/services/notion-service';
-import { dehydrate, QueryClient } from 'react-query';
 
 import PostBlogCardSection from '@/components/PostCardSection';
-import { BlogPost } from '@/types/schema';
+import { Posts } from '@/types/schema';
 
 import Meta from '@/components/Meta';
 import Landing from '@/components/Landing';
 import MainText from '@/components/MainText';
 
-interface IHomeProps {
-  posts: BlogPost[];
-}
-
 export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
-  const queryClient = new QueryClient();
-
-  let posts = queryClient.getQueryData(['posts']);
-
-  if (!posts) {
-    posts = await notionService.getPublishedBlogPosts();
-    queryClient.setQueryData(['posts'], posts);
-  }
+  const posts = await notionService.getPublishedBlogPosts();
 
   return {
     props: {
       posts,
-      dehydratedState: dehydrate(queryClient),
     },
   };
 };
 
-const Home: NextPage<IHomeProps> = ({
+const Home: NextPage<Posts> = ({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const title = 'CBJ Notion Blog developed with Next.js';
