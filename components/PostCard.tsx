@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { formatISO } from '@/utils/formatDate';
 import Category from '@/components/CategoryBox';
-import Tag from '@/components/Tag';
 import { tagSpread } from '@/utils/parseTag';
 
 type PostCardProps = {
