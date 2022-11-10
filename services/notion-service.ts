@@ -4,6 +4,9 @@ import { NotionAPI } from 'notion-client';
 import { ExtendedRecordMap } from 'notion-types';
 import { GetDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import { parseTag } from '@/utils/parseTag';
+import { PageProperty } from '@/types/property';
+import { getPageTitle } from 'notion-utils';
+import ImgUrlParse from '@/utils/imageTransform';
 
 export default class NotionService {
   client: Client;
@@ -57,21 +60,7 @@ export default class NotionService {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private static pageToPostTransformer(page: any): BlogPost {
-    let cover = page.cover !== null ? page.cover : '';
-
-    switch (cover.type) {
-      case 'file':
-        cover = page.cover.file.url;
-        break;
-      case 'external':
-        cover = page.cover.external.url;
-        break;
-      case null:
-        cover = 'https://picsum.photos/1920/1080'; // 기본 커버 이미지
-        break;
-      default:
-        cover = 'https://picsum.photos/1920/1080';
-    }
+    let cover = ImgUrlParse(page.cover);
 
     const tags = parseTag(
       page.properties.Tag.rich_text[0].plain_text as string
@@ -85,6 +74,23 @@ export default class NotionService {
       description: page.properties.Description.rich_text[0].plain_text,
       date: page.properties.Updated.last_edited_time,
       slug: page.properties.Slug.formula.string,
+      tags: tags,
+    };
+  }
+
+  async propertiesTransformer(recordMap: ExtendedRecordMap, pageID: string) {
+    const title = getPageTitle(recordMap);
+    const PageProperty = (await this.RetrievePage(pageID)) as PageProperty;
+    const { properties } = PageProperty;
+    const url = ImgUrlParse(PageProperty.cover);
+    const tags = parseTag(properties.Tag.rich_text[0].plain_text as string);
+
+    return {
+      title,
+      cover: url,
+      date: properties.Updated.last_edited_time,
+      category: properties.Category.select.name,
+      description: properties.Description.rich_text[0].plain_text,
       tags: tags,
     };
   }
