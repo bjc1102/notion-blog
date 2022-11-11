@@ -7,9 +7,11 @@ type tagProps = {
 
 const Tag = ({ tag }: tagProps) => {
   return (
-    <span className="border border-solid rounded-xl border-white px-2 py-1 text-base lg:text-sm">
-      {tag}
-    </span>
+    <Link passHref href={`/category?category=&tags=${tag}`}>
+      <button className="border border-solid rounded-xl border-white px-2 py-1 text-base lg:text-sm">
+        {tag}
+      </button>
+    </Link>
   );
 };
 

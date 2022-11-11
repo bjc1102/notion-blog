@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FilterOptionMenu from '@/components/FilterOptionMenu';
 import Landing from '@/components/Landing';
 import { BlogPost, Posts } from '@/types/schema';
@@ -9,13 +9,13 @@ import PostCardSection from '@/components/PostCardSection';
 const Category: NextPage<Posts> = ({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const blogPosts = posts as BlogPost[];
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>(posts);
 
   return (
     <div className="min-h-screen">
       <Landing />
       <div className="max-w-xl mx-auto mt-32">
-        <FilterOptionMenu />
+        <FilterOptionMenu posts={posts} setBlogPosts={setBlogPosts} />
       </div>
       <div className="max-w-6xl mx-auto py-12">
         <PostCardSection posts={blogPosts} />

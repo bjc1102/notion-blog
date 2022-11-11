@@ -1,5 +1,5 @@
 import React from 'react';
-import categoryTypeMap from '@/utils/categoryColors';
+import categoryTypeMap from '@/utils/CategoryOption';
 import Link from 'next/link';
 
 interface CategoryProps {

@@ -6,6 +6,6 @@ const categoryTypeMap = {
   월간회고: 'bg-red-900',
 };
 
-export const filterTest = () => (v: string) => v !== 'TEST';
+export const filterCategoryOption = () => (v: string) => v !== 'TEST';
 
 export default categoryTypeMap;
