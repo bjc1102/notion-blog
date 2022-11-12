@@ -1,13 +1,18 @@
 import React from 'react';
 
-import { BlogPost } from '../types/schema';
 import MainPostCard from './MainPostCard';
-import { postSpreader } from '@/utils/postSpreader';
 import { useRouter } from 'next/router';
+import PostCard from '@/components/PostCard';
+import { BlogPost } from '@/types/schema';
 
 interface IPostCardSectionProps {
   posts: BlogPost[];
 }
+
+// eslint-disable-next-line react/display-name
+export const postSpreader = () => (post: BlogPost) => {
+  return <PostCard key={post.id} post={post} />;
+};
 
 const PostCardSection: React.FC<IPostCardSectionProps> = ({ posts }) => {
   const router = useRouter();

@@ -1,17 +1,19 @@
-import { FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import { BlogPost } from '../types/schema';
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { formatISO } from '@/utils/formatDate';
 import Category from '@/components/CategoryBox';
-import { tagSpread } from '@/utils/parseTag';
+import { tagSpread } from '@/components/Tag';
+import usePush from '@/hooks/usePush';
 
 type PostCardProps = {
   post: BlogPost;
 };
 
 const PostCard: FunctionComponent<PostCardProps> = ({ post }) => {
+  const moveTags = usePush();
   return (
     <Link href={{ pathname: `/post/${post.slug}` }} as={`/post/${post.slug}`}>
       <a>
@@ -34,7 +36,7 @@ const PostCard: FunctionComponent<PostCardProps> = ({ post }) => {
             <h3 className="text-2xl lg:text-xl font-bold py-6">{post.title}</h3>
             <p className="text-gray-400">{post.description}</p>
             <div className="flex flex-wrap gap-2 mt-5">
-              {tagSpread(post.tags)}
+              {tagSpread(post.tags, moveTags)}
             </div>
           </div>
         </article>

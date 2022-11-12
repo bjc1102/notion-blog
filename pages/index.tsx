@@ -1,5 +1,5 @@
 import React from 'react';
-import { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
+import { NextPage, GetStaticProps } from 'next';
 import NotionService from '@/services/notion-service';
 
 import PostBlogCardSection from '@/components/PostCardSection';

@@ -8,4 +8,8 @@ const categoryTypeMap = {
 
 export const filterCategoryOption = () => (v: string) => v !== 'TEST';
 
+export const AllCategory = Object.keys(categoryTypeMap).filter(
+  filterCategoryOption()
+);
+
 export default categoryTypeMap;

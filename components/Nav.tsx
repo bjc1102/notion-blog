@@ -17,9 +17,9 @@ export default function Nav() {
             <a className="cursor-pointer">Choi</a>
           </Link>
           <div>
-            {/* <Link href="/search">
+            <Link href="/posts">
               <a className="cursor-pointer">search</a>
-            </Link> */}
+            </Link>
           </div>
         </div>
       </div>

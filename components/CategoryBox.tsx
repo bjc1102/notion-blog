@@ -11,7 +11,7 @@ const Category: React.FC<CategoryProps> = ({ category }) => {
   const categoryClass = categoryTypeMap[category];
 
   return (
-    <Link passHref href={`/category?category=${category}`}>
+    <Link passHref href={`/posts?category=${category}`}>
       <button
         className={
           categoryClass +
