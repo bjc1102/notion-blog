@@ -1,24 +1,32 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 type tagProps = {
-  tags: string[];
+  tag: string;
+  onClick?: (e: React.SyntheticEvent) => void;
 };
 
-const Tag = ({ tags }: tagProps) => {
+const Tag = ({ tag, onClick }: tagProps) => {
+  const query = useRouter().query;
+
   return (
-    <ul className="flex justify-center gap-2 text-sm">
-      {tags.map((tag: string, index: number) => (
-        <Link key={index} href={`/posts?tag=${tag}`} passHref>
-          <a>
-            <li className="border-solid border border-gray-400 p-2 rounded-xl">
-              #{tag}
-            </li>
-          </a>
-        </Link>
-      ))}
-    </ul>
+    <button
+      onClick={onClick}
+      className={`border border-solid rounded-xl px-2 py-1 text-base lg:text-sm hover:border-yellow-400 hover:text-yellow-400 ${
+        query.tags === tag
+          ? ' border-yellow-400 text-yellow-400'
+          : 'border-white'
+      }`}
+      value={tag}
+    >
+      {tag}
+    </button>
   );
 };
 
-export default Tag;
+export default React.memo(Tag);
+
+export const tagSpread = (
+  tags: string[],
+  onClick?: (e: React.SyntheticEvent) => void
+) => tags.map((v) => <Tag onClick={onClick} key={v} tag={v} />);

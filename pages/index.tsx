@@ -1,43 +1,29 @@
 import React from 'react';
-import { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
+import { NextPage, GetStaticProps } from 'next';
 import NotionService from '@/services/notion-service';
-import { dehydrate, QueryClient } from 'react-query';
 
 import PostBlogCardSection from '@/components/PostCardSection';
-import { BlogPost } from '@/types/schema';
+import { Posts } from '@/types/schema';
 
 import Meta from '@/components/Meta';
 import Landing from '@/components/Landing';
 import MainText from '@/components/MainText';
 
-interface IHomeProps {
-  posts: BlogPost[];
-}
-
 export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
-  const queryClient = new QueryClient();
-
-  let posts = queryClient.getQueryData(['posts']);
-
-  if (!posts) {
-    posts = await notionService.getPublishedBlogPosts();
-    queryClient.setQueryData(['posts'], posts);
-  }
+  const posts = await notionService.getPublishedBlogPosts();
 
   return {
     props: {
       posts,
-      dehydratedState: dehydrate(queryClient),
     },
   };
 };
 
-const Home: NextPage<IHomeProps> = ({
-  posts,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Home: NextPage<Posts> = ({ posts }) => {
   const title = 'CBJ Notion Blog developed with Next.js';
   const description = '노션을 CMS로 활용하여 회고글을 작성하고 있습니다.';
+  const Posts = [...posts];
 
   return (
     <>
@@ -46,7 +32,7 @@ const Home: NextPage<IHomeProps> = ({
         <Landing />
         <MainText />
         <div className="max-w-6xl mx-auto my-12">
-          <PostBlogCardSection posts={posts} />
+          <PostBlogCardSection posts={Posts} />
         </div>
       </main>
     </>

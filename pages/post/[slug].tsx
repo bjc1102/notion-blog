@@ -8,14 +8,11 @@ import { NotionRenderer } from 'react-notion-x';
 import { Code } from 'react-notion-x/build/third-party/code';
 import { Equation } from 'react-notion-x/build/third-party/equation';
 import { Pdf } from 'react-notion-x/build/third-party/pdf';
-import { getPageTitle } from 'notion-utils';
 
 import NotionService from '@/services/notion-service';
 import Meta from '@/components/Meta';
 import parseID from '@/utils/parseID';
-import { PageProperty } from '@/types/property';
 import PostHeader from '@/components/PostHeader';
-import ImgUrlParse from '@/utils/imageTransform';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
@@ -30,26 +27,20 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   // @ts-ignore
   const recordMap = await notionService.getSingleBlogPost(pageID);
-  const keys = Object.keys(recordMap?.block || {});
 
   if (!recordMap) {
     throw '';
   }
 
-  const title = getPageTitle(recordMap);
-  const PageProperty = (await notionService.RetrievePage(
+  const properies = await notionService.propertiesTransformer(
+    recordMap,
     pageID
-  )) as PageProperty;
-  const { properties } = PageProperty;
+  );
 
   return {
     props: {
       recordMap,
-      title,
-      cover: PageProperty.cover,
-      date: properties.Created,
-      category: properties.Category,
-      description: properties.Description,
+      ...properies,
     },
   };
 };
@@ -60,7 +51,6 @@ export async function getStaticPaths() {
   const paths = posts.map((post) => {
     return `/post/${post.slug}`;
   });
-
   return {
     paths,
     fallback: 'blocking',
@@ -74,20 +64,18 @@ const Post = ({
   date,
   category,
   description,
+  tags,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const url = ImgUrlParse(cover);
-  const descriptionText = description.rich_text[0].plain_text;
-  const categoryText = category.select.name;
-
   return (
     <>
-      <Meta title={title} keywords={category} description={descriptionText} />
+      <Meta title={title} keywords={category} description={description} />
       <PostHeader
         title={title}
-        cover={url}
-        date={date.last_edited_time}
-        category={categoryText}
-        description={descriptionText}
+        cover={cover}
+        date={date}
+        category={category}
+        description={description}
+        tags={tags}
       />
       <div className="rounded-t-xl py-6 overflow-hidden">
         <NotionRenderer

@@ -18,9 +18,14 @@ export type BlogPost = {
   category: string;
   description: string;
   date: string;
+  tags: string[];
 };
 
 export type PostPage = {
   post: BlogPost;
   markdown: string;
 };
+
+interface Posts {
+  posts: BlogPost[];
+}

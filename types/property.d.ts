@@ -23,6 +23,7 @@ interface Properties {
   Created: Updated;
   Category: Tags;
   Name: Name;
+  Tag: Tag;
 }
 
 export interface Name {
@@ -44,6 +45,12 @@ interface Published {
 }
 
 export interface Description {
+  id: string;
+  type: string;
+  rich_text: function[];
+}
+
+export interface Tag {
   id: string;
   type: string;
   rich_text: function[];

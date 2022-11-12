@@ -8,7 +8,7 @@ const MainText = () => {
       <h1 className="text-2xl lg:text-xl py-2">
         노션을 CMS로 활용한 블로그입니다.
       </h1>
-      <h2 className="text-lg lg:text-sm py-2 text-gray-200">
+      <h2 className="text-lg lg:text-sm py-8 text-gray-200">
         주로 회고 글을 작성하고 있습니다.
       </h2>
       <div className="flex justify-center items-center gap-4">
