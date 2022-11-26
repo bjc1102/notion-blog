@@ -3,7 +3,9 @@
 <h2 style="color:orange">Trouble shooting</h2>
 
 [SSG, SSR의 차이점을 문제를 통해 정리](https://choiblog.tistory.com/2).
+
 [SSG를 업데이트하기 위한 증분 정적 재생(ISR)](https://choiblog.tistory.com/28).
+
 [NextJS SSG ISR은 왜 동작하지 않았나](https://choiblog.tistory.com/68)
 
 ## Description
