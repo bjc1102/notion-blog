@@ -11,7 +11,9 @@
 ## Description
 
 노션을 CMS로 활용한 블로그입니다.
-Notion API와 NextJS SSG를 활용하여 구현하였습니다
+Notion API를 활용하여 개발하던 중 데이터를 불러오는 속도가 많이 느리고 블로그 목적상 자신의 생각을 표현하여 글을 공유하기 위해 NextJS의 SSG를 활용하여 구현하였습니다.
+
+이를 통해 기존 CSR, SSR 방식보다 속도를 약 90% 개선하
 
 ## Tech Stack
 
