@@ -4,8 +4,6 @@ import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { DefaultSeo } from 'next-seo';
-import DEFAULT_SEO from '@/utils/SEO';
 
 import '@/styles/global.css';
 
@@ -28,7 +26,6 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
           <RecoilRoot>
             <div className="block relative bg-primary text-white font-sans">
               <React.Fragment>
-                <DefaultSeo {...DEFAULT_SEO} />
                 <Component {...pageProps} />
                 <ReactQueryDevtools
                   initialIsOpen={false}
