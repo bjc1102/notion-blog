@@ -14,7 +14,7 @@ export default function Meta({ title, keywords, description, image }: IProps) {
       <title>CBJ | {title}</title>
       <meta charSet="utf-8" />
       <meta property="og:url" content="https://choi-notion-blog.vercel.app/" />
-      <meta property="og:title" content="CBJ blog using notion as a cms" />
+      <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta
         property="og:image"
