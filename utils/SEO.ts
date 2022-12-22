@@ -11,8 +11,8 @@ const DEFAULT_SEO = {
     images: [
       {
         url: '../public/images/earth-1756274_1920.jpg',
-        width: 285,
-        height: 167,
+        width: 800,
+        height: 600,
         alt: 'seo-image',
       },
     ],
