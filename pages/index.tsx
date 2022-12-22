@@ -27,12 +27,7 @@ const Home: NextPage<Posts> = ({ posts }) => {
 
   return (
     <>
-      <Meta
-        title={title}
-        description={description}
-        keywords="notion,blog"
-        image=""
-      />
+      <Meta title={title} description={description} keywords="notion,blog" />
       <main className="min-h-screen overflow-hidden">
         <Landing />
         <MainText />
