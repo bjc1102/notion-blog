@@ -68,7 +68,12 @@ const Post = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
-      <Meta title={title} keywords={category} description={description} />
+      <Meta
+        title={title}
+        keywords={category}
+        description={description}
+        image={cover}
+      />
       <PostHeader
         title={title}
         cover={cover}

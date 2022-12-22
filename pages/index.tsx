@@ -21,7 +21,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Home: NextPage<Posts> = ({ posts }) => {
-  const title = 'CBJ Notion Blog developed with Next.js';
+  const title = 'Notion을 CMS로 활용한 개발 블로그입니다.';
   const description = '노션을 CMS로 활용하여 회고글을 작성하고 있습니다.';
   const Posts = [...posts];
 
