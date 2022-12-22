@@ -4,9 +4,10 @@ interface IProps {
   title: string;
   keywords: string;
   description: string;
+  image?: string;
 }
 
-export default function Meta({ title, keywords, description }: IProps) {
+export default function Meta({ title, keywords, description, image }: IProps) {
   return (
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1" />

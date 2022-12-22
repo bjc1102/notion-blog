@@ -15,8 +15,8 @@ const PostHeaderContent: React.FC<PostHeaderContentsProps> = ({
   const moveTags = usePush();
   return (
     <div className="flex flex-col gap-9">
-      <h1 className="text-4xl font-black md:text-2xl">{title}</h1>
-      <p className="text-xl md:text-lg">{description}</p>
+      <title className="text-4xl font-black md:text-2xl">{title}</title>
+      <details className="text-xl md:text-lg">{description}</details>
       <div className="flex gap-3 items-center text-lg">
         <span>{formatISO(date)}</span>
         <span>&#183;</span>

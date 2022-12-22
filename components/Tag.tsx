@@ -19,7 +19,7 @@ const Tag = ({ tag, onClick }: tagProps) => {
       }`}
       value={tag}
     >
-      {tag}
+      <strong>{tag}</strong>
     </button>
   );
 };
