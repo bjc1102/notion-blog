@@ -15,6 +15,8 @@ Notion API를 활용하여 개발하던 중 데이터를 불러오는 속도가 
 
 이를 통해 기존 CSR, SSR 방식보다 속도를 약 90% 개선하였습니다
 
+<image src=public/images/perform.png />
+
 ## Tech Stack
 
 [![TypeScript Badge](https://img.shields.io/badge/Typescript-235A97?style=flat-square&logo=Typescript&logoColor=white)](https://www.typescriptlang.org/) [![Next.js Badge](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/) [![TailwindCSS Badge](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/) [![Notion Badge](https://img.shields.io/badge/Notion_API-000000?style=flat-square&logo=notion&logoColor=white)](https://www.notion.so/)
