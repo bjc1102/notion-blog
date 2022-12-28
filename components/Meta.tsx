@@ -16,6 +16,7 @@ export default function Meta({ title, keywords, description, image }: IProps) {
       <meta property="og:url" content="https://choi-notion-blog.vercel.app/" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
+      <meta name="description" content={description} />
       <meta
         property="og:image"
         content={
