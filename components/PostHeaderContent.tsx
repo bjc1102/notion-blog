@@ -16,7 +16,7 @@ const PostHeaderContent: React.FC<PostHeaderContentsProps> = ({
   return (
     <div className="flex flex-col gap-9">
       <title className="text-4xl font-black md:text-2xl">{title}</title>
-      <details className="text-xl md:text-lg">{description}</details>
+      <p className="text-xl md:text-lg">{description}</p>
       <div className="flex gap-3 items-center text-lg">
         <span>{formatISO(date)}</span>
         <span>&#183;</span>
