@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { BlogPost } from '../types/schema';
+import { BlogPost } from '../../types/schema';
 
 import Link from 'next/link';
 import Image from 'next/image';

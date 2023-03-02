@@ -4,7 +4,7 @@ import Landing from '@/components/Landing';
 import { BlogPost, Posts } from '@/types/schema';
 import NotionService from '@/services/notion-service';
 import { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
-import PostCardSection from '@/components/PostCardSection';
+import PostCardSection from '@/components/PostCard/PostCardSection';
 import { useRouter } from 'next/router';
 
 const Category: NextPage<Posts> = ({

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import MainPostCard from './MainPostCard';
+import MainPostCard from '../MainPostCard';
 import { useRouter } from 'next/router';
-import PostCard from '@/components/PostCard';
+import PostCard from '@/components/PostCard/PostCard';
 import { BlogPost } from '@/types/schema';
 
 interface IPostCardSectionProps {
