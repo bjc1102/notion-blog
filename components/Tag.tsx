@@ -3,7 +3,7 @@ import React from 'react';
 
 type tagProps = {
   tag: string;
-  onClick?: (e: React.SyntheticEvent) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const Tag = ({ tag, onClick }: tagProps) => {
@@ -28,5 +28,5 @@ export default React.memo(Tag);
 
 export const tagSpread = (
   tags: string[],
-  onClick?: (e: React.SyntheticEvent) => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 ) => tags.map((v) => <Tag onClick={onClick} key={v} tag={v} />);
