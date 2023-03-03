@@ -6,14 +6,14 @@ import Image from 'next/image';
 import { formatISO } from '@/utils/formatDate';
 import Category from '@/components/CategoryBox';
 import { tagSpread } from '@/components/Tag';
-import usePush from '@/hooks/usePush';
+import useNavigateTag from '@/hooks/useNavigateTag';
 
 type PostCardProps = {
   post: BlogPost;
 };
 
 const PostCard: FunctionComponent<PostCardProps> = ({ post }) => {
-  const moveTags = usePush();
+  const moveTags = useNavigateTag();
   return (
     <Link href={{ pathname: `/post/${post.slug}` }} as={`/post/${post.slug}`}>
       <a>

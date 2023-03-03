@@ -3,7 +3,7 @@ import { formatISO } from '@/utils/formatDate';
 import React from 'react';
 import Category from '@/components/CategoryBox';
 import { tagSpread } from '@/components/Tag';
-import usePush from '@/hooks/usePush';
+import useNavigateTag from '@/hooks/useNavigateTag';
 
 const PostHeaderContent: React.FC<PostHeaderContentsProps> = ({
   title,
@@ -12,7 +12,7 @@ const PostHeaderContent: React.FC<PostHeaderContentsProps> = ({
   category,
   tags,
 }) => {
-  const moveTags = usePush();
+  const moveTags = useNavigateTag();
   return (
     <div className="flex flex-col gap-9">
       <h1 className="text-4xl font-black md:text-2xl">{title}</h1>

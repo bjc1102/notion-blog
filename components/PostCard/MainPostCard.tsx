@@ -6,14 +6,14 @@ import { BlogPost } from '@/types/schema';
 import { formatISO } from '@/utils/formatDate';
 import Category from '@/components/CategoryBox';
 import { tagSpread } from '@/components/Tag';
-import usePush from '@/hooks/usePush';
+import useNavigateTag from '@/hooks/useNavigateTag';
 
 interface MainPostCardProps {
   post: BlogPost;
 }
 
 const MainPostCard: React.FC<MainPostCardProps> = ({ post }) => {
-  const moveTags = usePush();
+  const moveTags = useNavigateTag();
   return (
     <Link href={{ pathname: `/post/${post.slug}` }} as={`/post/${post.slug}`}>
       <a>
