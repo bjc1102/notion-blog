@@ -2,8 +2,7 @@ import { PostHeaderContentsProps } from '@/types/postHeader';
 import { formatISO } from '@/utils/formatDate';
 import React from 'react';
 import Category from '@/components/CategoryBox';
-import { tagSpread } from '@/components/Tag';
-import usePush from '@/hooks/usePush';
+import { TagSpread } from '@/components/Tag';
 
 const PostHeaderContent: React.FC<PostHeaderContentsProps> = ({
   title,
@@ -12,7 +11,6 @@ const PostHeaderContent: React.FC<PostHeaderContentsProps> = ({
   category,
   tags,
 }) => {
-  const moveTags = usePush();
   return (
     <div className="flex flex-col gap-9">
       <h1 className="text-4xl font-black md:text-2xl">{title}</h1>
@@ -22,9 +20,7 @@ const PostHeaderContent: React.FC<PostHeaderContentsProps> = ({
         <span>&#183;</span>
         <Category category={category} />
       </div>
-      <div className="flex flex-wrap items-center gap-2">
-        {tagSpread(tags, moveTags)}
-      </div>
+      <div className="flex flex-wrap items-center gap-2">{TagSpread(tags)}</div>
     </div>
   );
 };

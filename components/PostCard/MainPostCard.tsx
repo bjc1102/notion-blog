@@ -5,15 +5,13 @@ import Link from 'next/link';
 import { BlogPost } from '@/types/schema';
 import { formatISO } from '@/utils/formatDate';
 import Category from '@/components/CategoryBox';
-import { tagSpread } from '@/components/Tag';
-import usePush from '@/hooks/usePush';
+import { TagSpread } from '@/components/Tag';
 
 interface MainPostCardProps {
   post: BlogPost;
 }
 
 const MainPostCard: React.FC<MainPostCardProps> = ({ post }) => {
-  const moveTags = usePush();
   return (
     <Link href={{ pathname: `/post/${post.slug}` }} as={`/post/${post.slug}`}>
       <a>
@@ -36,7 +34,7 @@ const MainPostCard: React.FC<MainPostCardProps> = ({ post }) => {
             <Category category={post.category} />
             <p className="py-5 lg:py-2 text-gray-400">{post.description}</p>
             <div className="flex flex-wrap gap-2 mt-5 lg:mt-2">
-              {tagSpread(post.tags, moveTags)}
+              {TagSpread(post.tags)}
             </div>
           </div>
           {/* Text */}

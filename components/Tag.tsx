@@ -1,19 +1,22 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 
-type tagProps = {
+interface tagProps extends React.HTMLAttributes<HTMLButtonElement> {
   tag: string;
-  onClick?: (e: React.SyntheticEvent) => void;
-};
+}
 
-const Tag = ({ tag, onClick }: tagProps) => {
-  const query = useRouter().query;
+const Tag = ({ tag, ...props }: tagProps) => {
+  const router = useRouter();
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    router.push({ pathname: '/posts', query: { tags: tag } });
+  };
 
   return (
     <button
-      onClick={onClick}
+      {...props}
       className={`border border-solid rounded-xl px-2 py-1 text-base lg:text-sm hover:border-yellow-400 hover:text-yellow-400 ${
-        query.tags === tag
+        router.query.tags === tag
           ? ' border-yellow-400 text-yellow-400'
           : 'border-white'
       }`}
@@ -26,7 +29,12 @@ const Tag = ({ tag, onClick }: tagProps) => {
 
 export default React.memo(Tag);
 
-export const tagSpread = (
-  tags: string[],
-  onClick?: (e: React.SyntheticEvent) => void
-) => tags.map((v) => <Tag onClick={onClick} key={v} tag={v} />);
+export const TagSpread = (tags: string[]) => {
+  const router = useRouter();
+  const handleClick =
+    (tag: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      router.push({ pathname: '/posts', query: { tags: tag } });
+    };
+  return tags.map((v) => <Tag onClick={handleClick(v)} key={v} tag={v} />);
+};

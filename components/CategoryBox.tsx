@@ -3,11 +3,10 @@ import categoryTypeMap from '@/utils/CategoryOption';
 import Link from 'next/link';
 
 interface CategoryProps {
-  category: string;
+  category: keyof typeof categoryTypeMap;
 }
 
 const Category: React.FC<CategoryProps> = ({ category }) => {
-  //@ts-ignore
   const categoryClass = categoryTypeMap[category];
 
   return (

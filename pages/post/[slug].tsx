@@ -12,7 +12,7 @@ import { Pdf } from 'react-notion-x/build/third-party/pdf';
 import NotionService from '@/services/notion-service';
 import Meta from '@/components/Meta';
 import parseID from '@/utils/parseID';
-import PostHeader from '@/components/PostHeader';
+import PostHeader from '@/components/PostCard/PostHeader';
 
 const Modal = dynamic(
   () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),

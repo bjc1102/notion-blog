@@ -1,8 +1,3 @@
-export interface FilterOptionMenuProps {
-  posts: BlogPost[];
-  setBlogPosts: React.Dispatch<React.SetStateAction<BlogPost[]>>;
-}
-
 export interface FilterOption {
   category: string;
   search: string;

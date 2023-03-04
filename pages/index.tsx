@@ -2,7 +2,7 @@ import React from 'react';
 import { NextPage, GetStaticProps } from 'next';
 import NotionService from '@/services/notion-service';
 
-import PostBlogCardSection from '@/components/PostCardSection';
+import PostBlogCardSection from '@/components/PostCard/PostCardSection';
 import { Posts } from '@/types/schema';
 
 import Meta from '@/components/Meta';

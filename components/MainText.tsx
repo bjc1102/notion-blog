@@ -1,6 +1,6 @@
 import React from 'react';
-import GithubIcon from './GithubIcon';
-import TistoryIcon from './TistoryIcon';
+import GithubIcon from '../public/assets/GithubIcon';
+import TistoryIcon from '../public/assets/TistoryIcon';
 
 const MainText = () => {
   return (
