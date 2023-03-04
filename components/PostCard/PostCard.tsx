@@ -6,14 +6,12 @@ import Image from 'next/image';
 import { formatISO } from '@/utils/formatDate';
 import Category from '@/components/CategoryBox';
 import { tagSpread } from '@/components/Tag';
-import useNavigateTag from '@/hooks/useNavigateTag';
 
 type PostCardProps = {
   post: BlogPost;
 };
 
 const PostCard: FunctionComponent<PostCardProps> = ({ post }) => {
-  const moveTags = useNavigateTag();
   return (
     <Link href={{ pathname: `/post/${post.slug}` }} as={`/post/${post.slug}`}>
       <a>
@@ -36,7 +34,7 @@ const PostCard: FunctionComponent<PostCardProps> = ({ post }) => {
             <h3 className="text-2xl lg:text-xl font-bold py-6">{post.title}</h3>
             <p className="text-gray-400">{post.description}</p>
             <div className="flex flex-wrap gap-2 mt-5">
-              {tagSpread(post.tags, moveTags)}
+              {tagSpread(post.tags)}
             </div>
           </div>
         </article>

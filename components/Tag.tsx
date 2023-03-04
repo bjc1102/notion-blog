@@ -3,17 +3,21 @@ import React from 'react';
 
 type tagProps = {
   tag: string;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Tag = ({ tag, onClick }: tagProps) => {
-  const query = useRouter().query;
+const Tag = ({ tag }: tagProps) => {
+  const router = useRouter();
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (router.query.tags && router.query.tags === e.currentTarget.value)
+      return;
+  };
 
   return (
     <button
-      onClick={onClick}
+      onClick={handleClick}
       className={`border border-solid rounded-xl px-2 py-1 text-base lg:text-sm hover:border-yellow-400 hover:text-yellow-400 ${
-        query.tags === tag
+        router.query.tags === tag
           ? ' border-yellow-400 text-yellow-400'
           : 'border-white'
       }`}
@@ -26,7 +30,5 @@ const Tag = ({ tag, onClick }: tagProps) => {
 
 export default React.memo(Tag);
 
-export const tagSpread = (
-  tags: string[],
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
-) => tags.map((v) => <Tag onClick={onClick} key={v} tag={v} />);
+export const tagSpread = (tags: string[]) =>
+  tags.map((v) => <Tag key={v} tag={v} />);

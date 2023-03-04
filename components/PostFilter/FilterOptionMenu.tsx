@@ -1,0 +1,27 @@
+import React from 'react';
+import { debounce } from 'lodash';
+import Input from '@/components/Input';
+import { getAllTag } from '@/utils/parseTag';
+import CategoryMenu from '@/components/PostFilter/CategoryMenu';
+import TagsMenu from './TagsMenu';
+import { BlogPost } from '@/types/schema';
+
+export interface FilterOptionMenuProps {
+  posts: BlogPost[];
+  setBlogPosts: React.Dispatch<React.SetStateAction<BlogPost[]>>;
+}
+const FilterOptionMenu = ({ posts }: FilterOptionMenuProps) => {
+  // const InputDebounce = debounce(() => {}, 200);
+
+  return (
+    <div className="px-2">
+      <div className="flex lg:flex-col gap-3">
+        <CategoryMenu />
+        <Input name="search" />
+      </div>
+      <TagsMenu AllTag={getAllTag(posts) as string[]} />
+    </div>
+  );
+};
+
+export default FilterOptionMenu;

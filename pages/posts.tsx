@@ -1,5 +1,5 @@
 import React from 'react';
-import FilterOptionMenu from '@/components/FilterOptionMenu';
+import FilterOptionMenu from '@/components/PostFilter/FilterOptionMenu';
 import Landing from '@/components/Landing';
 import { BlogPost, Posts } from '@/types/schema';
 import NotionService from '@/services/notion-service';
@@ -10,7 +10,6 @@ import { useRouter } from 'next/router';
 const Category: NextPage<Posts> = ({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const query = useRouter().query;
   const [blogPosts, setBlogPosts] = React.useState<BlogPost[]>(posts);
 
   return (
