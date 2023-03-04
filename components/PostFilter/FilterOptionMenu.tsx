@@ -1,6 +1,4 @@
 import React from 'react';
-import { debounce } from 'lodash';
-import Input from '@/components/Input';
 import { getAllTag } from '@/utils/parseTag';
 import CategoryMenu from '@/components/PostFilter/CategoryMenu';
 import TagsMenu from './TagsMenu';

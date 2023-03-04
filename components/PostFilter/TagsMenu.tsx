@@ -10,14 +10,15 @@ interface TagMenuProps {
 const TagsMenu = ({ AllTag }: TagMenuProps) => {
   const { query, handleQuery, deleteQuery } = useRouterQuery('tags');
   const handleTags = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const selectCategory = e.currentTarget.value;
-    console.log(selectCategory);
-    // if (selectCategory === query.category) return;
-    // if (selectCategory !== query.category && selectCategory !== '') {
-    //   handleQuery(selectCategory);
-    //   return;
-    // }
-    // if (selectCategory === '') deleteQuery();
+    const selectTag = e.currentTarget.value;
+    if (selectTag !== query.tags && selectTag !== '') {
+      handleQuery(selectTag);
+      return;
+    }
+    if (selectTag === query.tags) {
+      deleteQuery();
+      return;
+    }
   };
 
   return (
