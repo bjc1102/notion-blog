@@ -2,7 +2,7 @@ import { PostHeaderContentsProps } from '@/types/postHeader';
 import { formatISO } from '@/utils/formatDate';
 import React from 'react';
 import Category from '@/components/CategoryBox';
-import { tagSpread } from '@/components/Tag';
+import { TagSpread } from '@/components/Tag';
 
 const PostHeaderContent: React.FC<PostHeaderContentsProps> = ({
   title,
@@ -20,7 +20,7 @@ const PostHeaderContent: React.FC<PostHeaderContentsProps> = ({
         <span>&#183;</span>
         <Category category={category} />
       </div>
-      <div className="flex flex-wrap items-center gap-2">{tagSpread(tags)}</div>
+      <div className="flex flex-wrap items-center gap-2">{TagSpread(tags)}</div>
     </div>
   );
 };

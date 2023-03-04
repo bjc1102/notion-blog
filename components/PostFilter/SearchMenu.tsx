@@ -1,7 +1,10 @@
 import React from 'react';
+import Input from '@/components/Input';
 
 const SearchMenu = () => {
-  return <div>SearchMenu</div>;
+  // const InputDebounce = debounce(() => {}, 200);
+
+  return <Input name="search" />;
 };
 
 export default SearchMenu;

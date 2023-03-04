@@ -1,21 +1,20 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 
-type tagProps = {
+interface tagProps extends React.HTMLAttributes<HTMLButtonElement> {
   tag: string;
-};
+}
 
-const Tag = ({ tag }: tagProps) => {
+const Tag = ({ tag, ...props }: tagProps) => {
   const router = useRouter();
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (router.query.tags && router.query.tags === e.currentTarget.value)
-      return;
+    router.push({ pathname: '/posts', query: { tags: tag } });
   };
 
   return (
     <button
-      onClick={handleClick}
+      {...props}
       className={`border border-solid rounded-xl px-2 py-1 text-base lg:text-sm hover:border-yellow-400 hover:text-yellow-400 ${
         router.query.tags === tag
           ? ' border-yellow-400 text-yellow-400'
@@ -30,5 +29,12 @@ const Tag = ({ tag }: tagProps) => {
 
 export default React.memo(Tag);
 
-export const tagSpread = (tags: string[]) =>
-  tags.map((v) => <Tag key={v} tag={v} />);
+export const TagSpread = (tags: string[]) => {
+  const router = useRouter();
+  const handleClick =
+    (tag: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      router.push({ pathname: '/posts', query: { tags: tag } });
+    };
+  return tags.map((v) => <Tag onClick={handleClick(v)} key={v} tag={v} />);
+};
