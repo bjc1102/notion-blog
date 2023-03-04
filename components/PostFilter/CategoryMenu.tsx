@@ -4,8 +4,8 @@ import useRouterQuery from '@/hooks/useRouterQuery';
 
 const CategoryMenu = () => {
   const { query, deleteQuery, handleQuery } = useRouterQuery('category');
-  // const handleCategory = () => [];
   const selectedCategory = query.category ?? '';
+
   const handleCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectCategory = e.currentTarget.value;
     if (selectCategory === query.category) return;
