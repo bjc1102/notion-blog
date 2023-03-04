@@ -1,3 +1,5 @@
+import categoryTypeMap from '@/utils/CategoryOption';
+
 export type Tag = {
   id: string;
   name: string;
@@ -15,7 +17,7 @@ export type BlogPost = {
   slug: string;
   cover: string;
   title: string;
-  category: string;
+  category: keyof typeof categoryTypeMap;
   description: string;
   date: string;
   tags: string[];
