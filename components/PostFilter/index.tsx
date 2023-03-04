@@ -5,11 +5,11 @@ import TagsMenu from './TagsMenu';
 import { BlogPost } from '@/types/schema';
 import SearchMenu from './SearchMenu';
 
-export interface FilterOptionMenuProps {
+export interface PostFilterProps {
   posts: BlogPost[];
-  setBlogPosts: React.Dispatch<React.SetStateAction<BlogPost[]>>;
 }
-const FilterOptionMenu = ({ posts }: FilterOptionMenuProps) => {
+
+const PostFilter = ({ posts }: PostFilterProps) => {
   return (
     <div className="px-2">
       <div className="flex lg:flex-col gap-3">
@@ -21,4 +21,4 @@ const FilterOptionMenu = ({ posts }: FilterOptionMenuProps) => {
   );
 };
 
-export default FilterOptionMenu;
+export default PostFilter;
