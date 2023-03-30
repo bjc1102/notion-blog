@@ -1,5 +1,12 @@
 # Using Notion as a CMS
 
+## Summary
+
+- NextJS를 활용하여 전체 페이지를 정적으로 생성
+- 노션 db를 활용한 메인 페이지 제작
+- 카테고리, 태그를 통한 페이지 필터, 검색 기능 구현
+- 상세 포스트 페이지 정적 생성
+
 <h2 style="color:orange">Trouble shooting</h2>
 
 [SSG, SSR의 차이점을 문제를 통해 정리](https://choiblog.tistory.com/2).
@@ -22,13 +29,6 @@ Notion API를 활용하여 개발하던 중 데이터를 불러오는 속도가 
 [![TypeScript Badge](https://img.shields.io/badge/Typescript-235A97?style=flat-square&logo=Typescript&logoColor=white)](https://www.typescriptlang.org/) [![Next.js Badge](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/) [![TailwindCSS Badge](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/) [![Notion Badge](https://img.shields.io/badge/Notion_API-000000?style=flat-square&logo=notion&logoColor=white)](https://www.notion.so/)
 
 [Notion database URL](https://choisdev.notion.site/5531dde37ce34dc5a28b3f5b49497563?v=16000545c24c43e2ad046f1022678903)
-
-## Summary
-
-- NextJS를 활용하여 전체 페이지를 정적으로 생성
-- 노션 db를 활용한 메인 페이지 제작
-- 카테고리, 태그를 통한 페이지 필터, 검색 기능 구현
-- 상세 포스트 페이지 정적 생성
 
 ## Image
 
