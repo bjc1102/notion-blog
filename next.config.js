@@ -2,11 +2,6 @@
 
 module.exports = {
   images: {
-    domains: [
-      'www.notion.so',
-      'picsum.photos',
-      'images',
-      's3.us-west-2.amazonaws.com',
-    ],
+    domains: ['www.notion.so', 'images', 's3.us-west-2.amazonaws.com'],
   },
 };

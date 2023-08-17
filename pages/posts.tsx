@@ -1,20 +1,18 @@
-import { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
-
 import React from 'react';
+
+import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import PostFilter from '@/components/PostFilter';
 import Landing from '@/components/Landing';
-import { BlogPost, Posts } from '@/types/schema';
-import NotionService from '@/services/notion-service';
 import PostCardSection from '@/components/PostCard/PostCardSection';
-import { useRouter } from 'next/router';
+import useBlogPosts from '@/services/hooks/queries/useGetBlogPosts';
 
-const Category: NextPage<Posts> = ({
-  posts,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Category: NextPage = () => {
   const router = useRouter();
+  const { data: posts } = useBlogPosts();
 
   const handlePosts = () => {
-    const blogPosts = posts as BlogPost[];
+    const blogPosts = posts;
     const { tags, category, search } = router.query;
 
     //tags, category, search에 따라 검색결과 필터
@@ -26,7 +24,6 @@ const Category: NextPage<Posts> = ({
       return true;
     });
 
-    //query가 있으면 전체 포스트 리턴
     return Object.keys(router.query).length === 0 ? posts : filteredPosts;
   };
 
@@ -44,14 +41,3 @@ const Category: NextPage<Posts> = ({
 };
 
 export default Category;
-
-export const getStaticProps: GetStaticProps = async () => {
-  const notionService = new NotionService();
-  const posts = await notionService.getPublishedBlogPosts();
-
-  return {
-    props: {
-      posts,
-    },
-  };
-};
