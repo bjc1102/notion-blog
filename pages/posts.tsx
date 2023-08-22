@@ -1,11 +1,28 @@
 import React from 'react';
 
-import { NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import PostFilter from '@/components/PostFilter';
 import Landing from '@/components/Landing';
 import PostCardSection from '@/components/PostCard/PostCardSection';
 import useBlogPosts from '@/services/hooks/queries/useGetBlogPosts';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
+import NotionService from '@/services/notion-service';
+
+export const getStaticProps: GetStaticProps = async () => {
+  const queryClient = new QueryClient();
+  const notionService = new NotionService();
+
+  await queryClient.prefetchQuery(['posts'], () =>
+    notionService.getPublishedBlogPosts()
+  );
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+};
 
 const Category: NextPage = () => {
   const router = useRouter();
