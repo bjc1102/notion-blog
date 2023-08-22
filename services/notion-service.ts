@@ -95,23 +95,3 @@ export default class NotionService {
     };
   }
 }
-
-// API Request
-// const response = await this.client.databases.query({
-//   database_id: database,
-//   filter: {
-//     property: 'Slug',
-//     formula: {
-//       text: {
-//         equals: slug, // slug
-//       },
-//     },
-//     // add option for tags in the future
-//   },
-//   sorts: [
-//     {
-//       property: 'Updated',
-//       direction: 'descending',
-//     },
-//   ],
-// });
